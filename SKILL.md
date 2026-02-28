@@ -1,14 +1,15 @@
 ---
 name: magyar-humanizer
-version: 1.0.0
+version: 1.1.0
 description: >
   Remove signs of AI-generated writing from text, with Hungarian-specific extensions.
   Use when editing or reviewing Hungarian text to make it sound more natural and
   human-written. Based on Wikipedia's "Signs of AI writing" guide (by @blader),
   extended with Hungarian corpus analysis covering syntax, word order, rhythm,
   and register-specific patterns (journalistic, literary, legal/official).
-source: https://github.com/blader/humanizer
+source: https://github.com/arlinamid/magyar-humanizer
 extends: blader/humanizer
+changelog: https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md
 ---
 
 # Magyar Humanizer: AI-szag eltávolítása magyar szövegekből
