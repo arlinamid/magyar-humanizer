@@ -1,4 +1,12 @@
+![Magyar Humanizer Banner](banner.png)
+
 # Magyar Humanizer
+
+[![Version](https://img.shields.io/badge/version-1.1.0-blue?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md)
+[![Patterns](https://img.shields.io/badge/minták-24%20általános%20%2B%206%20magyar-green?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/SKILL.md)
+[![Language](https://img.shields.io/badge/nyelv-magyar-red?style=flat-square)](https://github.com/arlinamid/magyar-humanizer)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/LICENSE)
+[![Based on](https://img.shields.io/badge/alapja-blader%2Fhumanizer-orange?style=flat-square)](https://github.com/blader/humanizer)
 
 > AI-szag eltávolítása magyar szövegekből — Claude Code skill
 
@@ -79,7 +87,7 @@ A skill automatikusan aktiválódik, ha magyar szöveget kapsz humanizálásra.
 A skill három regiszterben dolgozik — add meg, melyiket kéred:
 
 - **Köznyelvi / újságírói** — Index, HVG stílus
-- **Irodalmi / esszé** — Jelenkor, Litera stílus  
+- **Irodalmi / esszé** — Jelenkor, Litera stílus
 - **Hivatalos / jogi** — törvényszöveg, AB-határozat stílus
 
 ---
@@ -97,4 +105,10 @@ Ha van egy mintád, ami nálad bevált — nyiss egy pull requestet. Bővítsük
 
 ---
 
-MIT License
+## Changelog
+
+Lásd: [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+[![MIT License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](LICENSE)
