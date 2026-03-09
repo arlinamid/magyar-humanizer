@@ -1,6 +1,6 @@
 ---
 name: magyar-humanizer
-version: 1.1.0
+version: 1.4.1
 description: >
   Remove signs of AI-generated writing from text, with Hungarian-specific extensions.
   Use when editing or reviewing Hungarian text to make it sound more natural and
@@ -428,6 +428,40 @@ Az AI-minták kerülése csak a fél munka. A steril, személytelen írás ugyan
 
 ---
 
+### 25. Kétszavas drámai ütés
+
+**Figyelj ezekre:** Két egymást követő, feltűnően rövid (1–3 szavas) mondat, amelyek látványos dramaturgiai hatást utánoznak.
+
+**Probléma:** Az AI a rövid mondatokat nem organikusan helyezi el, hanem sablon szerint biggyeszti oda, ahol "ütősnek" kell lennie a szövegnek. Emberi szövegben a rövid mondat ritka és éppen ezért erős — ha minden harmadik bekezdés végén ott van, elveszíti a hatását.
+
+**Azonosítási módszer:** Ha a rövid mondatpáros elvehető és a szöveg ugyanannyit mond nélküle is, sablon.
+
+**Előtte:**
+
+> A script lefestette a hibás területeket, ráhúzta a helyes szöveget. Nem újragenerálás. Sebészet.
+
+**Utána:**
+
+> A script lefestette a hibás területeket és ráhúzta a helyes szöveget — újragenerálás nélkül.
+
+---
+
+### 26. Narratív fordulópontjelző és wow-jelzés
+
+**Figyelj ezekre:** „Itt jött a döntési pont", „Ekkor változott meg minden", „És most jön a lényeg", „Ha ez nem X, nem tudom mi az", „Ezt kell megnézni"
+
+**Probléma:** Az AI két dolgot csinál egyszerre: (1) bejelenti, hogy most következik a fontos rész, ahelyett hogy egyszerűen elmondaná; (2) a szöveg végén explicit elismerést kér az olvasótól. Mindkettő sérti azt az alapelvet, hogy az erős tartalom magáért beszél.
+
+**Előtte:**
+
+> Na, itt jön a rész, ami tényleg meglepett. [...] Ha ez nem cool, nem tudom mi az.
+
+**Utána:**
+
+> [Egyszerűen elmeséli a meglepő részt, kommentár nélkül. Az olvasó maga dönt.]
+
+---
+
 ---
 
 # 🇭🇺 MAGYAR-SPECIFIKUS KITERJESZTÉSEK
@@ -581,6 +615,63 @@ Természetes minták (törvényszövegek, AB-határozatok, 2017–2020):
 
 ---
 
+## M7. Első személyű logikai ellentmondás
+
+**Miért AI-specifikus probléma magyarul:** Az AI narrátorként ír, és elfelejti fenntartani az első személyű logikai konzisztenciát. Ha a szerző maga cselekedett valamit, nem lepődhet meg azon, hogy ő csinálja — csak az eredményen, vagy azon, hogy működött-e.
+
+**Azonosítási módszer:** Kérdezd meg: *Logikailag lehetséges-e ez az érzés, ha az alany maga hajtotta végre a cselekvést?*
+
+| Ellentmondásos (AI) | Logikailag konzisztens |
+|---------------------|----------------------|
+| „ami engem is meglepett" — miközben én csináltam | „és meglepődtem, hogy tényleg működött" |
+| „váratlanul rájöttem, hogy én hoztam ezt a döntést" | „visszagondolva furcsa, de akkor ez tűnt a legegyszerűbbnek" |
+| „nem is gondoltam volna, hogy így oldom meg" — aztán így oldottam meg | „más megoldáson gondolkodtam, de ez jött ki belőle" |
+
+**Előtte:**
+
+> Bedobtam a képet az ocr.z.ai-ba — ami engem is meglepett, mennyire pontosan működött.
+
+**Utána:**
+
+> Bedobtam a képet az ocr.z.ai-ba. Meglepett, hogy ilyen pontosan jött ki.
+
+---
+
+## M8. Személy-inkonzisztencia (Person drift)
+
+**Miért AI-specifikus probléma magyarul:** Az AI személyes narrációban (CV, önéletírás, esszé) hajlamos T/1 (mi) igealakokra váltani, különösen akkor, amikor eredményt, csapatmunkát vagy változást ír le. A CV-ban ez kettős problémát okoz: (1) nem egyértelmű, hogy az alany maga cselekedett-e, vagy csak jelen volt; (2) E/1 névmás + T/1 ige együtt grammatikailag ellentmondásos.
+
+**Miért csinálja az AI?** Az AI a csapateredményeket T/1-gyel írja le, mert az „szerényebbnek" tűnik. CV-ban ez visszafelé sül el: az olvasó nem tudja, te csináltad-e, vagy csak ott voltál.
+
+**Azonosítási módszer:** Kérdezd meg: *Következetesen E/1 személyű-e a narráció az egész szövegben? Van-e olyan eredménymondat, ahol a „mi" mögé bújt az „én"?*
+
+| AI (person drift) | E/1 konzisztens |
+|-------------------|-----------------|
+| `én értettük legjobban` | `én értettem legjobban` |
+| `a folyamatokat stabilizáltuk` | `a folyamatokat stabilizáltam` |
+| `átadtuk a legjobb megoldásokat` | `átadtam a legjobb megoldásokat` |
+| `csökkentettük a hibaarányt` | `csökkentettem a hibaarányt` |
+| `hogy lássuk, mi működik` | `hogy lássam` / `hogy kiderüljön, mi működik` |
+| `csak más nyelven mondja` *(E/3 első személyű narrációban)* | `csak más nyelven mondom` |
+
+**Előtte:**
+
+> A helyi operátorokat képeztem, a mixing folyamatokat stabilizáltuk, és átadtuk a legjobb hazai megoldásokat. Visszafelé a repülőn arra gondoltam, hogy egy gyár bárhol ugyanazokon akad el — csak más nyelven mondja.
+
+**Utána:**
+
+> A helyi operátorokat képeztem, a mixing folyamatokat stabilizáltam, és átadtam a legjobb hazai megoldásokat. Visszafelé a repülőn arra gondoltam, hogy egy gyár bárhol ugyanazokon akad el — csak más nyelven mondom.
+
+**Három alaptípus:**
+
+1. **E/1 névmás + T/1 ige** — grammatikai ellentmondás: `én értettük` → `én értettem`
+2. **T/1 ige eredménymondatban** — ki csinálta valójában?: `csökkentettük` → `csökkentettem`
+3. **E/3 ige első személyű narrációban** — kizökkentő perspektívaváltás: `mondja` → `mondom`
+
+**Figyelem:** A T/1 nem mindig hiba. Ha a szöveg valóban csapatmunkáról szól, és az „én" nem az alany, a T/1 helyes. A CV-ban azonban az egyéni hozzájárulást kell kiemelni.
+
+---
+
 ## Gyors ellenőrző lista (magyar szövegekhez)
 
 Az általános ellenőrzés mellett ezeket is nézd meg:
@@ -594,6 +685,12 @@ Az általános ellenőrzés mellett ezeket is nézd meg:
 - [ ] Van "szakértők szerint" konkrét forrás nélkül? → Konkretizálandó (5. minta)
 - [ ] Az igék helyett főnév + segédige szerepel? → Visszaigésítendő (M4)
 - [ ] Vannak egymás után 3 hasonló felsorolás? → Egyszerűsítendő (10. minta)
+- [ ] Van kétszavas drámai zárómondat-pár? → Felülvizsgálandó (25. minta)
+- [ ] Van „itt jön a lényeg" típusú bejelentés vagy wow-kérés a végén? → Törölhető (26. minta)
+- [ ] Első személyű szövegben logikailag lehetséges-e minden érzés/reakció? → Konzisztencia-ellenőrzés (M7)
+- [ ] Első személyű narrációban van-e T/1 igealak eredménymondatban (csökkentettük, stabilizáltuk)? → E/1-re cserélendő (M8)
+- [ ] Van E/1 névmás + T/1 ige ellentmondás (én értettük)? → Grammatikai javítás (M8)
+- [ ] Van E/3 ige ott, ahol az alany maga cselekedett (mondja → mondom)? → E/1-re cserélendő (M8)
 
 ---
 
@@ -618,17 +715,105 @@ Az általános ellenőrzés mellett ezeket is nézd meg:
 
 ---
 
+## ESZKÖZ: Helyesírás-ellenőrzés (pyenchant + hu_HU)
+
+Az átírt szöveg ellenőrzéséhez és a szinonima-javaslatok validálásához használd a pyenchant könyvtárat a LibreOffice hu_HU szótárával:
+
+```python
+import enchant
+d = enchant.Dict('hu_HU')
+
+d.check('kiemelkedő')       # True  — helyes
+d.check('kiemelkedo')       # False — hibás
+d.suggest('kiemelkedo')     # ['kiemelkedő', ...]
+```
+
+**Szótár helye:** `pyenchant` adatkönyvtárában már telepítve (`hu_HU.dic` + `hu_HU.aff`), forrás: [LibreOffice/dictionaries/hu_HU](https://github.com/LibreOffice/dictionaries/tree/master/hu_HU)
+
+**Mikor használd:**
+- Szinonima-cserénél: ellenőrizd, hogy a kiválasztott alternatíva helyesen van-e írva
+- Ha bizonytalan vagy egy szó helyesírásában az átírás után
+- Nem szükséges minden szónál — csak kérdéses esetekben
+
+---
+
+## ESZKÖZ: Szinonima-keresés (cache-first)
+
+Ha egy szó vagy kifejezés helyett természetesebb alternatívát keresel, **mindig a helyi adatbázist nézd meg először**, és csak akkor hívd az API-t, ha ott nem találod.
+
+### Alapszabály: mindig toldalék nélküli alapalakot keress
+
+A szövegben a szavak ragozva, jelezve vagy képzővel ellátva jelennek meg. Keresés előtt mindig vezess vissza alapalakra — ez az adatbázis kulcsa és az API paramétere is.
+
+| Szövegbeli alak | Alapalak (keresési kulcs) |
+|-----------------|--------------------------|
+| kulcsfontosságúnak | kulcsfontosságú |
+| kiemelkedőbb | kiemelkedő |
+| meghatározóan | meghatározó |
+| hozzájárulnak | hozzájárul |
+| elvégzésre kerülnek | elvégzésre kerül |
+| elősegítette | elősegít |
+
+Főneveknél: egyes szám alanyeset. Melléknéveknél: alapfok. Igéknél: főnévi igenév vagy egyes szám 3. személy jelen idő.
+
+### 1. lépés — Helyi adatbázis (`synonyms.json`)
+
+Az adatbázis két szekciót tartalmaz:
+
+- `szavak` — egyszavas AI-klisék szinonimái (struktúra: szócsoportok listája, mint a Poet.hu API-nál)
+- `kifejezések` — terpeszkedő fordulatok és bevezető klisék javasolt cseréi
+
+**Mielőtt API-t hívnál**, olvasd be a `synonyms.json`-t és keresd meg az alapalakot. Ha megvan: válaszd a kontextushoz illő szócsoportból a legjobb alternatívát.
+
+### 2. lépés — Poet.hu API (ha nincs cache-találat)
+
+Ha az alapalak nem szerepel az adatbázisban, hívd az API-t az alapalakkal. A hitelesítő adatokat a `.env` fájlból olvasd (soha ne hardcode-old a kódba):
+
+```python
+import os
+import urllib.request
+
+poet_user = os.environ.get('POET_HU_USER')
+poet_key  = os.environ.get('POET_HU_KEY')
+
+url = f"https://api.poet.hu/szinonima.php?f={poet_user}&j={poet_key}&s={alapalak}"
+```
+
+**Beállítás:** Másold a `.env.example` fájlt `.env` névre, majd töltsd ki a saját adataiddal. A `.env` fájl gitignore-olva van — soha nem kerül a repóba.
+
+**Válasz formátuma (XML):**
+```xml
+<szinonimak>
+  <szocsoport>
+    <szinonima>pipi</szinonima>
+    <szinonima>tojó</szinonima>
+  </szocsoport>
+</szinonimak>
+```
+
+A `<szocsoport>` tagok különböző jelentésmezőket jelölnek — mindig azt a csoportot válaszd, amelyik a szöveg adott kontextusához illik.
+
+**API-hívás után — kötelező:** Minden API-hívás eredményét mentsd vissza a `synonyms.json` `szavak` szekciójába az alapalak kulccsal. Az adatbázis így folyamatosan bővül, és ugyanazt a szót legközelebb már nem kell újra lekérni.
+
+### Mikor NE keress szinonimát:
+- Ha a szöveg szakmai/jogi regiszterű és a precizitás fontosabb a változatosságnál
+- Ha a szinonima megváltoztatná a szöveg pontos jelentését
+- Ha a `kifejezések` szekcióban `"[töröld]"` szerepel — ott nem csere, hanem törlés a megoldás
+
+---
+
 ## Folyamat
 
 1. Olvasd végig a bemeneti szöveget figyelmesen
 2. Azonosítsd az összes mintát (általános + magyar-specifikus)
-3. Írd át az összes problémás részt
+3. Írd át az összes problémás részt — **szükség esetén** hívd a Poet.hu API-t természetesebb szóalternatívákért
 4. Ellenőrizd, hogy az átírt szöveg:
    * Hangosan olvasva természetesen szól
    * Változatos mondatszerkezetet használ
    * Konkrét részleteket ad vague állítások helyett
    * Megfelel a szöveg stílusrétegének (köznyelvi / irodalmi / hivatalos)
    * Egyszerű szerkezeteket (van/egy) használ ahol megfelelő
+   * **Első személyű szövegben:** minden ige E/1 — nincs T/1 „eredménybújtatás", nincs E/3 perspektívaváltás (M8)
 5. **Második pass — "Nyilvánvalóan AI" audit:** Olvasd újra az átírt szöveget. Van-e benne bármi, ami még mindig nyilvánvalóan AI-generált hangzású? Ha igen, írd át.
 6. Add meg az átírt verziót
 

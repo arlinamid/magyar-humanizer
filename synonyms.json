@@ -1,0 +1,736 @@
+{
+  "_meta": {
+    "verzió": "1.1.0",
+    "leírás": "Magyar AI-klisék szinonima-adatbázisa. Struktúra tükrözi a Poet.hu API XML-válaszát: minden szóhoz szócsoportok listája, amin belül az egyazon jelentésmezőbe tartozó szinonimák vannak.",
+    "forrás": "Manuálisan kurált + Poet.hu API (https://poet.hu)",
+    "kulcs_egyezmény": "MINDIG toldalék nélküli alapalak: főneveknél egyes szám alanyeset, melléknéveknél alapfok, igéknél főnévi igenév vagy E/3 jelen idő. Soha ne mentsd ragozott alakot kulcsként.",
+    "bővítés": "Minden Poet.hu API-hívás eredményét mentsd vissza ide az alapalak kulccsal. Az adatbázis így folyamatosan bővül."
+  },
+  "szavak": {
+    "kulcsfontosságú": [
+      [
+        "alapvető",
+        "döntő",
+        "lényeges",
+        "nélkülözhetetlen"
+      ],
+      [
+        "kritikus",
+        "elsőrendű",
+        "megkerülhetetlen"
+      ]
+    ],
+    "kiemelkedő": [
+      [
+        "kiváló",
+        "kitűnő",
+        "jeles",
+        "kiemelkedő"
+      ],
+      [
+        "számottevő",
+        "jelentős",
+        "komoly",
+        "figyelemre méltó"
+      ]
+    ],
+    "meghatározó": [
+      [
+        "döntő",
+        "alapvető",
+        "lényegi",
+        "mérvadó"
+      ],
+      [
+        "iránymutató",
+        "mértékadó",
+        "irányító"
+      ]
+    ],
+    "fenntartható": [
+      [
+        "tartós",
+        "hosszú távú",
+        "stabil",
+        "életképes"
+      ],
+      [
+        "fenntartható",
+        "folytatható",
+        "megtartható"
+      ]
+    ],
+    "összetett": [
+      [
+        "bonyolult",
+        "szövevényes",
+        "szerteágazó"
+      ],
+      [
+        "sokrétű",
+        "sokszínű",
+        "árnyalt",
+        "tagolt"
+      ]
+    ],
+    "komplex": [
+      [
+        "bonyolult",
+        "szövevényes",
+        "szerteágazó"
+      ],
+      [
+        "sokrétű",
+        "összetett",
+        "árnyalt"
+      ]
+    ],
+    "élénk": [
+      [
+        "pezsgő",
+        "eleven",
+        "nyüzsgő",
+        "mozgalmas"
+      ],
+      [
+        "aktív",
+        "virágzó",
+        "lüktető"
+      ]
+    ],
+    "mélységes": [
+      [
+        "mély",
+        "erős",
+        "komoly",
+        "súlyos"
+      ],
+      [
+        "intenzív",
+        "átható",
+        "megrendítő"
+      ]
+    ],
+    "értékes": [
+      [
+        "hasznos",
+        "fontos",
+        "becses"
+      ],
+      [
+        "nélkülözhetetlen",
+        "számottevő",
+        "jó"
+      ]
+    ],
+    "innovatív": [
+      [
+        "újszerű",
+        "eredeti",
+        "friss",
+        "új"
+      ],
+      [
+        "úttörő",
+        "előremutató",
+        "korszerű"
+      ]
+    ],
+    "átfogó": [
+      [
+        "teljes körű",
+        "mindenre kiterjedő",
+        "részletes"
+      ],
+      [
+        "széles körű",
+        "teljeskörű",
+        "alapos"
+      ]
+    ],
+    "hatékony": [
+      [
+        "eredményes",
+        "sikeres",
+        "jó hatásfokú"
+      ],
+      [
+        "gazdaságos",
+        "takarékos",
+        "célszerű"
+      ]
+    ],
+    "stratégiai": [
+      [
+        "hosszú távú",
+        "tervszerű",
+        "célzott"
+      ],
+      [
+        "átgondolt",
+        "taktikus",
+        "számított"
+      ]
+    ],
+    "dinamikus": [
+      [
+        "pörgős",
+        "lendületes",
+        "gyors"
+      ],
+      [
+        "változékony",
+        "aktív",
+        "mozgalmas"
+      ]
+    ],
+    "holisztikus": [
+      [
+        "átfogó",
+        "egészelvű",
+        "teljes körű"
+      ],
+      [
+        "teljességre törekvő"
+      ]
+    ],
+    "robusztus": [
+      [
+        "megbízható",
+        "erős",
+        "szilárd"
+      ],
+      [
+        "stabil",
+        "tartós",
+        "biztonságos"
+      ]
+    ],
+    "transzparáns": [
+      [
+        "átlátható",
+        "nyílt",
+        "egyértelmű"
+      ],
+      [
+        "követhető",
+        "nyomon követhető"
+      ]
+    ],
+    "szignifikáns": [
+      [
+        "jelentős",
+        "számottevő",
+        "lényeges"
+      ],
+      [
+        "komoly",
+        "érzékelhető",
+        "mérhető"
+      ]
+    ],
+    "dedikált": [
+      [
+        "elhivatott",
+        "elkötelezett",
+        "odaadó"
+      ],
+      [
+        "rátermett",
+        "hozzáértő"
+      ]
+    ],
+    "proaktív": [
+      [
+        "kezdeményező",
+        "megelőző",
+        "előretekintő"
+      ],
+      [
+        "cselekvőkész",
+        "aktív",
+        "öntevékeny"
+      ]
+    ],
+    "elkötelezett": [
+      [
+        "eltökélt",
+        "következetes",
+        "kitartó"
+      ],
+      [
+        "hűséges",
+        "odaadó",
+        "állhatatos"
+      ]
+    ],
+    "releváns": [
+      [
+        "fontos",
+        "lényeges",
+        "odaillő"
+      ],
+      [
+        "ide vonatkozó",
+        "ide kapcsolódó",
+        "érintő"
+      ]
+    ],
+    "optimalizál": [
+      [
+        "javít",
+        "finomít",
+        "fejleszt"
+      ],
+      [
+        "tökéletesít",
+        "csiszol",
+        "hangol"
+      ]
+    ],
+    "facilitál": [
+      [
+        "elősegít",
+        "megkönnyít",
+        "lehetővé tesz"
+      ],
+      [
+        "segít",
+        "támogat",
+        "ösztönöz"
+      ]
+    ],
+    "implementál": [
+      [
+        "bevezet",
+        "megvalósít",
+        "alkalmazásba vesz"
+      ],
+      [
+        "üzembe helyez",
+        "használatba vesz"
+      ]
+    ],
+    "szimbolizál": [
+      [
+        "jelképez",
+        "jelöl",
+        "kifejez"
+      ],
+      [
+        "megtestesít",
+        "képvisel"
+      ]
+    ],
+    "tükröz": [
+      [
+        "mutat",
+        "jelez",
+        "kifejez"
+      ],
+      [
+        "megmutat",
+        "visszaad",
+        "ábrázol"
+      ]
+    ],
+    "hangsúlyoz": [
+      [
+        "kiemel",
+        "kidomborít",
+        "aláhúz"
+      ],
+      [
+        "nyomatékosít",
+        "megjelöl",
+        "rámutat"
+      ]
+    ],
+    "elősegít": [
+      [
+        "segít",
+        "megkönnyít",
+        "támogat"
+      ],
+      [
+        "ösztönöz",
+        "lehetővé tesz",
+        "mozdít"
+      ]
+    ],
+    "hozzájárul": [
+      [
+        "segít",
+        "támogat",
+        "erősít"
+      ],
+      [
+        "közrejátszik",
+        "részt vesz",
+        "befolyásol"
+      ]
+    ],
+    "mérföldkő": [
+      [
+        "fordulópont",
+        "határkő",
+        "átmenet"
+      ],
+      [
+        "változás",
+        "kiemelkedő esemény"
+      ]
+    ],
+    "paradigmaváltás": [
+      [
+        "szemléletváltás",
+        "fordulópont",
+        "gyökeres változás"
+      ],
+      [
+        "átalakulás",
+        "szemléletbeli fordulat"
+      ]
+    ],
+    "szinergia": [
+      [
+        "együtthatás",
+        "kölcsönös erősítés"
+      ],
+      [
+        "összjáték",
+        "együttműködési hatás"
+      ]
+    ],
+    "kiválóság": [
+      [
+        "minőség",
+        "jó teljesítmény",
+        "erény"
+      ],
+      [
+        "szakértelem",
+        "hozzáértés"
+      ]
+    ],
+    "úttörő": [
+      [
+        "első",
+        "eredeti",
+        "kezdeményező"
+      ],
+      [
+        "korát megelőző",
+        "felfedező"
+      ]
+    ],
+    "lelkes": [
+      [
+        "buzgó",
+        "odaadó",
+        "szenvedélyes"
+      ],
+      [
+        "lendületes",
+        "heves",
+        "tüzes"
+      ]
+    ],
+    "koherens": [
+      [
+        "következetes",
+        "egységes",
+        "összefüggő"
+      ],
+      [
+        "logikus",
+        "összhangban lévő"
+      ]
+    ],
+    "autentikus": [
+      [
+        "valódi",
+        "eredeti",
+        "hiteles"
+      ],
+      [
+        "igazi",
+        "tényleges"
+      ]
+    ],
+    "inspiráló": [
+      [
+        "lelkesítő",
+        "buzdító",
+        "ösztönző"
+      ],
+      [
+        "lendítő",
+        "szárnyaló"
+      ]
+    ],
+    "betanít": [
+      [
+        "oktat",
+        "képez",
+        "kiképez",
+        "bevezet",
+        "megismertet"
+      ]
+    ],
+    "fejleszt": [
+      [
+        "tökéletesít",
+        "jobbít",
+        "csiszol",
+        "átdolgoz"
+      ],
+      [
+        "újít",
+        "korszerűsít"
+      ]
+    ],
+    "koordinál": [
+      [
+        "összehangol",
+        "megszervez",
+        "irányít",
+        "vezényel"
+      ]
+    ],
+    "csökkent": [
+      [
+        "mérsékel",
+        "redukál",
+        "kisebbít"
+      ],
+      [
+        "enyhít",
+        "csillapít"
+      ]
+    ],
+    "bevezet": [
+      [
+        "meghonosít",
+        "behoz",
+        "kezdeményez",
+        "elterjeszt"
+      ]
+    ],
+    "növel": [
+      [
+        "emel",
+        "gyarapít",
+        "fokoz",
+        "nagyobbít"
+      ]
+    ],
+    "megold": [
+      [
+        "elintéz",
+        "lerendez",
+        "lebonyolít"
+      ]
+    ],
+    "rögzít": [
+      [
+        "adminisztrál",
+        "dokumentál",
+        "bejegyez",
+        "nyilvántartásba vesz"
+      ]
+    ],
+    "ellenőriz": [
+      [
+        "nyomon követ",
+        "figyelemmel kísér",
+        "verifikál"
+      ]
+    ],
+    "támogat": [
+      [
+        "segít",
+        "ösztönöz",
+        "buzdít",
+        "serkent"
+      ]
+    ],
+    "szervez": [
+      [
+        "megszervez",
+        "megtervez",
+        "előkészít",
+        "lebonyolít"
+      ]
+    ],
+    "vezet": [
+      [
+        "irányít",
+        "vezényel",
+        "igazgat",
+        "összehangol"
+      ]
+    ],
+    "javít": [
+      [
+        "korrigál",
+        "kiigazít",
+        "helyesbít",
+        "tökéletesít"
+      ]
+    ]
+  },
+  "kifejezések": {
+    "szerepet játszik": {
+      "helyett": [
+        "hat",
+        "befolyásol",
+        "számít",
+        "közrejátszik"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "kérdésként merül fel": {
+      "helyett": [
+        "felmerül",
+        "szóba kerül",
+        "felvetődik"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "elvégzésre kerül": {
+      "helyett": [
+        "elvégzik",
+        "megtörténik",
+        "megcsinálják"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "megvalósításra kerül": {
+      "helyett": [
+        "megvalósul",
+        "bevezető",
+        "elkészül"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "lehetővé teszi azt, hogy": {
+      "helyett": [
+        "lehetővé teszi",
+        "segíti",
+        "módot ad arra, hogy"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "átalakító erőként jelenik meg": {
+      "helyett": [
+        "átalakítja",
+        "megváltoztatja",
+        "hatással van rá"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "hozzájárul ahhoz, hogy": {
+      "helyett": [
+        "segíti",
+        "elősegíti",
+        "ösztönzi"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "figyelmet érdemel": {
+      "helyett": [
+        "fontos",
+        "érdemes",
+        "lényeges"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "tekintettel arra, hogy": {
+      "helyett": [
+        "mivel",
+        "mert",
+        "tekintve, hogy"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "annak érdekében, hogy": {
+      "helyett": [
+        "hogy",
+        "azért",
+        "célból"
+      ],
+      "megjegyzés": "M3 terpeszkedő"
+    },
+    "nem csupán ... hanem": {
+      "helyett": [
+        "... és ... egyaránt",
+        "... is, ... is",
+        "egyszerre ... és ..."
+      ],
+      "megjegyzés": "9. minta – negatív párhuzamosság"
+    },
+    "fontos megjegyezni, hogy": {
+      "helyett": [
+        "[töröld – mondd el közvetlenül]"
+      ],
+      "megjegyzés": "M5 bevezető klisé"
+    },
+    "érdemes kiemelni, hogy": {
+      "helyett": [
+        "[töröld – mondd el közvetlenül]"
+      ],
+      "megjegyzés": "M5 bevezető klisé"
+    },
+    "összefoglalásképpen elmondható, hogy": {
+      "helyett": [
+        "tehát",
+        "röviden",
+        "[töröld]"
+      ],
+      "megjegyzés": "M5 bevezető klisé"
+    },
+    "mérföldkövet jelent": {
+      "helyett": [
+        "[konkrétummal helyettesítsd: mi változott ténylegesen]"
+      ],
+      "megjegyzés": "1. minta – significance inflation"
+    },
+    "korszakalkotó áttörés": {
+      "helyett": [
+        "[konkrétummal: mi és mennyivel jobb]"
+      ],
+      "megjegyzés": "1. minta – significance inflation"
+    },
+    "a jövő záloga": {
+      "helyett": [
+        "[töröld]"
+      ],
+      "megjegyzés": "1. minta – significance inflation"
+    },
+    "funkcionál": {
+      "helyett": [
+        "van",
+        "működik",
+        "szolgál"
+      ],
+      "megjegyzés": "8. minta – létige kerülése"
+    },
+    "büszkélkedik": {
+      "helyett": [
+        "van",
+        "rendelkezik",
+        "tartalmaz"
+      ],
+      "megjegyzés": "8. minta – létige kerülése"
+    },
+    "minősül": {
+      "helyett": [
+        "van",
+        "számít",
+        "tekintendő"
+      ],
+      "megjegyzés": "8. minta – létige kerülése"
+    }
+  }
+}
