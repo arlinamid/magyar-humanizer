@@ -1,0 +1,151 @@
+# Helyesírási kivételek — az adatbázis verziókövetett magja.
+# Újraépítés:  python dict/db.py import
+word	lang	reason	origin	times_seen	note
+Avoidance	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Balanced	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Case	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Changelog	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Codexhez	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Copula	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Curly	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Cursorhoz	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Humanizer	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Indicators	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Install	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Key	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Language	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+License	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Name	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Objectives	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Patterns	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Person	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+PowerShell	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+Results	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Scorecard	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Title	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+Windsurfnál	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+agent	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+agentek	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+build	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+cache	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+close	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+commit	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+commitolunk	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+cons	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+drift	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+emoji	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+emojik	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+emojikkal	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+emojis	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+fallback	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+frontmatter	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+inflation	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+instructions	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+keynote	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+markdown	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+mixing	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+networking	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+npx	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+pass	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+project	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+prompt	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+promptolás	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+pros	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+pull	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+quote	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+quotes	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+repetition	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+repo	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+request	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+requestet	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+rule	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+rules	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+scoped	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+script	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+significance	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+skill	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+skillek	hu_HU	idegen	seed	0	angol szakkifejezések, amik magyar szövegben is megjelennek
+slop	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+third	hu_HU	idegen	seed	0	a mintapéldákban szereplő angol kifejezések és nevek
+workspace	hu_HU	idegen	seed	0	további angol szakszavak a dokumentációban
+API	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+Metaírás	hu_HU	magyar-hianyzo	learned	0	helyes magyar alak, a LibreOffice szótár nem generálja
+SQLite	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+TSV	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+Tartalmilag	hu_HU	magyar-hianyzo	learned	0	helyes magyar alak, a LibreOffice szótár nem generálja
+URL	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+agented	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+agenteket	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+agenteknél	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+agentenként	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+agentet	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+bájt	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+bájtban	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+commitolható	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+commitolva	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+diff	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+diffje	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+helyesírási	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+legütősebb	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+meghivatkozják	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+meghivatkozza	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+meta-magyarázat	hu_HU	magyar-hianyzo	learned	0	helyes magyar alak, a LibreOffice szótár nem generálja
+promocionális	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+repójából	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+repónak	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+rövidzár	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+rövidzárat	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+skillbe	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+skillt	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+szikofantikus	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+szövegegész	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+tartalmi	hu_HU	magyar-hianyzo	learned	0	helyes magyar alak, a LibreOffice szótár nem generálja
+túlhasználat	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+túlhasználata	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+verziókövetett	hu_HU	magyar-hianyzo	seed	0	helyes magyar alakok, amiket a LibreOffice szótár nem generál
+véleményjellegű	hu_HU	magyar-hianyzo	learned	0	helyes magyar alak, a LibreOffice szótár nem generálja
+wow	hu_HU	magyar-hianyzo	seed	0	magyar szakszavak, amiket a hunspell nem ismer
+Antigravity	hu_HU	marka	seed	0	agent- és eszköznevek
+Caimelot	hu_HU	marka	seed	0	agent- és eszköznevek
+Claude	hu_HU	marka	seed	0	agent- és eszköznevek
+Cleanup	hu_HU	marka	seed	0	agent- és eszköznevek
+Cline	hu_HU	marka	seed	0	agent- és eszköznevek
+Code	hu_HU	marka	seed	0	agent- és eszköznevek
+Codex	hu_HU	marka	seed	0	agent- és eszköznevek
+Copilot	hu_HU	marka	seed	0	agent- és eszköznevek
+Cursor	hu_HU	marka	seed	0	agent- és eszköznevek
+Desktop	hu_HU	marka	seed	0	agent- és eszköznevek
+Gemini	hu_HU	marka	seed	0	agent- és eszköznevek
+GitHub	hu_HU	marka	seed	0	agent- és eszköznevek
+Litera	hu_HU	marka	seed	0	agent- és eszköznevek
+OpenAI	hu_HU	marka	seed	0	agent- és eszköznevek
+Signs	hu_HU	marka	seed	0	agent- és eszköznevek
+WikiProject	hu_HU	marka	seed	0	agent- és eszköznevek
+Wikipedia	hu_HU	marka	seed	0	agent- és eszköznevek
+Windsurf	hu_HU	marka	seed	0	agent- és eszköznevek
+Zed	hu_HU	marka	seed	0	agent- és eszköznevek
+agentbe	hu_HU	marka	seed	0	agent- és eszköznevek
+gitignore	hu_HU	marka	seed	0	agent- és eszköznevek
+hardcode	hu_HU	marka	seed	0	agent- és eszköznevek
+hunspell	hu_HU	marka	seed	0	agent- és eszköznevek
+pyenchant	hu_HU	marka	seed	0	agent- és eszköznevek
+repó	hu_HU	marka	seed	0	agent- és eszköznevek
+repóba	hu_HU	marka	seed	0	agent- és eszköznevek
+slash	hu_HU	marka	seed	0	agent- és eszköznevek
+spylls	hu_HU	marka	seed	0	agent- és eszköznevek
+transzpiler	hu_HU	marka	seed	0	agent- és eszköznevek
+transzpilert	hu_HU	marka	seed	0	agent- és eszköznevek
+Kp	hu_HU	szakszo	learned	0	közigazgatási perrendtartás rövidítése
+burstiness	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+humanizál	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+humanizálandó	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+humanizálás	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+humanizáló	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+metakogníció	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+stilometria	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+stilometriai	hu_HU	szakszo	seed	0	a skill saját szakszókincse
+Copilotot	hu_HU	tulajdonnev	learned	0	agent- és lapnevek magyar toldalékkal
+Cursort	hu_HU	tulajdonnev	learned	0	agent- és lapnevek magyar toldalékkal
+Qubit	hu_HU	tulajdonnev	learned	0	agent- és lapnevek magyar toldalékkal
+Windsurfot	hu_HU	tulajdonnev	learned	0	agent- és lapnevek magyar toldalékkal
+Zedet	hu_HU	tulajdonnev	learned	0	agent- és lapnevek magyar toldalékkal

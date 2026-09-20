@@ -2,111 +2,144 @@
 
 # Magyar Humanizer
 
-[![Version](https://img.shields.io/badge/version-1.4.1-blue?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md)
-[![Patterns](https://img.shields.io/badge/minták-26%20általános%20%2B%208%20magyar-green?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/SKILL.md)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md)
+[![Patterns](https://img.shields.io/badge/minták-26%20%2B%209%20%2B%2010-green?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/SKILL.md)
+[![Install](https://img.shields.io/badge/npx-skills%20add-black?style=flat-square)](https://github.com/vercel-labs/skills)
 [![Language](https://img.shields.io/badge/nyelv-magyar-red?style=flat-square)](https://github.com/arlinamid/magyar-humanizer)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/LICENSE)
-[![Based on](https://img.shields.io/badge/alapja-blader%2Fhumanizer-orange?style=flat-square)](https://github.com/blader/humanizer)
 
-> AI-szag eltávolítása magyar szövegekből — Claude Code skill
+> AI-szag eltávolítása magyar szövegekből — agent skill Claude Code-hoz, Codexhez, Cursorhoz és társaikhoz
 
-Az AI-generált szöveg jeleit azonosítja és eltávolítja, hogy a szöveg természetesebben és emberibben hangozzon. Az útmutató a Wikipedia ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) oldalán alapul (WikiProject AI Cleanup, [@blader/humanizer](https://github.com/blader/humanizer)), kiegészítve a magyar nyelvre vonatkozó korpuszelemzéssel.
+```bash
+npx skills add arlinamid/magyar-humanizer
+```
 
 ---
 
-## Mit csinál?
+## Három réteg, mindig mind a három
 
-**26 általános minta** (az eredeti humanizer alapján, kibővítve):
+Ez a skill v2.0-tól **három kötelező rétegből** áll, és ez a lényege:
 
-- Jelentőség-felfújás, reklámszerű nyelv, homályos hivatkozások
-- AI-szókincs, terpeszkedő szerkezetek, negatív párhuzamosságok
-- Gondolatjel- és félkövér-túlhasználat, alcímes felsorolások
-- Title Case fejlécek, tipográfiai idézőjelek
-- Chatbot-töredékek, szikofantikus hangnem, általános zárómondatok
-- Kétszavas drámai ütés, narratív fordulópontjelzők
-- **Második pass audit** — kötelező újraolvasás az első átírás után
+| Réteg | Mit tartalmaz | Hatókör |
+|-------|---------------|---------|
+| **A — általános** (1–26) | Nyelvfüggetlen AI-minták: felfújt jelentőség, reklámnyelv, homályos hivatkozás, AI-szókincs, gondolatjel, félkövér, emoji, chatbot-töredékek | mondat, bekezdés |
+| **B — magyar** (M1–M9) | Szórend, ritmus, terpeszkedés, főnevesítés, magyar klisék, regiszter, személykonzisztencia, névismétlés | mondat, bekezdés |
+| **C — stilometriai** (S1–S10) | Gondolatvezetés szabályossága, szerkezeti ismétlődés, bináris érvelés, szemantikai körkörösség | **teljes szöveg** |
 
-**8 magyar-specifikus kiterjesztés (M1–M8):**
+**A B réteg kiegészítés, nem helyettesítés.** A v1 leggyakoribb hibája az volt, hogy az agent meglátta a magyar szöveget, és csak a magyar rétegen futott végig — ettől bennmaradt a „mérföldkövet jelent", a „szakértők szerint" és a három félkövér kiemelés bekezdésenként. A v2 a sorrendet kötelezővé teszi, és egy záró réteg-audittal kikényszeríti.
+
+---
+
+## Mit ad hozzá a C réteg?
+
+Az A és B réteg mondatokat javít. A C réteg **arányokat mér** — mert egy szöveg minden egyes mondata lehet természetes, miközben a szöveg egésze gépi.
 
 | Minta | Leírás |
 |-------|--------|
-| M1 | Szórend és fókuszpozíció — pragmatikai szórend helyreállítása |
-| M2 | Mondatritmus (burstiness) — egyenletes AI-ritmus felváltása |
-| M3 | Terpeszkedő kifejezések → tömör változatok (40+ eset) |
-| M4 | Főnevesítés → visszaigésítés |
-| M5 | Magyar AI-klisék és felfújt fontosság |
-| M6 | Stílusréteg-érzékeny szabályok (köznyelvi / irodalmi / hivatalos) |
-| M7 | Első személyű logikai ellentmondás |
-| M8 | Személy-inkonzisztencia — T/1 igék E/1 narrációban (CV, önéletírás) |
+| S1 | Feltűnően szabályos gondolatvezetés — minden bekezdésnek egyértelmű dolga van, semmi nem lóg ki |
+| S2 | A „nem az… hanem…" szerkezet túlhasználata, a mondatkezdő „Hanem" |
+| S3 | Rövid mondatok mint rendszer — a nyomatékosítás sablonná válik |
+| S4 | Retorikai kérdések halmozása, mindig ugyanabban a dramaturgiai szerepben |
+| S5 | Azonos vázú mondatsorozatok — a párhuzam tovább tart, mint ameddig ember fenntartaná |
+| S6 | Két pólusra egyszerűsített érvelés, a köztes esetek eltüntetése |
+| S7 | Az átmenetek túlzott jelölése — a szöveg a saját szerkezetét magyarázza |
+| S8 | „Szerintem"-szindróma — a személyességet jelölő hordozza tapasztalat helyett |
+| S9 | Szemantikai körkörösség — ugyanaz a tétel négyszer, új tartalom nélkül |
+| S10 | Felsorolások folyó szövegbe rejtve |
 
----
-
-## Beépített eszközök
-
-### Szinonima-keresés (cache-first)
-
-A `synonyms.json` fájl 51 AI-klisé és 22 terpeszkedő kifejezés helyi adatbázisa. Ha a szó megvan benne, nem kell API-t hívni. Ha nincs, a Poet.hu szinonimaszótár API tölti ki, és az eredmény visszaíródik az adatbázisba.
-
-```
-szó → synonyms.json → (ha nincs) → Poet.hu API → visszamentés
-```
-
-A Poet.hu API hitelesítő adatait a `.env` fájlban kell megadni (lásd `.env.example`).
-
-### Helyesírás-ellenőrzés (pyenchant + hu_HU)
-
-A `dict/` könyvtár a LibreOffice hivatalos Magyar hunspell szótárát tartalmazza. A `pyenchant` könyvtárral használható:
-
-```python
-import enchant
-d = enchant.Dict('hu_HU')
-d.check('kiemelkedő')      # True
-d.suggest('kiemelkedo')    # ['kiemelkedő', ...]
-```
+A réteghez **mérhető mutatótábla** is tartozik: mondathossz-szórás, rövid mondatok aránya, „hanem"-sűrűség, véleményjelölő/tapasztalat arány. Egyetlen kilógó érték semmit nem jelent — **három vagy több egyszerre már mintázat.**
 
 ---
 
 ## Telepítés
 
-### Claude Code (ajánlott)
+### npx skills (ajánlott)
 
 ```bash
-# Klónozd a teljes repót a skills könyvtárba:
-git clone https://github.com/arlinamid/magyar-humanizer \
-  ~/.claude/skills/magyar-humanizer
+npx skills add arlinamid/magyar-humanizer
 ```
 
-Vagy csak a SKILL.md, ha a többi eszközre nincs szükséged:
+Felismeri a gépen lévő agenteket és felajánlja a telepítést. Konkrét célok:
 
 ```bash
-mkdir -p ~/.claude/skills/magyar-humanizer
-curl -o ~/.claude/skills/magyar-humanizer/SKILL.md \
-  https://raw.githubusercontent.com/arlinamid/magyar-humanizer/master/SKILL.md
+npx skills add arlinamid/magyar-humanizer --agent claude-code codex cursor
+npx skills add arlinamid/magyar-humanizer -g       # globálisan
+npx skills update magyar-humanizer                 # frissítés
 ```
 
-### Poet.hu API beállítása (opcionális)
+Támogatott: **Claude Code** (CLI és Desktop), **OpenAI Codex CLI**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Gemini CLI / Antigravity**, **Cline**, **Zed**. Mindegyik a teljes SKILL.md-t kapja.
 
-A szinonima-kereső cache-first módban működik — az API nélkül is használható, de az adatbázisból hiányzó szavakhoz szükséges.
+### Kézzel
 
 ```bash
-cp .env.example .env
-# Töltsd ki a .env fájlt a saját Poet.hu adataiddal
-# Regisztráció: https://poet.hu/api
+git clone https://github.com/arlinamid/magyar-humanizer ~/.claude/skills/magyar-humanizer
 ```
 
-### Helyesírás-ellenőrzés beállítása (opcionális)
+### Régi, szabályfájl-alapú beállításokhoz
+
+Ha az agented még nem ismeri a skill-mappát és csak szabályfájlt olvas, az `install/` transzpilere legenerálja a méretkorlátos formátumokat (Cursor `.mdc`, Windsurf rule, Copilot instructions, Gemini TOML, `AGENTS.md`):
 
 ```bash
-pip install pyenchant
-# Másold a szótárfájlokat a pyenchant hunspell könyvtárába
-# Részletes útmutató: dict/README.md
+node install/build.js --all
 ```
+
+Részletek: [install/README.md](install/README.md)
+
+---
+
+## Beépített eszközök
+
+A `dict/` mappában négy offline eszköz. Egyik sem igényel API-kulcsot.
+
+```bash
+python dict/fetch.py        # szótárak letöltése — rákérdez, mely nyelvek kellenek
+pip install spylls          # a teljes hunspell motorhoz
+```
+
+A szótárak a [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) repóból jönnek. A magyar mindig települ; tezaurusz 29 nyelvhez, helyesírási szótár 66-hoz érhető el.
+
+### Helyesírás-ellenőrzés — kötelező lépés
+
+```bash
+python dict/spell.py check szoveg.md --suggest
+```
+
+Nem opcionális segédeszköz: az átírás közben keletkezik a legtöbb elgépelés, mert szavakat cserélsz és mondatokat szerkesztesz át. A skill ellenőrizetlen szöveget nem ad vissza.
+
+Teljes hunspell motorral fut, nem szólistával. Ez a magyarban nem finomhangolás: a „kulcsfontosságú" nem szerepel külön a szótárfájlban, a hunspell összetételként állítja elő — szólistával téves hibának látszana, és a ragozott alakok tömegesen buknának.
+
+### Tezaurusz — kereszt-ellenőrzéssel
+
+```bash
+python dict/thesaurus.py lookup kiemelkedő --verify
+```
+
+A LibreOffice magyar tezaurusza 21 687 szócikket és 30 500 jelentéscsoportot tartalmaz. A `--verify` minden jelöltről megmondja, hogy valódi szó-e, melyik jelentéscsoportból jött, és **kölcsönös-e** a szinonimaviszony:
+
+```
+kiemelkedő -> kiváló    helyesírás: rendben   tezaurusz: rendben   kölcsönös: rendben
+kiemelkedő -> sárcipő   helyesírás: rendben   tezaurusz: rendben   kölcsönös: FIGYELEM
+```
+
+A „sárcipő" valódi szó, és szerepel is a tezauruszban — csak éppen semmi köze a „kiemelkedő"-höz. Egyedül a kölcsönösség fogja meg. Pontosan ez hiányzott a korábbi JSON-alapú megoldásból.
+
+### Adatbázis — amit a skill maga épít
+
+```bash
+python dict/db.py add "szerepet játszik" "hat" --pattern M3 --context "…"
+python dict/db.py scan szoveg.md
+python dict/db.py verify
+```
+
+A `humanizer.db` (SQLite) nem beégetett lista: az induló készlet csak mag, a tartalom a munkából jön. Minden bejegyzés átmegy a kereszt-ellenőrzésen, és az eredmény eltárolódik, tehát utólag is látszik, mi mennyire megbízható. A verziókövetett forma a `dict/seed.tsv` — bináris SQLite-ot nem commitolunk, mert nem olvasható a diffje.
+
+Részletek és licencek: [dict/README.md](dict/README.md)
 
 ---
 
 ## Használat
 
-Claude Code-ban a skill automatikusan aktiválódik, ha magyar szöveg humanizálásáról van szó. Explicit hívás:
+A skill automatikusan aktiválódik, ha magyar szöveg humanizálásáról van szó. Explicit hívás Claude Code-ban:
 
 ```
 /magyar-humanizer
@@ -114,39 +147,57 @@ Claude Code-ban a skill automatikusan aktiválódik, ha magyar szöveg humanizá
 [szöveg ide]
 ```
 
+A kimenet az átírt szöveg, és a változtatások **rétegenként bontva** (A / B / C) — így látszik, hogy mind a három lefutott.
+
 ---
 
 ## Fájlszerkezet
 
 ```
 magyar-humanizer/
-├── SKILL.md          — fő skill (v1.4.1), összes minta és eszköz
-├── synonyms.json     — helyi szinonima-adatbázis (bővül minden API-hívásnál)
-├── CHANGELOG.md      — teljes fejlesztési napló
-├── .env.example      — Poet.hu API credentials sablon
-├── .gitignore        — .env kizárva
-└── dict/
-    ├── README.md     — forrás, licenc, telepítési útmutató
-    ├── hu_HU.dic     — LibreOffice Magyar szótár (~1.7 MB, LGPL-2.1/MPL-2.0)
-    └── hu_HU.aff     — LibreOffice Magyar ragozási szabályok (~2.2 MB)
+├── SKILL.md              — a skill magja: kötelező sorrend, eszközök, kimenet
+├── CHANGELOG.md          — fejlesztési napló
+├── references/           — A/B/C rétegek, publicisztika, ellenőrzőlista, példák
+├── dict/
+│   ├── README.md         — eszközök, kereszt-ellenőrzés, licencek
+│   ├── fetch.py          — szótárletöltő (interaktív nyelvválasztás)
+│   ├── spell.py          — helyesírás-ellenőrzés (spylls / hunspell)
+│   ├── thesaurus.py      — MyThes tezaurusz kereszt-ellenőrzéssel
+│   ├── db.py             — a skill saját SQLite adatbázisa
+│   ├── seed.tsv          — szócseré mag (verziókövetett)
+│   ├── seed-ignore.tsv   — helyesírási kivételek magja
+│   └── data/             — letöltött szótárak (gitignore-olt)
+└── install/
+    ├── README.md         — telepítési útmutató agentenként
+    ├── build.js          — transzpiler a szabályfájl-formátumokhoz
+    ├── compact.md        — kézzel sűrített változat (drift-ellenőrzéssel)
+    └── dist/             — generált kimenetek (gitignore-olt)
 ```
 
 ---
 
 ## Stílusrétegek
 
-- **Köznyelvi / újságírói** — Index, HVG stílus
+- **Köznyelvi / újságírói** — Index, HVG, Magyar Narancs stílus
 - **Irodalmi / esszé** — Jelenkor, Litera stílus
 - **Hivatalos / jogi** — törvényszöveg, AB-határozat stílus
 
 ---
 
-## Kapcsolódó projektek
+## Korlátok
 
-- [@blader/humanizer](https://github.com/blader/humanizer) — az eredeti skill, amin ez alapul
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) — forrásanyag
-- [Poet.hu szinonimaszótár](https://poet.hu) — Magyar szinonima API
-- [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries/tree/master/hu_HU) — hu_HU hunspell szótár forrása
+Ez szövegszerkesztő eszköz, nem detektor-megkerülő. Az automatikus MI-detektorok százalékos értéke nem szerzőségi bizonyíték: emberi szöveget is minősítenek gépinek, és gépi szöveg is átcsúszik rajtuk. Jelentős tartalmi MI-közreműködésnél szakmailag és etikailag helyes jelezni a használatot; aki a szöveget a neve alatt közli, felelős az adatokért és a hivatkozásokért. Az EU MI-rendelet 50. cikk (4) bekezdése szerint jelezni kell a nyilvánosság közérdekű tájékoztatására közzétett MI-generált szöveget (2026. augusztus 2-tól alkalmazandó) — érdemi emberi felülvizsgálat esetén nem szükséges.
+
+---
+
+## Források
+
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) — az A réteg alapja (WikiProject AI Cleanup)
+- [@blader/humanizer](https://github.com/blader/humanizer) — az eredeti skill
+- 2022 előtti magyar korpusz (Index, HVG, Magyar Narancs, Jelenkor, Litera, törvényszövegek, AB-határozatok) — a B réteg alapja
+- [Caimelot: Az MI-használat felismerhető nyomai — mit mutat meg a stilometria?](https://caimelot.blogspot.com/2026/09/az-mi-hasznalat-felismerheto-nyomai-mit.html) (2026) — a C réteg alapja
+- [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) — hunspell + MyThes tezaurusz (offline)
+- [vercel-labs/skills](https://github.com/vercel-labs/skills) — a telepítéshez használt skills CLI
 
 ---
 
@@ -154,11 +205,7 @@ magyar-humanizer/
 
 Ha van egy mintád, ami nálad bevált — nyiss egy pull requestet. Bővítsük együtt.
 
----
-
-## Changelog
-
-Lásd: [CHANGELOG.md](CHANGELOG.md)
+Changelog: [CHANGELOG.md](CHANGELOG.md)
 
 ---
 

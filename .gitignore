@@ -1,2 +1,24 @@
 # Hitelesítő adatok — SOHA ne commitold
 .env
+
+# Generált kimenetek — újraépíthető: node install/build.js --all
+install/dist/
+
+# Letöltött szótárak — újraépíthető: python dict/fetch.py
+# Nem vendoroljuk őket: ~6 MB nyelvenként, és a magyar tezaurusz GPL-2,
+# ami nem fér össze ennek a repónak az MIT licencével.
+dict/data/
+
+# A munka-adatbázis. A verziókövetett mag a dict/seed.tsv — bináris SQLite-ot
+# nem commitolunk, mert nem olvasható a diffje és nem lehet összefésülni.
+dict/humanizer.db
+dict/humanizer.db-wal
+dict/humanizer.db-shm
+
+# Helyi munkamásolatok / ideiglenes mentések
+.SKILL.monolith.bak
+.kilo/
+
+# Python
+__pycache__/
+*.pyc

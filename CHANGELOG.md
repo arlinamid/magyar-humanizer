@@ -1,5 +1,204 @@
 # Magyar Humanizer — Fejlesztési napló
 
+## v2.1.0 (2026-09-20)
+
+### Összefoglalás
+
+Progresszív feltárás: a mintakatalógusok a `references/` alá kerültek. Átemelve a Codex-változat publicisztika- és önfejlesztő rétege. A helyesírási kivételek az adatbázisba költöztek.
+
+### 1. Progresszív feltárás — a monolit felbontása
+
+A SKILL.md most a **kötelező sorrendet, az eszközöket és a kimeneti formátumot** tartja. A minták külön fájlokban vannak:
+
+| Fájl | Tartalom |
+|------|----------|
+| `references/layer-a-general.md` | A réteg (1–26) |
+| `references/layer-b-hungarian.md` | B réteg (M1–M9) |
+| `references/layer-c-stylometric.md` | C réteg (S1–S10) |
+| `references/voice.md` | személyiség és lélek |
+| `references/checklist.md` | teljes ellenőrzőlista |
+| `references/examples.md` | végigvezetett példák |
+
+A három alapréteg **mindig mind beolvasandó** — a „szükség szerint" csak a feltételes rétegekre vonatkozik. Ez a Codex-változat „use references selectively" mintáját fordítja meg: ott ez okozta, hogy az agentek csak a magyar réteget futtatták.
+
+A `install/build.js` drift-bélyege a `references/` tartalmát is lefedi, így egy rétegfájl módosulása sem marad észrevétlen a szabályfájl-céloknál.
+
+### 2. Publicisztika réteg (Codex-ből)
+
+Feltételes réteg véleményhez, esszéhez, tárcához:
+
+- `references/publicisztika.md` — állítás, konkrétum, súrlódás, aránytalanság
+- `references/publicisztika-audit.md` — záró ellenőrzés átírás után
+- `references/publicisztika-sources.md` — 2020 előtti magyar mintaszövegek
+
+Több ponton függetlenül ugyanazt találja meg, mint a C réteg (pl. a túlcsiszolt „X nem ez, hanem az" tételmondat).
+
+### 3. Önfejlesztés
+
+- `references/self-improvement.md` — mikor és hogyan kerülhet új minta a skill memóriájába
+- `references/evolution-notes.md` — rövid, tartós jegyzetek
+
+A szócseréket továbbra is az adatbázisba kell írni (`dict/db.py add`), nem a jegyzetekbe.
+
+### 4. Helyesírási kivételek az adatbázisban
+
+A `dict/ignore.txt` megszűnt. A kivételek az `ignore_words` táblában élnek, verziókövetett magjuk a `dict/seed-ignore.tsv`.
+
+```bash
+python dict/db.py ignore add LLM --reason szakszo
+python dict/db.py ignore list
+python dict/db.py dump    # seed.tsv + seed-ignore.tsv
+```
+
+---
+
+## v2.0.0 (2026-09-20)
+
+### Összefoglalás
+
+Háromrétegű átszervezés. Új stilometriai réteg (S1–S10), kötelezővé tett rétegsorrend, és `npx skills`-alapú telepítés minden támogatott agentbe.
+
+### 1. Rétegstruktúra — a „csak a magyar réteg fut le" hiba javítása
+
+A v1 leggyakoribb üzemi hibája az volt, hogy az agent meglátta a magyar szöveget, és **csak a magyar-specifikus mintákat** futtatta le. Az általános réteg így kimaradt: bennmaradt a „mérföldkövet jelent", a „szakértők szerint", a bekezdésenkénti három félkövér kiemelés és az emojis fejléc.
+
+**Javítás:**
+
+- A SKILL.md eleje egy **kötelező futtatási sorrend** gate-tel indul, a frontmatter előtti első érdemi szakaszként
+- A három réteg explicit nevet kapott: **A — általános** (1–26), **B — magyar** (M1–M9), **C — stilometriai** (S1–S10)
+- A B réteg bevezetője kimondja, hogy az A rétegre **ráépül**, nem helyettesíti
+- A frontmatter `description` is kimondja, hogy a magyar réteg kiegészítés
+- Új 7. lépés a folyamatban: **réteg-audit** — visszaadás előtt ellenőrizni kell, hogy mind a három lefutott
+- A kimeneti formátum mostantól **rétegenként bontott** változáslistát kér (A / B / C), így a hiányzó réteg azonnal látszik
+- A Gyors ellenőrző lista három szakaszra bomlik, és kimondja: „Ez a lista egyben van. Nem szabad csak a B szakaszát végigfutni."
+
+### 2. Új C réteg — stilometriai minták (S1–S10)
+
+Forrás: Caimelot, *Az MI-használat felismerhető nyomai — mit mutat meg a stilometria?* (2026. szeptember).
+
+Az A és B réteg mondatokat javít, a C réteg **arányokat mér**: egy szöveg minden mondata lehet természetes, miközben a szöveg egésze gépi.
+
+| Minta | Leírás |
+|-------|--------|
+| S1 | Feltűnően szabályos gondolatvezetés |
+| S2 | A „nem az… hanem…" szerkezet túlhasználata, mondatkezdő „Hanem" |
+| S3 | Rövid mondatok mint rendszer (megtört szövegritmus) |
+| S4 | Retorikai kérdések halmozása |
+| S5 | Azonos vázú mondatsorozatok |
+| S6 | Két pólusra egyszerűsített érvelés |
+| S7 | Az átmenetek túlzott jelölése |
+| S8 | A személyesség nyelvi jelölése („szerintem"-szindróma) |
+| S9 | Ugyanannak a gondolatnak a többszöri visszatérése |
+| S10 | Felsorolások folyó szövegbe rejtve |
+
+**Új: stilometriai mutatótábla** — mérhető küszöbökkel (mondathossz-szórás, 1–3 szavas mondatok aránya, kérdő mondatok aránya, „hanem"-sűrűség, átvezető formulák aránya, véleményjelölő/tapasztalat arány). Alapelv: **egyetlen kilógó érték semmit nem jelent, három vagy több egyszerre már mintázat.**
+
+**Kereszthivatkozások a rétegek között** — a fedések feloldva, hogy ne legyen kétszeres javítás:
+
+- S2 ↔ 9. minta (negatív párhuzamosságok): a 9. egy mondatot néz, az S2 a sűrűséget méri
+- S3 ↔ 25. minta + M2: az M2 ritmusváltást kér, az S3 figyelmeztet, hogy ez ne legyen sablonos
+- S5 ↔ 10. minta: a 10. a felsorolt elemek számát nézi, az S5 a mondatvázak ismétlődését
+- S7 ↔ 26. minta: a 26. egy előfordulást töröl, az S7 az átmenetek változatosságát méri
+- S9 ↔ 11. minta: a 11. ugyanannak a *szónak*, az S9 ugyanannak a *gondolatnak* az újrafogalmazása
+
+**S8 korrekciója a „SZEMÉLYISÉG ÉS LÉLEK" szakaszhoz:** a személyességet tapasztalat hordozza, nem jelölő. Ha több a „szerintem", mint a konkrét tapasztalati elem, a személyesség díszlet.
+
+### 3. Új: Felelősség és átláthatóság szakasz
+
+- Az automatikus MI-detektorok korlátai — a százalékos érték nem szerzőségi bizonyíték
+- Szerzői felelősség jelentős tartalmi MI-közreműködés esetén
+- Az EU MI-rendelet 50. cikk (4) bekezdése: jelzési kötelezettség a nyilvánosság közérdekű tájékoztatására közzétett MI-generált szövegnél (2026. augusztus 2-tól alkalmazandó)
+
+### 4. Új: agent-specifikus telepítő réteg
+
+Korábban csak a Claude Code kézi telepítése volt dokumentálva.
+
+**Elsődleges út — `npx skills`:**
+
+```bash
+npx skills add arlinamid/magyar-humanizer
+```
+
+A [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI a SKILL.md szabványt használja, és mind a nyolc célt kezeli: Claude Code (CLI és Desktop), OpenAI Codex CLI, Cursor, Windsurf, GitHub Copilot, Gemini CLI / Antigravity, Cline, Zed. Mindegyik a **teljes** SKILL.md-t kapja — a skill nem sérül telepítéskor.
+
+**Visszaesési réteg — `install/build.js`:** transzpiler azokhoz a régebbi beállításokhoz, amelyek csak szabályfájlt olvasnak. Generált formátumok: Cursor `.mdc` rule, Windsurf workspace rule, Copilot scoped instructions, Gemini CLI TOML parancs, `AGENTS.md`.
+
+- A méretkorlátok **karakterben** ellenőrződnek, nem bájtban — a magyar ékezetes szöveg UTF-8-ban 1,1–1,2x annyi bájt, mint karakter, ami a Windsurf 12 000 karakteres korlátjánál téves hibát okozott volna
+- A build 95% felett tartalékot jelez, korlát felett hibát ad
+- A Windsurf-változatból a forrásjegyzék kimarad, hogy legyen mozgástér
+
+**`install/compact.md` + drift-ellenőrzés:** a szabályfájl-célok kézzel sűrített forrása. Mivel ez önálló forrás, a build egy sha256-bélyeggel a SKILL.md tartalmához köti, és **DRIFT** hibát ad, ha a SKILL.md változott, de a sűrítés nem. Szinkronizálás átvezetés után: `node install/build.js --sync`.
+
+### 5. Szótárrendszer — a `synonyms.json` leváltása
+
+A korábbi `synonyms.json` két dolgot nem tudott: **nem volt benne kereszt-ellenőrzés**, tehát bármilyen elgépelt vagy rossz jelentésű javaslat bekerülhetett, és nehezen lehetett feldolgozni.
+
+**Helyette a teljes LibreOffice szótárcsomag.**
+
+- `dict/fetch.py` — letölti a [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) repóból a kért nyelveket. A magyar mindig települ, a telepítő **rákérdez, kell-e másik nyelv is.** Tezaurusz 29 nyelvhez, helyesírási szótár 66-hoz érhető el.
+- A szótárak **nem kerülnek be a repóba.** Nyelvenként ~6 MB, és a licencek eltérnek: a magyar tezaurusz **GPL-2** (© 2009 Németh László), ami nem fér össze ennek a repónak az MIT licencével. Futásidőben használjuk, nem terjesztjük.
+- A LibreOffice repó nem tartalmaz `.idx` indexet a tezauruszhoz — a `thesaurus.py` generálja (szó → bájtoffszet), így a 2 MB-os fájlból nem kell mindent memóriába olvasni.
+
+**Nyereség:** 55 szó és 20 kifejezés helyett **21 687 szócikk, 30 500 jelentéscsoport**, szófaji címkékkel.
+
+### 6. Kereszt-ellenőrzés
+
+Minden szinonimajelölt három ellenőrzésen megy át, és az eredmény eltárolódik:
+
+| Ellenőrzés | Mit fog meg |
+|------------|-------------|
+| helyesírás | elgépelést, rossz egybeírást |
+| tezaurusz | koholt vagy túl ritka alakot |
+| **kölcsönösség** | rossz jelentésű cserét |
+
+A kölcsönösség a legerősebb jel:
+
+```
+kiemelkedő -> kiváló    helyesírás: rendben   tezaurusz: rendben   kölcsönös: rendben
+kiemelkedő -> sárcipő   helyesírás: rendben   tezaurusz: rendben   kölcsönös: FIGYELEM
+```
+
+**A hiányzó adat nem bukás.** Ha a forrásszó nincs a tezauruszban — és a skill épp ilyen AI-klisékkel dolgozik, mint a „kulcsfontosságú" —, a kölcsönösség „n.a.", nem „FIGYELEM". Az első implementáció ezt elrontotta: 242 bejegyzést jelölt bukottnak, holott csak a forrásszó hiányzott.
+
+**Amit a migráció kihozott:** a régi JSON 348 átemelt bejegyzéséből kettő valódi hiba volt — `bugyborékal` (helyesen *bugyborékol*) és `teljeskörű` (helyesen *teljes körű*). Mindkettő javítva. A javaslatok nagyjából fele pedig olyan tipp, amit a tezaurusz nem erősít meg; ezek benne maradtak, de meg vannak jelölve.
+
+### 7. Helyesírás-ellenőrzés — mostantól kötelező lépés
+
+Korábban opcionális segédeszköz volt. A v2.0-tól a folyamat 7. lépése, és az ellenőrzőlistán is szerepel: **ellenőrizetlen szöveget a skill nem ad vissza.** Az átírás közben keletkezik a legtöbb elgépelés, mert épp akkor cserélsz szavakat és szerkesztesz át mondatokat.
+
+- `dict/spell.py` — teljes hunspell motor (`spylls`), visszaeséssel `pyenchant`-ra, végül nyers szólistára (ilyenkor figyelmeztet)
+- **Miért nem elég a szólista:** a „kulcsfontosságú" nem szerepel külön a `.dic`-ben, a hunspell összetételként állítja elő. Szólistával téves hibának látszana, és a ragozott alakok tömegesen buknának.
+- A magyar `.dic` néhány `REP` mintája nem érvényes reguláris kifejezés, amitől a spylls betöltés közben elhasalna — ez lekezelve (literálként fordítjuk)
+- Kihagyja a kódblokkokat, URL-eket, YAML frontmattert, azonosítókat és fájlneveket
+- Kezeli a magyar sajátosságokat: `AI-szag`, `LLM-ek`, `1989-ben`, `Q3-ban`, `40%-ánál`, `„kiemelkedő"-höz`
+- Kivételek: `dict/seed-ignore.tsv` → `ignore_words` tábla (`python dict/db.py ignore …`)
+
+**Dogfood:** a saját SKILL.md-n futtatva két valódi hibát talált — `legrövidebbés` (hiányzó szóköz) és `Melléknéveknél` (helyesen *Mellékneveknél*). Mindkettő javítva.
+
+### 8. Saját adatbázis beégetett lista helyett
+
+`dict/db.py` — SQLite adatbázis, amit a skill **munka közben maga épít.**
+
+Az induló készlet csak mag (`origin='seed'`, a SKILL.md M3/M5 tábláiból és a régi JSON-ból). A valódi tartalom onnan jön, hogy a skill rögzíti, mit cserélt, melyik minta alapján, milyen mondatban (`origin='learned'`).
+
+```bash
+python dict/db.py add "szerepet játszik" "hat" --pattern M3 --context "…"
+python dict/db.py scan szoveg.md
+python dict/db.py verify
+```
+
+- Táblák: `entries`, `checks` (a kereszt-ellenőrzés eredménye), `contexts` (valódi előfordulások)
+- **Verziókövetés:** a `.db` gitignore-olt, a `dict/seed.tsv` commitolva. Bináris SQLite-nak nem olvasható a diffje és nem lehet összefésülni; a TSV-nek igen. `db.py dump` / `db.py import` a két irány között.
+- A Poet.hu API és a hozzá tartozó `.env` / `.env.example` megszűnt: a tezaurusz offline, nagyobb, és nem kell hozzá hitelesítés
+
+### 9. Egyéb
+
+- Új háromrétegű végigvezetett példa: a v1 „átírt" mintaszövege átmegy az A és B rétegen, de **elbukik a C-n** — ugyanaz a szöveg C réteg után is átírva
+- README.md átírva v2.0-ra, `npx skills` telepítéssel és C réteg táblával
+- Verzió: 1.4.1 → 2.0.0
+
+---
+
 ## v1.4.1 (2026-03-09)
 
 ### Összefoglalás
