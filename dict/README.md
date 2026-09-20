@@ -4,6 +4,7 @@ Négy eszköz, mind offline, egyik sem igényel API-kulcsot.
 
 | Fájl | Mire való |
 |------|-----------|
+| `ensure.py` | **bootstrap** — telepít / létrehoz, ha hiányzik a szótár vagy az adatbázis |
 | `fetch.py` | szótárak letöltése a LibreOffice repóból (interaktív nyelvválasztás) |
 | `spell.py` | helyesírás-ellenőrzés teljes hunspell motorral — **kötelező lépés** |
 | `thesaurus.py` | szinonimakeresés kereszt-ellenőrzéssel |
@@ -13,7 +14,17 @@ Négy eszköz, mind offline, egyik sem igényel API-kulcsot.
 
 ---
 
-## Telepítés
+## Telepítés / bootstrap
+
+A skill első lépése — **ne kérdezz rá, futtasd**, ha a szótár vagy az adatbázis hiányzik:
+
+```bash
+python dict/ensure.py                 # magyar + spylls + humanizer.db
+python dict/ensure.py --lang hu_HU,en_US
+python dict/ensure.py --check         # csak jelent, nem telepít
+```
+
+Kézi letöltés, ha kell:
 
 ```bash
 python dict/fetch.py                 # interaktív: rákérdez, mely nyelvek kellenek

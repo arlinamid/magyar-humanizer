@@ -1,5 +1,24 @@
 # Magyar Humanizer — Fejlesztési napló
 
+## v2.1.1 (2026-09-20)
+
+### Bootstrap — szótár és adatbázis automatikus előkészítése
+
+A skill első lépése mostantól kötelezően elindítja a telepítést, ha hiányzik valami:
+
+```bash
+python dict/ensure.py
+```
+
+- Ellenőrzi a `spylls` csomagot, a `dict/data/hu_HU` helyesírási szótárat + tezauruszt, és a `dict/humanizer.db`-t
+- Ami hiányzik, azt telepíti / létrehozza (`fetch.py` + `db.py import`) — nem kérdez rá
+- Más nyelv: `python dict/ensure.py --lang hu_HU,en_US`
+- Csak ellenőrzés: `python dict/ensure.py --check`
+
+Beírva a SKILL.md folyamatába (0. lépés), a checklistbe és a `dict/README.md`-be.
+
+---
+
 ## v2.1.0 (2026-09-20)
 
 ### Összefoglalás

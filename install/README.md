@@ -63,11 +63,19 @@ Copy-Item -Recurse magyar-humanizer $env:USERPROFILE\.claude\skills\
 
 ## 2b. Szótárak — telepítés után
 
-A skill eszközei külön szótárakat igényelnek. Ezek licencokok miatt nem részei a repónak (a magyar tezaurusz GPL-2, a repó MIT), ezért külön kell letölteni őket:
+A skill eszközei külön szótárakat igényelnek. Ezek licencokok miatt nem részei a repónak (a magyar tezaurusz GPL-2, a repó MIT). **A skill első lépése automatikusan telepíti őket**, ha hiányoznak:
+
+```bash
+python dict/ensure.py                 # magyar + spylls + humanizer.db
+python dict/ensure.py --lang hu_HU,en_US
+```
+
+Kézi út:
 
 ```bash
 python dict/fetch.py      # rákérdez, mely nyelvek kellenek a magyaron kívül
 pip install spylls        # a teljes hunspell motorhoz
+python dict/db.py import  # seed → humanizer.db
 ```
 
 Enélkül a helyesírás-ellenőrzés nyers szólistára esik vissza, és a tezaurusz nem érhető el. Részletek: [../dict/README.md](../dict/README.md)

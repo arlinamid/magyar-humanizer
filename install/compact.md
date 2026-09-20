@@ -1,4 +1,5 @@
-<!-- synced-with: SKILL.md@2.1.0 sha256:cbec7c98dcfd -->
+<!-- synced-with: SKILL.md@2.1.1 sha256:c463371b4137 -->
+
 # Magyar Humanizer — kompakt szabálykészlet
 
 Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és eltávolítása. Ez a teljes skill (SKILL.md) sűrített változata azokhoz az agentekhez, amelyek szabályfájlokra korlátozott mérettel dolgoznak.
@@ -97,9 +98,9 @@ Az A és B réteg mondatokat javít, a C réteg **arányokat mér**. Minden mond
 
 ## Eszközök
 
-A `dict/` mappában három offline eszköz (telepítés: `python dict/fetch.py`, majd `pip install spylls`):
+A `dict/` mappában offline eszközök. **Első lépés mindig:** `python dict/ensure.py` — telepíti a magyar szótárat + tezauruszt, létrehozza a `humanizer.db`-t, és telepíti a `spylls`-t, ha hiányzik. Más nyelv: `python dict/ensure.py --lang hu_HU,en_US`.
 
-- **Helyesírás-ellenőrzés — kötelező lépés.** `python dict/spell.py check <fájl> --suggest`. Átírás közben keletkezik a legtöbb elgépelés. Ellenőrizetlen szöveget ne adj vissza. Ami szándékosan nem magyar szó, kerüljön a `dict/ignore.txt`-be.
+- **Helyesírás-ellenőrzés — kötelező lépés.** `python dict/spell.py check <fájl> --suggest`. Átírás közben keletkezik a legtöbb elgépelés. Ellenőrizetlen szöveget ne adj vissza. Ami szándékosan nem magyar szó: `python dict/db.py ignore add <szó> --reason idegen|tulajdonnev|marka|szakszo`.
 - **Tezaurusz.** `python dict/thesaurus.py lookup <szó> --verify` — 21 687 szócikk, jelentéscsoportokkal. A `--verify` megmondja, kölcsönös-e a szinonimapár. **Kölcsönös párt válassz, és ne lépj át jelentéscsoportot.** A tezaurusz szótári alakokat tárol, tehát told vissza alapalakra.
 - **Adatbázis.** `python dict/db.py scan <fájl>` megkeresi az ismert fordulatokat; `python dict/db.py add "<eredeti>" "<csere>" --pattern <minta> --context "<mondat>"` rögzíti, amit cseréltél. Minden bejegyzés átmegy a kereszt-ellenőrzésen (helyesírás, tezaurusz, kölcsönösség).
 
@@ -107,8 +108,9 @@ A `dict/` mappában három offline eszköz (telepítés: `python dict/fetch.py`,
 
 ## Folyamat
 
+0. **Bootstrap:** `python dict/ensure.py` — ha a szótár vagy az adatbázis hiányzik, telepítsd / hozd létre. Ne kérdezz rá. Ha hibával tér vissza, ne humanizálj tovább.
 1. Olvasd végig a **teljes** szöveget, mielőtt bármit átírnál
-2. A réteg (1–26) — mindig elsőként, akkor is, ha a szöveg magyar
+2. A réteg (1–26) — mindig a bootstrap után elsőként, akkor is, ha a szöveg magyar
 3. B réteg (M1–M9) — a már javított szövegen
 4. C réteg (S1–S10) — olvasd újra **egészben**, és mérd a mutatótáblát
 5. „Nyilvánvalóan AI" audit: maradt-e bármi, ami még mindig gépi hangzású?

@@ -2,6 +2,11 @@
 
 **Ez a lista egyben van. Nem szabad csak a B szakaszát végigfutni.**
 
+### Bootstrap — mielőtt bármit átírnál
+
+- [ ] Lefuttattad a `python dict/ensure.py`-t (vagy `--check` után OK a szótár + adatbázis)?
+- [ ] Ha angol/más nyelvű szakszavakra is kell motor: `python dict/ensure.py --lang hu_HU,en_US`?
+
 ### A réteg — általános (1–26) · mondatszint
 
 - [ ] Van „mérföldkövet jelent", „paradigmaváltás", „a jövő záloga" típusú felfújt jelentőség? → konkretizálandó (1.)

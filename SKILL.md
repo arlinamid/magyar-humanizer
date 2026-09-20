@@ -1,6 +1,6 @@
 ---
 name: magyar-humanizer
-version: 2.1.0
+version: 2.1.1
 description: >
   Remove signs of AI-generated writing from Hungarian text. Runs a mandatory
   three-layer pass: a language-independent general layer (1-26, from Wikipedia's
@@ -8,8 +8,10 @@ description: >
   analysis), and a stylometric whole-text layer (S1-S10). All three always run, in
   order - the Hungarian and stylometric layers are ADDITIONS to the general layer,
   never replacements. Adds an opinion-writing (publicisztika) layer for essays and
-  columns, and a mandatory spell-check step. Use when editing, reviewing or
-  rewriting Hungarian text so it sounds natural and human-written.
+  columns, and a mandatory spell-check step. On first use bootstraps LibreOffice
+  dictionaries and the local SQLite database via dict/ensure.py if missing. Use
+  when editing, reviewing or rewriting Hungarian text so it sounds natural and
+  human-written.
 source: https://github.com/arlinamid/magyar-humanizer
 extends: blader/humanizer
 changelog: https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md
@@ -66,8 +68,22 @@ Fordítva is igaz: ha csak az A réteget futtatod magyar szövegen, a mondatok a
 
 ## A feladatod
 
+0. **Bootstrap — mielőtt bármit átírnál.** Ha a szótár vagy az adatbázis hiányzik, telepítsd / hozd létre. **Ne kérdezz rá, futtasd:**
+
+   ```bash
+   python dict/ensure.py
+   ```
+
+   Ez ellenőrzi a `spylls` csomagot, a `dict/data/hu_HU` helyesírási szótárat + tezauruszt, és a `dict/humanizer.db` adatbázist. Ami hiányzik, azt telepíti / létrehozza (`fetch.py` + `db.py import`). Ha a szövegben angol (vagy más) szakszavak is vannak, és azokra is kell motor:
+
+   ```bash
+   python dict/ensure.py --lang hu_HU,en_US
+   ```
+
+   Csak ellenőrzés telepítés nélkül: `python dict/ensure.py --check`. Ha a bootstrap hibával tér vissza, **ne humanizálj tovább** — javítsd előbb.
+
 1. **Olvasd végig a teljes bemeneti szöveget**, mielőtt bármit átírnál. A C réteg csak így működik.
-2. **A réteg (1–26).** Futtasd végig az általános mintákat. Ez mindig az első lépés, akkor is, ha a szöveg magyar.
+2. **A réteg (1–26).** Futtasd végig az általános mintákat. Ez mindig az első lépés a bootstrap után, akkor is, ha a szöveg magyar.
 3. **B réteg (M1–M9).** A már javított szövegen futtasd a magyar nyelvspecifikus ellenőrzést. Szóalternatívákhoz a tezauruszt használd, és a kölcsönös párokat részesítsd előnyben.
 4. **C réteg (S1–S10).** Olvasd újra az immár átírt szöveget **egészben**, és mérd a szerkezeti mintázatok sűrűségét a stilometriai mutatótáblával. Itt nem mondatokat keresel, hanem arányokat.
 5. **Feltételes réteg**, ha a szöveg publicisztikai: a `publicisztika.md` irányelvei, majd a végén a `publicisztika-audit.md`.
@@ -88,11 +104,13 @@ Fordítva is igaz: ha csak az A réteget futtatod magyar szövegen, a mondatok a
 
 ## Eszközök
 
-Három offline eszköz a `dict/` mappában. Egyik sem igényel API-kulcsot.
+Offline eszközök a `dict/` mappában. Egyik sem igényel API-kulcsot.
 
 ```bash
-python dict/fetch.py        # szótárak letöltése — rákérdez, mely nyelvek kellenek
-pip install spylls          # a teljes hunspell motorhoz
+python dict/ensure.py                 # KÖTELEZŐ első lépés — telepít, ha hiányzik
+python dict/ensure.py --check         # csak ellenőriz
+python dict/fetch.py --lang hu_HU     # kézi szótárletöltés
+pip install spylls                    # a teljes hunspell motorhoz (az ensure is megteszi)
 ```
 
 ### 1. Helyesírás-ellenőrzés — KÖTELEZŐ LÉPÉS

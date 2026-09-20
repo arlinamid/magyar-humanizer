@@ -2,7 +2,7 @@
 
 # Magyar Humanizer
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.1.1-blue?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/CHANGELOG.md)
 [![Patterns](https://img.shields.io/badge/minták-26%20%2B%209%20%2B%2010-green?style=flat-square)](https://github.com/arlinamid/magyar-humanizer/blob/master/SKILL.md)
 [![Install](https://img.shields.io/badge/npx-skills%20add-black?style=flat-square)](https://github.com/vercel-labs/skills)
 [![Language](https://img.shields.io/badge/nyelv-magyar-red?style=flat-square)](https://github.com/arlinamid/magyar-humanizer)
@@ -160,6 +160,7 @@ magyar-humanizer/
 ├── references/           — A/B/C rétegek, publicisztika, ellenőrzőlista, példák
 ├── dict/
 │   ├── README.md         — eszközök, kereszt-ellenőrzés, licencek
+│   ├── ensure.py         — bootstrap: telepít, ha hiányzik
 │   ├── fetch.py          — szótárletöltő (interaktív nyelvválasztás)
 │   ├── spell.py          — helyesírás-ellenőrzés (spylls / hunspell)
 │   ├── thesaurus.py      — MyThes tezaurusz kereszt-ellenőrzéssel
