@@ -1,4 +1,4 @@
-<!-- synced-with: SKILL.md@2.2.0 sha256:927d3ed59a83 -->
+<!-- synced-with: SKILL.md@2.2.0 sha256:f81ba9fb21ff -->
 # Magyar Humanizer – kompakt szabálykészlet
 
 Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és eltávolítása. Ez a teljes skill (SKILL.md) sűrített változata azokhoz az agentekhez, amelyek szabályfájlokra korlátozott mérettel dolgoznak.
@@ -6,7 +6,7 @@ Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és 
 ## Két alapszabály
 
 1. **Tartalmi hűség.** Nem kerülhet a szövegbe új tény, szám, forrás, idézet, név, esemény, személyes élmény, vélemény vagy érzés, ami az eredetiben nincs. A minták javítása egyszerűsítés vagy törlés; ahol a szerző saját részlete kellene, hagyj `[ide jöhet egy saját példa: …]` jelölést, és sorold fel a kimenetben.
-2. **Műfaj.** Előbb döntsd el: publicisztika/esszé, széppróza, közösségi médiás poszt, blog, hivatalos szöveg. Szépprózában a szereplői beszéd, a nyelvjárás és a szleng marad; posztban a tegezés, a szleng és egy-két mondatba illő emoji is.
+2. **Műfaj.** Előbb döntsd el: publicisztika/esszé, széppróza, közösségi médiás poszt, blog, hivatalos szöveg. Szépprózában a szereplői beszéd, a nyelvjárás és a szleng marad; posztban a tegezés és a szleng is – emoji viszont semmilyen műfajban nem marad.
 
 ## Három réteg, mindig, ebben a sorrendben
 
@@ -39,7 +39,7 @@ Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és 
 15. **Gondolatjel** – mondaton belül 2+, vagy három egymás utáni mondatban → ritkítandó; magyarul szóközös nagykötőjel ` – `, nem angol `—`
 16. **Félkövér-túlhasználat** – bekezdésenként 3+ kiemelés, rövidítések mind félkövérben
 17. **Alcímes felsorolás** – `* **Szó:** ugyanaz a szó folytatja a mondatot` → prózává
-18. **Emojik** fejlécben vagy felsoroláspontban → törlendő (posztban egy-két mondatba illő maradhat)
+18. **Emojik** → mindig törlendők, Facebook- és LinkedIn-posztban is
 19. **Chatbot-töredék** – „Remélem, segít!”, „Természetesen!”, „Íme…”, „adjon tudtomra”
 20. **Tudásvágási nyilatkozat** – „a rendelkezésre álló információk alapján”, „bár a részletek korlátozottak”
 21. **Szikofantikus hangnem** – „Nagyszerű kérdés!”, „Teljesen igaza van!”

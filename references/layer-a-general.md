@@ -278,9 +278,9 @@
 
 ### 18. Emojik
 
-**Probléma:** Az AI chatbotok emojikkal díszítik a fejléceket vagy felsoroláspontokat.
+**Probléma:** Az AI chatbotok emojikkal díszítik a fejléceket, a felsoroláspontokat és a mondatvégeket.
 
-**Műfaji kivétel:** közösségi médiás posztban és kötetlen üzenetben az ember is használ emojit – ott az AI-jel a *rendszer*: minden sor elején egy, emojis felsorolásjel, emojis címsor, vagy a szöveg végén gyűjtve (🚀✨🔥). Egy-két, a mondatba illő emoji maradhat; lásd `kozossegi-media.md`.
+**Szabály:** a kimenetben nincs emoji – semmilyen műfajban, Facebook- és LinkedIn-posztban sem. Az emoji mondaton belül, sor elején, címsorban vagy a szöveg végén gyűjtve (🚀✨🔥) egyaránt törlendő; ha a jelentést hordozta (pl. 🤯 = meglepődtem), azt szóval mondd ki, de csak ha az eredeti ezt valóban kifejezte.
 
 **Előtte:**
 

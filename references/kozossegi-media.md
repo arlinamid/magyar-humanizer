@@ -11,9 +11,10 @@ A poszt beszélt nyelvhez közeli műfaj. Ami egy esszében lazaság, az itt ter
 - A szerző megszólítása: tegez vagy magáz – ahogy a szerző szokta, a szövegen belül következetesen.
 - Beszélt nyelvi elemek: *szóval*, *na*, *amúgy*, *hát*, félmondat, odavetett kérdés, önirónia.
 - Szleng, becézés, angol szakszó, ha a szerző így beszél (*promptolás*, *lájk*, *xD*). A helyesírás-ellenőrző ezeket jelzi – ez nem hiba, nem kell kivételnek felvenni.
-- Egy-két emoji a mondat részeként, ha a szerző használja.
 - Rövid bekezdések, sorközök – a telefonos olvasáshoz ez normális.
 - `@említés`, link, `#hashtag` – pontosan úgy, ahogy a szerző megadta.
+
+**Emoji nincs.** A posztban sem marad emoji – se mondaton belül, se sor elején, se a végén. Ha egy emoji jelentést hordozott (🤯 = meglepett), azt szóval mondd ki; ha csak díszítés volt, törlendő (18. minta).
 
 ---
 
@@ -27,7 +28,7 @@ A poszt beszélt nyelvhez közeli műfaj. Ami egy esszében lazaság, az itt ter
 
 ### K2. Listás poszt emojis felsorolásjelekkel
 
-✅, 🚀, 💡, 👉, 1️⃣ minden sor elején; *Íme 5 tipp, ami…*; *3 dolog, amit megtanultam:*. Ez a 17. és 18. minta posztváltozata. Ha a tartalom valóban lista, maradhat lista – sima kötőjellel vagy számmal, emojis díszítés nélkül; ha nem az, írd vissza folyó szöveggé.
+✅, 🚀, 💡, 👉, 1️⃣ minden sor elején; *Íme 5 tipp, ami…*; *3 dolog, amit megtanultam:*. Ez a 17. és 18. minta posztváltozata. Ha a tartalom valóban lista, maradhat lista – sima kötőjellel vagy számmal, emoji nélkül; ha nem az, írd vissza folyó szöveggé.
 
 ### K3. Markdown és Unicode-félkövér
 
@@ -65,11 +66,11 @@ Bevezetés – három kifejtő bekezdés – összegzés, átvezető mondatokkal
 
 ## A rétegek posztban
 
-- **A réteg:** 16–18 (félkövér, alcímes lista, emoji) a K2–K3 szerint; 19 (chatbot-töredék) és 21 (szervilis hang) posztban különösen árulkodó; 24–26 a K7–K8 szerint.
+- **A réteg:** 16–17 (félkövér, alcímes lista) a K2–K3 szerint; 18 (emoji): minden emoji törlendő; 19 (chatbot-töredék) és 21 (szervilis hang) posztban különösen árulkodó; 24–26 a K7–K8 szerint.
 - **B réteg:** M1–M5 érvényes; M6-ban a köznyelvi regiszter az irányadó; M8 első személyű posztban fontos („kipróbáltuk” vs. „kipróbáltam” – csak ha a szerző egyedül csinálta).
 - **C réteg:** a poszt rövid, a mutatótábla nem alkalmazható. Egy kérdésre felelj: ugyanaz a mozdulat ismétlődik-e (minden bekezdés egy mondat, minden mondat felkiáltás, minden gondolat ellentétpár)?
 
-**Kimenet:** sima szöveg, markdown nélkül, az eredeti sortörésekhez igazodó bekezdésekkel, közvetlenül bemásolható.
+**Kimenet:** sima szöveg, markdown és emoji nélkül, az eredeti sortörésekhez igazodó bekezdésekkel, közvetlenül bemásolható.
 
 ---
 
@@ -95,8 +96,8 @@ Bevezetés – három kifejtő bekezdés – összegzés, átvezető mondatokkal
 
 **Utána:**
 
-> Tegnap kipróbáltam az új modellt, és meglepett: gyorsabb, pontosabb, és magyarul is jól ír 🤯
+> Tegnap kipróbáltam az új modellt, és meglepett: gyorsabb, pontosabb, és magyarul is jól ír.
 >
 > #AI
 
-**Változtatások:** törölt horog-nyitány és markdown-félkövér (K1, K3); az „Elképesztő volt” helyett a szerző saját reakciója marad, visszafogottabban (K8); az emojis lista folyó szöveggé (K2); a „lemarad” tanulság törölve (K7), mert általános bölcsesség, nem a szerző tapasztalata (ha a szerzőnek ez fontos állítás, maradhat – egyszerűbben, saját szavaival); a kommentvadász zárás törölve (K5); öt hashtagből egy maradt (K6). A szerző egy emojija maradt, a mondat részeként. Tartalom nem került bele: minden állítás (gyorsabb, pontosabb, magyarul jól ír, meglepett) az eredetiből való. Ha a szerző a kérdést is meg akarja tartani, egy konkrét kérdés mehet a végére.
+**Változtatások:** törölt horog-nyitány és markdown-félkövér (K1, K3); az „Elképesztő volt” helyett a szerző saját reakciója marad, visszafogottabban (K8); az emojis lista folyó szöveggé (K2); a „lemarad” tanulság törölve (K7), mert általános bölcsesség, nem a szerző tapasztalata (ha a szerzőnek ez fontos állítás, maradhat – egyszerűbben, saját szavaival); a kommentvadász zárás törölve (K5); öt hashtagből egy maradt (K6). Minden emoji törölve (18. minta); a 🤯 jelentését a „meglepett” szó viszi. Tartalom nem került bele: minden állítás (gyorsabb, pontosabb, magyarul jól ír, meglepett) az eredetiből való. Ha a szerző a kérdést is meg akarja tartani, egy konkrét kérdés mehet a végére.

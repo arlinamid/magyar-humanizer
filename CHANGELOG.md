@@ -15,7 +15,7 @@ Teljes audit a v2.1.1-en: tartalmi hűség szabály, két új műfaji réteg (sz
 ### 2. Új műfaji rétegek
 
 - `references/szepproza.md` — novella, regényrészlet: magyar párbeszéd-tipográfia, a szereplői beszéd/nyelvjárás megőrzése, szépprózai AI-jelek (F1–F8: megnevezett érzelem, klisés kép, érzékszervi hármas, beszélő-igék, tanulságos zárás, túlmagyarázott alszöveg, egyforma szereplők, formulás átmenetek).
-- `references/kozossegi-media.md` — Facebook/LinkedIn-poszt: K1–K10 (horog-nyitány, emojis lista, markdown és Unicode-félkövér, egymondatos bekezdések, kommentvadász zárás, hashtag-halmaz, tanulság, túlzó lelkesedés, regiszterkeveredés, esszészerkezet). A kimenet posztnál sima szöveg.
+- `references/kozossegi-media.md` — Facebook/LinkedIn-poszt: K1–K10 és emojitilalom (horog-nyitány, emojis lista, markdown és Unicode-félkövér, egymondatos bekezdések, kommentvadász zárás, hashtag-halmaz, tanulság, túlzó lelkesedés, regiszterkeveredés, esszészerkezet). A kimenet posztnál sima szöveg.
 - A C réteg küszöbei kb. 400 szótól érvényesek; rövid szövegnél minőségi alkalmazás, szépprózában párbeszéd nélkül számolva.
 
 ### 3. Javítások a mintafájlokban
@@ -27,7 +27,7 @@ Teljes audit a v2.1.1-en: tartalmi hűség szabály, két új műfaji réteg (sz
 - M9, S2, S4, S5, S6, S10 „Utána” példái nem adnak hozzá új tartalmat.
 - Nyelvi hibák: „hangulhoz” (elírás) → „agresszívvá teszi a hangulatot”, „Kétértelmes” → „Kétértelmű”, „A rendszer feldolgoz” → „A rendszer feldolgozza az adatokat”.
 - 7. minta: új AI-szavak (kulcsszerepet játszik, zökkenőmentes, betekintést nyújt, egyedülálló, „utazás”, „a … világában”) és a „mikor nem AI-jel” szabály (szakszó, egyszeri előfordulás).
-- 18. minta: posztban a mondatba illő emoji nem AI-jel.
+- 18. minta: emoji semmilyen műfajban nem marad, Facebook- és LinkedIn-posztban sem; ha jelentést hordozott, szóval kell kimondani.
 - Emojik a rétegfájlok címsoraiból törölve (a skill a saját 18. mintáját sértette).
 - Ellenőrzőlista: S4 küszöb összhangba hozva (kettő már vizsgálandó), új szakaszok: tartalmi hűség, széppróza, közösségi média.
 - `evolution-notes.md`: a „nemcsak…, hanem…” mintapélda ellentmondott a 9. mintának — átírva.

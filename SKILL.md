@@ -35,7 +35,7 @@ A `references/` és a `dict/` útvonalak ehhez a SKILL.md-hez képest értendők
 
 Ugyanez érvényes a véleményre és az érzelemre: a szerző nevében nem találsz ki álláspontot vagy érzést. A kitalált tény egy humanizált szövegben rosszabb, mint az AI-szag – a szerző a saját neve alatt közli.
 
-**2. Műfaj és regiszter: a szabályok a szöveghez igazodnak.** Mielőtt átírsz, állapítsd meg, mi a szöveg: publicisztika/esszé, szépirodalmi próza (novella, regényrészlet), közösségi médiás poszt, blog/hírlevél, szakmai vagy hivatalos szöveg. Ugyanaz a jelenség műfajonként mást jelent: a rövid mondat a párbeszédben természetes, az emoji egy Facebook-posztban nem feltétlenül AI-jel, a nyelvjárás a szereplő szájában nem helyesírási hiba. A műfaji fájlok (lent) megmondják, hol kell eltérni a rétegek alapértelmezéseitől.
+**2. Műfaj és regiszter: a szabályok a szöveghez igazodnak.** Mielőtt átírsz, állapítsd meg, mi a szöveg: publicisztika/esszé, szépirodalmi próza (novella, regényrészlet), közösségi médiás poszt, blog/hírlevél, szakmai vagy hivatalos szöveg. Ugyanaz a jelenség műfajonként mást jelent: a rövid mondat a párbeszédben természetes, a tegezés és a szleng egy posztban rendben van, a nyelvjárás a szereplő szájában nem helyesírási hiba. A műfaji fájlok (lent) megmondják, hol kell eltérni a rétegek alapértelmezéseitől.
 
 ---
 
@@ -166,7 +166,7 @@ Ha olyan visszatérő magyar AI-mintát veszel észre, amit egyik réteg sem fed
 
 ## Kimeneti formátum
 
-1. Az átírt szöveg – közvetlenül másolható formában. Közösségi médiás posztnál markdown-jelölés nélkül (a Facebook nem jeleníti meg a `**` jelet).
+1. Az átírt szöveg – közvetlenül másolható formában. Közösségi médiás posztnál markdown-jelölés és emoji nélkül (a Facebook nem jeleníti meg a `**` jelet).
 2. A változtatások rövid összefoglalója **rétegenként** (A / B / C, és a műfaji réteg, ha volt), hogy látszódjon, mind lefutott. Rövid szövegnél ez néhány sor.
 3. Ha a C réteg mutatói közül maradt kilógó érték, jelezd, és mondd meg, miért hagytad benne.
 4. A `[ide jöhet…]` jelölések listája, ha hagytál ilyet – ezeket a szerzőnek kell kitöltenie.

@@ -34,7 +34,7 @@
 - [ ] Gondolatjel-túlhasználat (mondaton belül 2+, vagy 3 egymás utáni mondatban)? → ritkítandó; ami marad, szóközös nagykötőjel ` – `, nem `—` (15.)
 - [ ] Bekezdésenként 3+ félkövér kiemelés? → ritkítandó (16.)
 - [ ] Van `* **Szó:** Ugyanaz a szó folytatja` típusú alcímes felsorolás? → prózává írandó (17.)
-- [ ] Vannak emojik fejlécben vagy felsoroláspontban? → törlendő; posztban a mondatba illő egy-két emoji maradhat (18.)
+- [ ] Van emoji bárhol a szövegben (fejléc, felsoroláspont, mondat, poszt vége)? → törlendő, posztban is (18.)
 - [ ] Van chatbot-töredék: „Remélem, segít!”, „Természetesen!”, „Íme…”? → törlendő (19.)
 - [ ] Van tudásvágási nyilatkozat: „a rendelkezésre álló információk alapján”? → törlendő (20.)
 - [ ] Van szikofantikus hangnem: „Nagyszerű kérdés!”, „Teljesen igaza van”? → törlendő (21.)
@@ -87,8 +87,8 @@
 ### Közösségi média (ha a szöveg az)
 
 - [ ] Nincs horog-nyitány, emojis felsorolás, kommentvadász zárás, hashtag-halmaz (K1–K6)?
-- [ ] A kimenet sima szöveg, markdown és Unicode-félkövér nélkül (K3)?
-- [ ] A szerző megszólítása (tegez/magáz), szlengje és saját emojijai megmaradtak?
+- [ ] A kimenet sima szöveg, markdown, Unicode-félkövér és emoji nélkül (K3, 18.)?
+- [ ] A szerző megszólítása (tegez/magáz) és szlengje megmaradt?
 
 ### Eszközök – a visszaadás előtt
 
