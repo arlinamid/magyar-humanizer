@@ -67,6 +67,20 @@ DATA = HOME / "data"
 DB = HOME / "humanizer.db"
 
 
+def seed_digest(path: Path = SEED_TSV) -> str:
+    """
+    A seed.tsv tartalmi ujjlenyomata. Ebből látszik, hogy a munka-adatbázisba
+    a mag melyik változata van betöltve. A sorvéget normalizáljuk, hogy egy
+    CRLF-es (Windows, core.autocrlf) kicsekkolás ne számítson változásnak.
+    """
+    import hashlib
+
+    if not path.exists():
+        return ""
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()[:16]
+
+
 def skill_cmd(script: str) -> str:
     """Parancs a felhasználói üzenetekhez — abszolút úttal, hogy bárhonnan fusson."""
     return f'python3 "{DICT_DIR / script}"'

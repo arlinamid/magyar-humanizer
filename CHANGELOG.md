@@ -1,5 +1,12 @@
 # Magyar Humanizer — Fejlesztési napló
 
+## Kiadatlan
+
+- `db.py import`: törli a `seed.tsv`-ből kikerült `seed` eredetű bejegyzéseket (a `learned`/`manual` érintetlen). Eddig egy frissítés után a v2.2.0-ban törölt hibás cserék („elmúlás → kaszás”, „pirul → irul-pirul”) a meglévő adatbázisokban tovább éltek. Az adatbázis tárolja a betöltött mag ujjlenyomatát; az `ensure.py` eltérésnél magától importál, a `--check` ilyenkor 1-gyel lép ki.
+- `spell.py`: a motor neve pontos — `hunspell` a rendszerprogram, `spylls` a Python-implementáció (eddig a spylls is „hunspell”-ként jelent meg, így a téves találatai megbízhatónak látszottak). Spylls esetén a kimenet figyelmeztet a hamis hibákra.
+- `db.py seed`: a „Felfújt fontosság” tábla kulcsa törölve — a jobb oldala utasítás, nem csere (a gondolatjel-javítás óta amúgy sem illeszkedett).
+- `install/compact.md`: újraszinkronizálva és rövidítve; a Windsurf-kimenet 12 036 karakterről a 12 000-es korlát alá került, a build ismét hiba nélkül fut.
+
 ## v2.2.0 (2026-09-26)
 
 ### Összefoglalás

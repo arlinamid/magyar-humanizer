@@ -104,8 +104,10 @@ A `db.py ignore add` csak a helyi adatbázisba ír; a verziókövetett `seed-ign
 
 ```bash
 python dict/db.py dump      # .db  -> seed.tsv   (commit előtt)
-python dict/db.py import    # seed.tsv -> .db    (klónozás után)
+python dict/db.py import    # seed.tsv -> .db    (klónozás vagy frissítés után)
 ```
+
+Az `import` a magból kikerült `seed` eredetű bejegyzéseket törli is, a `learned` és `manual` bejegyzésekhez nem nyúl. Az adatbázis megjegyzi, melyik `seed.tsv`-változatot töltötte be, így frissítés után az `ensure.py` magától lefuttatja az importot.
 
 ---
 

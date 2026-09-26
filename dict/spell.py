@@ -127,10 +127,11 @@ class Speller:
     """
     Négy szint, ebben a sorrendben:
 
-      hunspell-cli — a rendszer hunspell programja (referencia, legpontosabb)
-      hunspell     — spylls, teljes ragozás- és összetétel-kezelés
-      enchant      — pyenchant, ha rendszerszinten telepítve van a hu_HU
-      wordlist     — puszta .dic tagság; csak szótári alakokra megbízható
+      hunspell — a rendszer hunspell programja (referencia, legpontosabb)
+      spylls   — tiszta Python hunspell, teljes ragozás- és összetétel-kezelés;
+                 néhány helyes magyar alakot tévesen elutasít (pl. „ellenőrzi”)
+      enchant  — pyenchant, ha rendszerszinten telepítve van a hu_HU
+      wordlist — puszta .dic tagság; csak szótári alakokra megbízható
     """
 
     def __init__(self, lang: str = DEFAULT_LANG):
@@ -149,7 +150,7 @@ class Speller:
         if shutil.which("hunspell") and not os.environ.get("MAGYAR_HUMANIZER_NO_CLI"):
             try:
                 self._d = _HunspellPipe(base)
-                self.engine = "hunspell-cli"
+                self.engine = "hunspell"
                 return
             except Exception as e:
                 print(f"hunspell program nem használható ({e}); visszaesés.", file=sys.stderr)
@@ -159,7 +160,7 @@ class Speller:
             from spylls.hunspell import Dictionary
 
             self._d = Dictionary.from_files(str(base))
-            self.engine = "hunspell"
+            self.engine = "spylls"
             return
         except ImportError:
             pass
@@ -188,13 +189,13 @@ class Speller:
     @property
     def reliable(self) -> bool:
         """A szólista csak szótári alakokra megbízható — ragozott szövegre nem."""
-        return self.engine in ("hunspell-cli", "hunspell", "enchant")
+        return self.engine in ("hunspell", "spylls", "enchant")
 
     def check(self, word: str) -> bool:
         w = _norm(word)
-        if self.engine == "hunspell-cli":
-            return self._d.query(w)[0]
         if self.engine == "hunspell":
+            return self._d.query(w)[0]
+        if self.engine == "spylls":
             return bool(self._d.lookup(w))
         if self.engine == "enchant":
             return bool(self._d.check(w))
@@ -203,9 +204,9 @@ class Speller:
     def suggest(self, word: str, limit: int = 5) -> list[str]:
         w = _norm(word)
         try:
-            if self.engine == "hunspell-cli":
-                return self._d.query(w)[1][:limit]
             if self.engine == "hunspell":
+                return self._d.query(w)[1][:limit]
+            if self.engine == "spylls":
                 out = []
                 for s in self._d.suggest(w):
                     out.append(s)
@@ -395,6 +396,8 @@ def cmd_check(args):
             "  FIGYELEM: szólista-visszaesés. Ez csak szótári alakokra megbízható,\n"
             f"  ragozott alakokat tévesen hibásnak jelöl. Telepítsd:  {skill_cmd('ensure.py')}"
         )
+    elif sp.engine == "spylls":
+        print("  (spylls: néhány helyes alakot tévesen elutasít, pl. „ellenőrzi” – a találatot bíráld el)")
 
     if not unknown:
         print("  Nincs ismeretlen szó.")
@@ -436,7 +439,7 @@ def cmd_engine(args):
     print(f"megbízható ragozott alakokra: {'igen' if sp.reliable else 'nem'}")
     if not sp.reliable:
         print(f"\n  {skill_cmd('ensure.py')}   — ezzel lesz teljes ragozás- és összetétel-kezelés")
-    if sp.engine == "hunspell":
+    if sp.engine == "spylls":
         print("\n  Tipp: a rendszer hunspell programja pontosabb (apt install hunspell /"
               "\n  brew install hunspell); ha elérhető, a szkript automatikusan azt használja.")
 

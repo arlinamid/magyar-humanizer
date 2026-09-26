@@ -39,7 +39,7 @@ from pathlib import Path
 DICT_DIR = Path(__file__).resolve().parent
 ROOT = DICT_DIR.parent
 sys.path.insert(0, str(DICT_DIR))
-from paths import DB as DB_PATH, IGNORE_TSV, SEED_TSV, skill_cmd  # noqa: E402
+from paths import DB as DB_PATH, IGNORE_TSV, SEED_TSV, seed_digest, skill_cmd  # noqa: E402
 
 SKILL = ROOT / "references" / "layer-b-hungarian.md"
 
@@ -102,6 +102,13 @@ CREATE TABLE IF NOT EXISTS contexts (
   before        TEXT NOT NULL,
   after         TEXT,
   seen_at       TEXT NOT NULL
+);
+
+-- Kulcs–érték tár: itt áll, melyik seed.tsv-változat van betöltve, hogy
+-- frissítéskor a magból kikerült bejegyzéseket is el lehessen távolítani.
+CREATE TABLE IF NOT EXISTS meta (
+  key           TEXT PRIMARY KEY,
+  value         TEXT
 );
 
 CREATE VIEW IF NOT EXISTS v_entries AS
@@ -282,7 +289,8 @@ def add_entry(
 SECTIONS = {
     "## M3. Terpeszkedő kifejezések": ("terpeszkedo", "M3"),
     "### Kerülendő bevezető fordulatok": ("bevezeto", "M5"),
-    "### Felfújt fontosság (significance inflation) — magyar változat": ("felfujt", "M5"),
+    # A „Felfújt fontosság” tábla szándékosan nincs itt: a jobb oldala utasítás
+    # („töröld”, „mondd meg, mi változott”), nem beírható csere.
 }
 ROW = re.compile(r"^\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$")
 SEP = re.compile(r"^\|[\s:|-]+\|$")
@@ -402,6 +410,59 @@ def load_seed(con: sqlite3.Connection, path: Path = SEED_TSV) -> int:
     return n
 
 
+def _seed_keys(path: Path = SEED_TSV) -> set[tuple[str, str, str, str]]:
+    keys = set()
+    with io.open(path, encoding="utf-8") as f:
+        header = None
+        for line in f:
+            if line.startswith("#") or not line.strip():
+                continue
+            parts = line.rstrip("\r\n").split("\t")
+            if header is None:
+                header = parts
+                continue
+            row = dict(zip(header, parts))
+            keys.add((row["kind"], row["lang"], row["source_text"], row["replacement"]))
+    return keys
+
+
+def prune_seed(con: sqlite3.Connection, path: Path = SEED_TSV) -> int:
+    """
+    Törli a `seed` eredetű bejegyzéseket, amelyek kikerültek a seed.tsv-ből.
+
+    A betöltés csak beszúr (`ON CONFLICT DO NOTHING`), így egy frissítés után a
+    magból szándékosan törölt, hibás cserék a régi adatbázisban tovább élnének.
+    A `learned` és `manual` bejegyzésekhez nem nyúlunk: azok a felhasználóéi.
+    """
+    if not path.exists():
+        return 0
+    keep = _seed_keys(path)
+    stale = [
+        r["id"]
+        for r in con.execute(
+            "SELECT id, kind, lang, source_text, replacement FROM entries WHERE origin='seed'"
+        )
+        if (r["kind"], r["lang"], r["source_text"], r["replacement"]) not in keep
+    ]
+    con.executemany("DELETE FROM entries WHERE id=?", [(i,) for i in stale])
+    con.commit()
+    return len(stale)
+
+
+def seed_is_current(con: sqlite3.Connection, path: Path = SEED_TSV) -> bool:
+    row = con.execute("SELECT value FROM meta WHERE key='seed_digest'").fetchone()
+    return bool(row) and row["value"] == seed_digest(path)
+
+
+def mark_seed_loaded(con: sqlite3.Connection, path: Path = SEED_TSV) -> None:
+    con.execute(
+        "INSERT INTO meta (key, value) VALUES ('seed_digest', ?) "
+        "ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+        (seed_digest(path),),
+    )
+    con.commit()
+
+
 IGNORE_COLS = ["word", "lang", "reason", "origin", "times_seen", "note"]
 
 
@@ -504,6 +565,7 @@ def cmd_init(args):
     if n == 0 and SEED_TSV.exists():
         load_seed(con)
         load_ignore_seed(con)
+        mark_seed_loaded(con)
         n = con.execute("SELECT COUNT(*) c FROM entries").fetchone()["c"]
         print(f"{SEED_TSV.name} betöltve.")
     print(f"{args.db} kész — {n} bejegyzés.")
@@ -521,9 +583,12 @@ def cmd_import(args):
     before = con.execute("SELECT COUNT(*) c FROM entries").fetchone()["c"]
     load_seed(con)
     load_ignore_seed(con)
+    removed = prune_seed(con)
+    mark_seed_loaded(con)
     after = con.execute("SELECT COUNT(*) c FROM entries").fetchone()["c"]
     ign = con.execute("SELECT COUNT(*) c FROM ignore_words").fetchone()["c"]
-    print(f"{after - before} új bejegyzés (összesen {after}), {ign} kivétel.")
+    print(f"{after - before + removed} új bejegyzés, {removed} elavult mag-bejegyzés törölve "
+          f"(összesen {after}), {ign} kivétel.")
     if not args.no_check:
         for r in con.execute("SELECT id FROM entries"):
             run_checks(con, r["id"])

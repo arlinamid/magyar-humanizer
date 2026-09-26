@@ -23,7 +23,7 @@ from pathlib import Path
 
 DICT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(DICT_DIR))
-from paths import DATA, DB, HOME  # noqa: E402
+from paths import DATA, DB, HOME, seed_digest  # noqa: E402
 
 BASE_LANG = "hu_HU"
 
@@ -61,6 +61,21 @@ def _db_ready() -> bool:
         return False
 
 
+def _seed_current() -> bool:
+    """A betöltött mag egyezik-e a mostani seed.tsv-vel (frissítés után nem)."""
+    if not DB.exists():
+        return False
+    try:
+        import sqlite3
+
+        con = sqlite3.connect(DB)
+        row = con.execute("SELECT value FROM meta WHERE key='seed_digest'").fetchone()
+        con.close()
+        return bool(row) and row[0] == seed_digest()
+    except Exception:  # régi adatbázis, még nincs meta tábla
+        return False
+
+
 def _spylls_ok() -> bool:
     try:
         import spylls  # noqa: F401
@@ -74,6 +89,7 @@ def status(langs: list[str]) -> dict:
     return {
         "spylls": _spylls_ok(),
         "db": _db_ready(),
+        "seed": _seed_current(),
         "langs": {
             lang: {"spell": _has_spell(lang), "thesaurus": _has_thesaurus(lang)}
             for lang in langs
@@ -112,14 +128,15 @@ def ensure(langs: list[str], *, check_only: bool = False) -> int:
     print(f"  adatmappa:  {HOME}")
     print(f"  hunspell:   {'OK (rendszer)' if shutil.which('hunspell') else 'nincs — a spylls motor fut'}")
     print(f"  spylls:     {'OK' if st['spylls'] else 'HIÁNYZIK'}")
-    print(f"  adatbázis:  {'OK' if st['db'] else 'HIÁNYZIK'}  ({DB.name})")
+    db_state = "HIÁNYZIK" if not st["db"] else "OK" if st["seed"] else "OK, de a mag elavult"
+    print(f"  adatbázis:  {db_state}  ({DB.name})")
     for lang, info in st["langs"].items():
         spell = "OK" if info["spell"] else "HIÁNYZIK"
         th = "OK" if info["thesaurus"] else "HIÁNYZIK"
         print(f"  {lang}:      helyesírás {spell}, tezaurusz {th}")
 
     if check_only:
-        ok = st["spylls"] and st["db"] and not missing_langs
+        ok = st["spylls"] and st["db"] and st["seed"] and not missing_langs
         return 0 if ok else 1
 
     rc = 0
@@ -140,8 +157,9 @@ def ensure(langs: list[str], *, check_only: bool = False) -> int:
             or rc
         )
 
-    if not st["db"]:
+    if not st["db"] or not st["seed"]:
         # import létrehozza a sémát, betölti a seed.tsv / seed-ignore.tsv magot,
+        # frissítés után törli a magból kikerült bejegyzéseket,
         # és lefuttatja a kereszt-ellenőrzést.
         rc = _run([sys.executable, str(DICT_DIR / "db.py"), "import"]) or rc
 

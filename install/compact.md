@@ -1,7 +1,7 @@
-<!-- synced-with: SKILL.md@2.2.0 sha256:f81ba9fb21ff -->
+<!-- synced-with: SKILL.md@2.2.0 sha256:60137c36a312 -->
 # Magyar Humanizer – kompakt szabálykészlet
 
-Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és eltávolítása. Ez a teljes skill (SKILL.md) sűrített változata azokhoz az agentekhez, amelyek szabályfájlokra korlátozott mérettel dolgoznak.
+Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és eltávolítása. A teljes skill (SKILL.md) sűrített változata méretkorlátos szabályfájlokhoz.
 
 ## Két alapszabály
 
@@ -16,7 +16,7 @@ Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és 
 | **B – magyar (M1–M9)** | mondat, bekezdés | mindig, az A után |
 | **C – stilometriai (S1–S10)** | **teljes szöveg** | mindig, záró passzként |
 
-**A leggyakoribb hiba:** „a szöveg magyar, tehát a magyar réteg elég”. Hibás. A B réteg kiegészítés, nem önálló lista – ha csak azt futtatod, bennmarad a „mérföldkövet jelent”, a „szakértők szerint”, a három félkövér bekezdésenként, az emojis fejléc. A „magyar” a szöveg nyelvét jelöli, nem azt, melyik réteget használd.
+**A leggyakoribb hiba:** „a szöveg magyar, tehát a magyar réteg elég”. A B réteg kiegészítés, nem önálló lista – ha csak azt futtatod, bennmarad a „mérföldkövet jelent”, a „szakértők szerint”, a három félkövér bekezdésenként, az emojis fejléc. A „magyar” a szöveg nyelvét jelöli, nem azt, melyik réteget használd.
 
 ---
 
@@ -43,7 +43,7 @@ Magyar szöveg humanizálása: az AI-generált írás jeleinek felismerése és 
 19. **Chatbot-töredék** – „Remélem, segít!”, „Természetesen!”, „Íme…”, „adjon tudtomra”
 20. **Tudásvágási nyilatkozat** – „a rendelkezésre álló információk alapján”, „bár a részletek korlátozottak”
 21. **Szikofantikus hangnem** – „Nagyszerű kérdés!”, „Teljesen igaza van!”
-22. **Töltelékfrázis** – „annak érdekében, hogy” → „hogy”; „ezen a ponton” → „most”; „fontos megjegyezni, hogy az adatok mutatják” → „az adatok mutatják”
+22. **Töltelékfrázis** – „annak érdekében, hogy” → „hogy”; „ezen a ponton” → „most”; „fontos megjegyezni, hogy” → törlendő
 23. **Túlzott fedezés** – „talán esetlegesen felvethető lenne, hogy némi hatással lehet”
 24. **Általános pozitív zárómondat** – „a jövő fényesnek ígérkezik”, „izgalmas idők közelednek”
 25. **Kétszavas drámai ütés** – két egymás utáni 1–3 szavas mondat hatásvadász célból. Teszt: ha elvehető és a szöveg ugyanannyit mond, sablon.
