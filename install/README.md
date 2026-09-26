@@ -1,6 +1,6 @@
 # Telepítés
 
-## 1. Elsődleges út — `npx skills`
+## 1. Elsődleges út – `npx skills`
 
 A skill SKILL.md-szabvány szerint épül, ezért a [skills CLI](https://github.com/vercel-labs/skills)-jel közvetlenül telepíthető. **Ez kezeli az összes agentet**, a linkelést és a frissítést is.
 
@@ -61,7 +61,7 @@ Copy-Item -Recurse magyar-humanizer $env:USERPROFILE\.claude\skills\
 
 ---
 
-## 2b. Szótárak — telepítés után
+## 2b. Szótárak – telepítés után
 
 A skill eszközei külön szótárakat igényelnek. Ezek licencokok miatt nem részei a repónak (a magyar tezaurusz GPL-2, a repó MIT). **A skill első lépése automatikusan telepíti őket**, ha hiányoznak:
 
@@ -82,7 +82,7 @@ Enélkül a helyesírás-ellenőrzés nyers szólistára esik vissza, és a teza
 
 ---
 
-## 3. Visszaesési réteg — régi, szabályfájl-alapú beállítások
+## 3. Visszaesési réteg – régi, szabályfájl-alapú beállítások
 
 **Ez csak akkor kell**, ha az agented még nem ismeri a skill-mappát, és kizárólag szabályfájlt olvas (régebbi Windsurf `.windsurf/rules/`, Copilot `copilot-instructions.md`, Gemini CLI slash-parancs). Ezeknek a fájloknak méret- vagy kontextuskorlátjuk van, ezért nem a teljes skillcsomag megy beléjük, hanem a kézzel sűrített [`compact.md`](compact.md).
 
@@ -104,13 +104,13 @@ A generált fájlok:
 
 ### Méretkorlátok
 
-A korlátok **karakterben** értendők, nem bájtban — a magyar ékezetes szöveg UTF-8-ban 1,1–1,2-szer annyi bájt, mint karakter. A Windsurf 12 000 karakteres korlátjánál a build prioritási sorrendben hagy el szakaszokat, amíg befér — először a forrásjegyzéket, aztán a jogi-etikai részt, végül az eszközleírást —, és kiírja, mit hagyott el. Az operatív szabályok mindig bennmaradnak. Egyéb céloknál 95% felett figyelmeztet, korlát felett hibát ad.
+A korlátok **karakterben** értendők, nem bájtban – a magyar ékezetes szöveg UTF-8-ban 1,1–1,2-szer annyi bájt, mint karakter. A Windsurf 12 000 karakteres korlátjánál a build prioritási sorrendben hagy el szakaszokat, amíg befér – először a forrásjegyzéket, aztán a jogi-etikai részt, végül az eszközleírást —, és kiírja, mit hagyott el. Az operatív szabályok mindig bennmaradnak. Egyéb céloknál 95% felett figyelmeztet, korlát felett hibát ad.
 
 ---
 
 ## A compact.md és a drift
 
-A `compact.md` **kézzel írt** sűrítés, tehát önálló forrás — és minden önálló forrás el tud csúszni az eredetitől. Ezért a build a SKILL.md tartalmához köti egy bélyeggel:
+A `compact.md` **kézzel írt** sűrítés, tehát önálló forrás – és minden önálló forrás el tud csúszni az eredetitől. Ezért a build a SKILL.md tartalmához köti egy bélyeggel:
 
 ```
 <!-- synced-with: SKILL.md@2.1.0 sha256:eeb317506525 -->
@@ -126,6 +126,6 @@ A `--sync` **csak a bélyeget írja át**, a tartalmat nem nézi meg helyetted. 
 
 ### Miért van egyáltalán két forrás?
 
-Mert a két cél mérete különbözik. A skill-mappába telepített csomag igény szerint tölti be a `references/` fájlokat, ezért lehet benne teljes mintakatalógus, példák és ellenőrzőlista. A szabályfájlok viszont minden promptba bekerülnek, és a Windsurfnál kemény karakterkorlát is van. Egy automatikusan csonkolt változat pont a példákat veszítené el, amitől a szabályok használhatók — ezért a sűrítés kézi, és ezért kell hozzá a drift-ellenőrzés.
+Mert a két cél mérete különbözik. A skill-mappába telepített csomag igény szerint tölti be a `references/` fájlokat, ezért lehet benne teljes mintakatalógus, példák és ellenőrzőlista. A szabályfájlok viszont minden promptba bekerülnek, és a Windsurfnál kemény karakterkorlát is van. Egy automatikusan csonkolt változat pont a példákat veszítené el, amitől a szabályok használhatók – ezért a sűrítés kézi, és ezért kell hozzá a drift-ellenőrzés.
 
 **Ha csak SKILL.md-t értő agentet használsz (Claude Code, Codex, Cursor), a `compact.md` és a `build.js` nem érint.**

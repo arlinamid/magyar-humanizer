@@ -14,14 +14,16 @@ fordulatot, rögzíti: mit mire, melyik minta alapján, milyen mondatban. Minden
 bejegyzés átmegy a kereszt-ellenőrzésen (helyesírás, tezaurusz, kölcsönösség),
 és az eredmény is eltárolódik, tehát utólag látszik, mi mennyire megbízható.
 
-    python dict/db.py init                 # séma létrehozása
-    python dict/db.py seed                 # induló készlet a B réteg tábláiból
-    python dict/db.py add "szerepet játszik" "hat" --pattern M3 --context "..."
-    python dict/db.py scan szoveg.md       # ismert fordulatok keresése
-    python dict/db.py lookup "kiemelkedő"
-    python dict/db.py verify               # kereszt-ellenőrzések újrafuttatása
-    python dict/db.py stats
-    python dict/db.py export --tsv         # sima szöveges kimenet szkripteknek
+    python3 <skill-mappa>/dict/db.py init          # séma + mag betöltése
+    python3 <skill-mappa>/dict/db.py add "szerepet játszik" "hat" --pattern M3
+    python3 <skill-mappa>/dict/db.py scan szoveg.md  # ismert fordulatok keresése
+    python3 <skill-mappa>/dict/db.py lookup "kiemelkedő"
+    python3 <skill-mappa>/dict/db.py verify          # kereszt-ellenőrzések újra
+    python3 <skill-mappa>/dict/db.py stats
+    python3 <skill-mappa>/dict/db.py export --out dump.tsv
+
+Az adatbázis helyét a dict/paths.py adja (a dict/ mappa, ha írható, különben
+a felhasználói adatmappa; felülírható: MAGYAR_HUMANIZER_HOME).
 """
 
 from __future__ import annotations
@@ -36,7 +38,9 @@ from pathlib import Path
 
 DICT_DIR = Path(__file__).resolve().parent
 ROOT = DICT_DIR.parent
-DB_PATH = DICT_DIR / "humanizer.db"
+sys.path.insert(0, str(DICT_DIR))
+from paths import DB as DB_PATH, IGNORE_TSV, SEED_TSV, skill_cmd  # noqa: E402
+
 SKILL = ROOT / "references" / "layer-b-hungarian.md"
 
 SCHEMA = """
@@ -135,19 +139,20 @@ def tools(lang: str = "hu_HU"):
     """A helyesírás- és tezaurusz-motor lusta betöltése (a hunspell ~3 s)."""
     if lang in _tools:
         return _tools[lang]
-    sys.path.insert(0, str(DICT_DIR))
     speller = thes = None
+    # A Speller/Thesaurus SystemExit-tel jelzi, ha nincs letöltött szótár —
+    # itt ez nem végzetes: az ellenőrzés az adott mezőt n.a.-n hagyja.
     try:
         from spell import Speller
 
         speller = Speller(lang)
-    except Exception:
+    except (Exception, SystemExit):
         pass
     try:
         from thesaurus import Thesaurus
 
         thes = Thesaurus(lang)
-    except Exception:
+    except (Exception, SystemExit):
         pass
     _tools[lang] = (speller, thes)
     return _tools[lang]
@@ -158,9 +163,11 @@ def run_checks(con: sqlite3.Connection, entry_id: int, verbose: bool = False) ->
     Három kereszt-ellenőrzés minden bejegyzésre:
 
       spelling   — a javasolt csere minden szava valódi szó-e (teljes hunspell)
-      thesaurus  — szerepel-e a csere a tezauruszban (egyszavas eseteknél)
-      reciprocal — kölcsönös-e a szinonimaviszony; ez a legerősebb jel, mert az
-                   egyirányú kapcsolat gyakran csak laza asszociáció
+      thesaurus  — szerepel-e a csere a tezauruszban szócikként (egyszavas eseteknél)
+      reciprocal — kölcsönös-e a szinonimaviszony: a csere a forrásszó
+                   csoportjában ÉS a forrásszó a csere csoportjában is szerepel.
+                   Ez a legerősebb jel, mert az egyirányú kapcsolat gyakran csak
+                   laza asszociáció.
 
     A fordulatoknál (több szó) a tezaurusz nem alkalmazható — ott a mező NULL
     marad, nem pedig „bukott". Ez fontos: a hiányzó adat nem hiba.
@@ -195,11 +202,17 @@ def run_checks(con: sqlite3.Connection, entry_id: int, verbose: bool = False) ->
         if not senses:
             out["reciprocal"] = (None, "a forrásszó nincs a tezauruszban — nem értelmezhető")
         else:
-            recip = any(cand.lower() == s.lower() for g in senses for s in g["synonyms"])
-            out["reciprocal"] = (
-                recip,
-                "" if recip else "nem szerepel a forrásszó jelentéscsoportjában",
+            fwd = any(cand.lower() == s.lower() for g in senses for s in g["synonyms"])
+            back = any(
+                src.lower() == s.lower() for g in thes.lookup(cand) for s in g["synonyms"]
             )
+            recip = fwd and back
+            detail = (
+                "" if recip
+                else "nem szerepel a forrásszó jelentéscsoportjában" if not fwd
+                else "egyirányú: a csere szócikkében nincs vissza a forrásszó"
+            )
+            out["reciprocal"] = (recip, detail)
 
     for name, (passed, detail) in out.items():
         con.execute(
@@ -211,7 +224,7 @@ def run_checks(con: sqlite3.Connection, entry_id: int, verbose: bool = False) ->
     con.commit()
     if verbose:
         for k, (p, d) in out.items():
-            print(f"    {k:<11} {'rendben' if p else 'FIGYELEM'}  {d}")
+            print(f"    {k:<11} {_flag(None if p is None else int(bool(p)))}  {d}")
     return out
 
 
@@ -339,7 +352,6 @@ def cmd_seed(args):
 # --------------------------------------------------------------- CLI
 
 
-SEED_TSV = DICT_DIR / "seed.tsv"
 EXPORT_COLS = ["kind", "lang", "source_text", "replacement", "category",
                "pattern", "origin", "times_used", "note"]
 
@@ -390,7 +402,6 @@ def load_seed(con: sqlite3.Connection, path: Path = SEED_TSV) -> int:
     return n
 
 
-IGNORE_TSV = DICT_DIR / "seed-ignore.tsv"
 IGNORE_COLS = ["word", "lang", "reason", "origin", "times_seen", "note"]
 
 
@@ -458,15 +469,17 @@ def cmd_ignore(args):
         if not args.word:
             raise SystemExit("Adj meg legalább egy szót.")
         for w in args.word:
-            add_ignore(con, w, reason=args.reason, note=args.note, origin=args.origin)
+            add_ignore(con, w, reason=args.reason, note=args.note, origin=args.origin,
+                       lang=args.lang)
+        # Nem írjuk automatikusan a verziókövetett seed-ignore.tsv-be: abba
+        # csak az kerüljön, amit a karbantartó tudatosan kiad (`dump`) —
+        # különben a felhasználói szövegek nevei bekerülnének a repóba.
         print(f"{len(args.word)} szó felvéve ({args.reason}).")
-        dump_ignore(con)
     elif args.action == "remove":
         for w in args.word:
             con.execute("DELETE FROM ignore_words WHERE LOWER(word)=LOWER(?)", (w,))
         con.commit()
         print(f"{len(args.word)} szó törölve.")
-        dump_ignore(con)
     else:
         rows = con.execute(
             "SELECT * FROM ignore_words WHERE (? IS NULL OR reason=?) ORDER BY reason, word",
@@ -565,7 +578,15 @@ def cmd_scan(args):
 
     hits = []
     for r in rows:
-        pat = re.compile(r"(?<!\w)" + re.escape(r["source_text"]) + r"(?!\w)", re.IGNORECASE)
+        src = r["source_text"]
+        if "..." in src or "…" in src:
+            continue  # sablon („nem csupán ... hanem”), nem szó szerinti fordulat
+        # Egyszavas bejegyzésnél a toldalékolt alak is találat
+        # („kulcsfontosságúnak”, „elősegítette”). Fordulatnál csak a szó szerinti
+        # alak: a belső ragozást („szerepet játszott”) regex nem kezeli
+        # megbízhatóan, azt a B réteg olvasása fogja meg.
+        tail = r"\w*" if r["kind"] == "word" else ""
+        pat = re.compile(r"(?<!\w)" + re.escape(src) + tail + r"(?!\w)", re.IGNORECASE)
         for n, line in enumerate(lines, 1):
             for m in pat.finditer(line):
                 hits.append((n, m.start() + 1, r))
@@ -581,6 +602,8 @@ def cmd_scan(args):
     if not hits:
         print(f"{label} — nincs ismert fordulat az adatbázisból.")
         return 0
+    print("Ezek jelöltek, nem kötelező cserék: csak ott cserélj, ahol a szó a")
+    print("szövegben valóban AI-jel (7. minta), és a csere jelentése illik.\n")
 
     # Egy előforduláshoz több jelölt is tartozhat — egy helyen, egy sorban
     # mutatjuk őket, különben a kimenet olvashatatlan. A megerősített
@@ -606,7 +629,7 @@ def cmd_verify(args):
     con = connect(args.db)
     ids = [r["id"] for r in con.execute("SELECT id FROM entries ORDER BY id")]
     if not ids:
-        raise SystemExit("Üres adatbázis. Futtasd: python dict/db.py seed")
+        raise SystemExit(f"Üres adatbázis. Futtasd: {skill_cmd('db.py')} init")
     print(f"{len(ids)} bejegyzés ellenőrzése…")
     for i in ids:
         run_checks(con, i)
@@ -632,7 +655,7 @@ def cmd_stats(args):
         "GROUP BY origin, kind ORDER BY origin, kind"
     ).fetchall()
     if not t:
-        raise SystemExit("Üres adatbázis. Futtasd: python dict/db.py seed")
+        raise SystemExit(f"Üres adatbázis. Futtasd: {skill_cmd('db.py')} init")
     print(f"{'eredet':<10} {'típus':<8} {'darab':>7} {'használat':>10}")
     for r in t:
         print(f"{r['origin']:<10} {r['kind']:<8} {r['n']:>7} {r['used'] or 0:>10}")
@@ -706,12 +729,13 @@ def main():
                    choices=["szakszo", "tulajdonnev", "marka", "idegen",
                             "magyar-hianyzo", "egyeb"])
     p.add_argument("--reason-filter", dest="reason_filter", default=None)
+    p.add_argument("--lang", default="hu_HU")
     p.add_argument("--note")
     p.add_argument("--origin", default="learned", choices=["learned", "manual", "seed"])
     p.set_defaults(fn=cmd_ignore)
 
     sub.add_parser("stats", help="összesítés").set_defaults(fn=cmd_stats)
-    sub.add_parser("dump", help="szöveges mag kiírása (dict/seed.tsv)").set_defaults(fn=cmd_dump)
+    sub.add_parser("dump", help="szöveges mag kiírása (dict/seed.tsv) — karbantartói lépés").set_defaults(fn=cmd_dump)
 
     p = sub.add_parser("import", help="szöveges mag betöltése")
     p.add_argument("--no-check", action="store_true")

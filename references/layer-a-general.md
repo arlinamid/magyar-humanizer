@@ -1,6 +1,8 @@
-# 🌐 A RÉTEG — ÁLTALÁNOS (NYELVFÜGGETLEN) MINTÁK
+# A réteg – általános (nyelvfüggetlen) minták
 
-*Ez a réteg mindig fut, elsőként. Forrás: Wikipedia "Signs of AI writing" (WikiProject AI Cleanup).*
+*Ez a réteg mindig fut, elsőként. Forrás: Wikipedia „Signs of AI writing” (WikiProject AI Cleanup).*
+
+> **Az „Utána” példákról.** A példák azt mutatják, milyen *fajta* javítás kell. A bennük szereplő konkrétumok – évszám, felmérés, „az építész elmondta” – illusztrációk: a valódi átírásban csak olyan tény maradhat, ami az eredeti szövegben vagy a szerzőtől származik. Ha nincs konkrétum, a javítás egyszerűsítés vagy törlés (lásd SKILL.md, 1. alapszabály).
 
 ## TARTALMI MINTÁK (általános)
 
@@ -82,7 +84,7 @@
 
 ---
 
-### 6. Formulaszerű "Kihívások és kilátások" fejezetek
+### 6. Formulaszerű „Kihívások és kilátások” fejezetek
 
 **Figyelj ezekre:** Mindezek ellenére számos kihívással kell szembenézni..., Ezen kihívások dacára, Kihívások és örökség, Jövőbeli kilátások
 
@@ -98,9 +100,11 @@
 
 ## NYELVI ÉS GRAMMATIKAI MINTÁK (általános)
 
-### 7. Túlhasznált "AI-szókincs" szavak
+### 7. Túlhasznált „AI-szókincs” szavak
 
-**Magas frekvenciájú AI-szavak (magyar):** Ezen felül, összhangban van, kulcsfontosságú, kiemelkedő, hangsúlyozva, fenntartható, fejlesztve, elősegítve, ösztönözve, tapéta/szőttes (átvitt), érintettség, mélységes, összetett/összetettsége, kulcs- (jelzőként), (szak)területi táj, meghatározó, bemutatva, kiválóság, aláhúzva (átvitt), értékes, élénk
+**Magas frekvenciájú AI-szavak (magyar):** Ezen felül, összhangban van, kulcsfontosságú, kulcsszerepet játszik, kiemelkedő, hangsúlyozva, fejlesztve, elősegítve, ösztönözve, tapéta/szőttes (átvitt), érintettség, mélységes, összetett/összetettsége, kulcs- (jelzőként), (szak)területi táj, meghatározó, bemutatva, kiválóság, aláhúzva (átvitt), értékes, élénk, zökkenőmentes, betekintést nyújt, egyedülálló, „utazás” (átvitt: „ez az utazás”), „a … világában” („a mesterséges intelligencia világában”)
+
+**Mikor nem AI-jel:** a szó a sűrűségtől és a szereptől lesz gyanús, nem önmagától. Szakszóként maradjon („fenntartható fejlődés”, „szignifikáns eltérés” statisztikában, „összetett szó” nyelvtanban), és egy-egy előfordulás egy különben természetes szövegben nem ok a cserére. Cserélni ott kell, ahol a szó üres nyomatékot ad, vagy ahol ugyanabban a bekezdésben több ilyen torlódik.
 
 **Előtte:**
 
@@ -116,7 +120,7 @@
 
 **Figyelj ezekre:** szolgál alapul, jelenik meg, testesíti meg, minősül, tekinthető, büszkélkedik
 
-**Probléma:** Az LLM-ek bonyolult szerkezeteket használnak az egyszerű "van/egy" helyett.
+**Probléma:** Az LLM-ek bonyolult szerkezeteket használnak az egyszerű „van/egy” helyett.
 
 **Előtte:**
 
@@ -130,7 +134,7 @@
 
 ### 9. Negatív párhuzamosságok
 
-**Probléma:** "Nem csak...hanem..." vagy "Nem csupán...hanem..." szerkezetek túlhasználata.
+**Probléma:** „Nem csak...hanem...” vagy „Nem csupán...hanem...” szerkezetek túlhasználata.
 
 **Előtte:**
 
@@ -138,7 +142,7 @@
 
 **Utána:**
 
-> A hangsúlyos ritmus hozzájárul az agresszív hangulhoz.
+> A hangsúlyos ritmus agresszívvá teszi a hangulatot.
 
 ---
 
@@ -172,7 +176,7 @@
 
 ### 12. Hamis tartományok
 
-**Probléma:** Az LLM-ek "X-től Y-ig" szerkezeteket használnak, ahol X és Y nem áll értelmes skálán.
+**Probléma:** Az LLM-ek „X-től Y-ig” szerkezeteket használnak, ahol X és Y nem áll értelmes skálán.
 
 **Előtte:**
 
@@ -202,11 +206,11 @@
 
 ---
 
-### 14. Tipográfiai idézőjel (Curly quotes)
+### 14. Angol idézőjel magyar szövegben
 
-**Figyelj ezekre:** "ilyen" vagy "ilyen" idézőjelek — amikor a szöveg angol tipográfiai idézőjeleket használ magyar szövegben
+**Figyelj ezekre:** `“ilyen”` (angol tipográfiai) vagy `"ilyen"` (egyenes, gépi) idézőjel magyar szövegben; `'ilyen'` egyszeres idézőjel belső idézetként.
 
-**Probléma:** Az AI angol curly quote-okat (`"..."`) generál, holott a magyar tipográfia „alsó-felső" idézőjelet használ.
+**Probléma:** Az AI az angol idézőjelet viszi át a magyarba. A magyar szabály (AkH. 256.): nyitó idézőjel lent (`„`, U+201E), záró fent, 9-es alakban (`”`, U+201D). Idézeten belüli idézet: `»…«`. Az aposztróf `’` (U+2019), nem egyenes `'`.
 
 **Előtte:**
 
@@ -214,15 +218,19 @@
 
 **Utána:**
 
-> „A projekt sikeresen zárult" — mondta az igazgató.
+> „A projekt sikeresen zárult” – mondta az igazgató.
+
+**Kivétel:** kódban, parancsban, fájlnévben és URL-ben az egyenes idézőjel marad.
 
 ---
 
 ### 15. Gondolatjel-túlhasználat
 
-**Figyelj ezekre:** mondaton belül két vagy több gondolatjel; gondolatjel vesszőt vagy pontot helyettesít; három egymás utáni mondatban is szerepel
+**Figyelj ezekre:** mondaton belül két vagy több gondolatjel; gondolatjel vesszőt vagy pontot helyettesít; három egymás utáni mondatban is szerepel; angol hosszú kötőjel (`—`, em dash) magyar szövegben, főleg szóköz nélkül.
 
-**Probléma:** Az LLM-ek gondolatjeleket (—) használnak az emberinél sűrűbben, "ütős" értékesítési szöveget utánozva.
+**Probléma:** Az LLM-ek az emberinél sűrűbben használnak gondolatjelet, „ütős” értékesítési szöveget utánozva – és magyarul is az angol formát írják. A magyar gondolatjel a nagykötőjel (`–`, U+2013), mindkét oldalán szóközzel (AkH. 263.); a szóköz nélküli `—` angol tipográfia, magyar szövegben önmagában is árulkodó. Szépprózában a párbeszéd sorát is nagykötőjel vezeti be (`– Hová mész? – kérdezte.`).
+
+**Javítás:** a gondolatjelek többsége vessző, kettőspont, zárójel vagy új mondat lesz; ami marad, az ` – ` alakú.
 
 **Előtte:**
 
@@ -230,7 +238,7 @@
 
 **Utána:**
 
-> A kifejezést elsősorban holland intézmények propagálják, nem maguk az érintett emberek. Nem mondod, hogy "Hollandia, Európa" cím gyanánt, mégis folytatódik ez a hibás megjelölés még a hivatalos dokumentumokban is.
+> A kifejezést elsősorban holland intézmények propagálják, nem maguk az érintett emberek. Nem mondod, hogy „Hollandia, Európa” cím gyanánt, mégis folytatódik ez a hibás megjelölés, még a hivatalos dokumentumokban is.
 
 ---
 
@@ -271,6 +279,8 @@
 ### 18. Emojik
 
 **Probléma:** Az AI chatbotok emojikkal díszítik a fejléceket vagy felsoroláspontokat.
+
+**Műfaji kivétel:** közösségi médiás posztban és kötetlen üzenetben az ember is használ emojit – ott az AI-jel a *rendszer*: minden sor elején egy, emojis felsorolásjel, emojis címsor, vagy a szöveg végén gyűjtve (🚀✨🔥). Egy-két, a mondatba illő emoji maradhat; lásd `kozossegi-media.md`.
 
 **Előtte:**
 
@@ -332,12 +342,12 @@
 
 **Előtte → Utána:**
 
-* "Annak érdekében, hogy ezt a célt elérjük" → "Hogy ezt elérjük"
-* "Abból kifolyólag, hogy esett az eső" → "Mert esett az eső"
-* "Ezen a ponton" → "Most"
-* "Abban az esetben, ha segítségre van szüksége" → "Ha segítségre van szüksége"
-* "A rendszer képes feldolgozni" → "A rendszer feldolgoz"
-* "Fontos megjegyezni, hogy az adatok azt mutatják" → "Az adatok azt mutatják"
+* „Annak érdekében, hogy ezt a célt elérjük” → „Hogy ezt elérjük”
+* „Abból kifolyólag, hogy esett az eső” → „Mert esett az eső”
+* „Ezen a ponton” → „Most”
+* „Abban az esetben, ha segítségre van szüksége” → „Ha segítségre van szüksége”
+* „A rendszer képes feldolgozni az adatokat” → „A rendszer feldolgozza az adatokat”
+* „Fontos megjegyezni, hogy az adatok azt mutatják” → „Az adatok azt mutatják”
 
 ---
 
@@ -369,7 +379,7 @@
 
 **Figyelj ezekre:** Két egymást követő, feltűnően rövid (1–3 szavas) mondat, amelyek látványos dramaturgiai hatást utánoznak.
 
-**Probléma:** Az AI a rövid mondatokat nem organikusan helyezi el, hanem sablon szerint biggyeszti oda, ahol "ütősnek" kell lennie a szövegnek. Emberi szövegben a rövid mondat ritka és éppen ezért erős — ha minden harmadik bekezdés végén ott van, elveszíti a hatását.
+**Probléma:** Az AI a rövid mondatokat nem organikusan helyezi el, hanem sablon szerint biggyeszti oda, ahol „ütősnek” kell lennie a szövegnek. Emberi szövegben a rövid mondat ritka és éppen ezért erős – ha minden harmadik bekezdés végén ott van, elveszíti a hatását.
 
 **Azonosítási módszer:** Ha a rövid mondatpáros elvehető és a szöveg ugyanannyit mond nélküle is, sablon.
 
@@ -379,24 +389,20 @@
 
 **Utána:**
 
-> A script lefestette a hibás területeket és ráhúzta a helyes szöveget — újragenerálás nélkül.
+> A script lefestette a hibás területeket, majd újragenerálás nélkül ráhúzta a helyes szöveget.
 
 ---
 
 ### 26. Narratív fordulópontjelző és wow-jelzés
 
-**Figyelj ezekre:** „Itt jött a döntési pont", „Ekkor változott meg minden", „És most jön a lényeg", „Ha ez nem X, nem tudom mi az", „Ezt kell megnézni"
+**Figyelj ezekre:** „Itt jött a döntési pont”, „Ekkor változott meg minden”, „És most jön a lényeg”, „Ha ez nem X, nem tudom, mi az”, „Ezt kell megnézni”
 
 **Probléma:** Az AI két dolgot csinál egyszerre: (1) bejelenti, hogy most következik a fontos rész, ahelyett hogy egyszerűen elmondaná; (2) a szöveg végén explicit elismerést kér az olvasótól. Mindkettő sérti azt az alapelvet, hogy az erős tartalom magáért beszél.
 
 **Előtte:**
 
-> Na, itt jön a rész, ami tényleg meglepett. [...] Ha ez nem cool, nem tudom mi az.
+> Na, itt jön a rész, ami tényleg meglepett. [...] Ha ez nem cool, nem tudom, mi az.
 
 **Utána:**
 
 > [Egyszerűen elmeséli a meglepő részt, kommentár nélkül. Az olvasó maga dönt.]
-
----
-
----

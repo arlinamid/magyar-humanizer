@@ -8,29 +8,41 @@ a hunspell mégis helyesnek ismeri fel, mert összetételként előállítja. Ez
 teljes hunspell motort használjuk (spylls), és csak végső esetben esünk vissza
 a szólistára.
 
-    python dict/spell.py check szoveg.md
-    python dict/spell.py check - < szoveg.txt
-    python dict/spell.py check szoveg.md --suggest
-    python dict/spell.py word kiemelkedo --suggest
-    python dict/spell.py engine
+    python3 <skill-mappa>/dict/spell.py check szoveg.md
+    python3 <skill-mappa>/dict/spell.py check - < szoveg.txt
+    python3 <skill-mappa>/dict/spell.py check szoveg.md --suggest
+    python3 <skill-mappa>/dict/spell.py word kiemelkedo --suggest
+    python3 <skill-mappa>/dict/spell.py engine
 
-Kivételek: az adatbázisban (`python dict/db.py ignore add <szó> --reason idegen`).
+Motorok, ebben a sorrendben: a rendszer `hunspell` programja (a referencia-
+implementáció), a spylls (tiszta Python hunspell), a pyenchant, végül a nyers
+szólista. A spylls a magyar szótárral néhány helyes alakot tévesen elutasít
+(pl. „ellenőrzi”), ezért ha van rendszer-hunspell, az az elsődleges.
+
+Egyik motor sem veszi észre a létező, de rossz szót („hangulhoz” a
+„hangulathoz” helyett, „kétértelmes” a „kétértelmű” helyett) — ezért az
+ellenőrzés után a szöveget vissza is kell olvasni.
+
+Kivételek: az adatbázisban (`db.py ignore add <szó> --reason idegen`).
 """
 
 from __future__ import annotations
 
 import argparse
 import io
+import os
 import re
+import shutil
 import sqlite3
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
 
 DICT_DIR = Path(__file__).resolve().parent
-DATA = DICT_DIR / "data"
-DB = DICT_DIR / "humanizer.db"
-IGNORE_SEED = DICT_DIR / "seed-ignore.tsv"
+sys.path.insert(0, str(DICT_DIR))
+from paths import DATA, DB, IGNORE_TSV as IGNORE_SEED, skill_cmd  # noqa: E402
+
 DEFAULT_LANG = "hu_HU"
 
 
@@ -74,13 +86,51 @@ def _base_path(lang: str) -> Path | None:
     return None
 
 
+class _HunspellPipe:
+    """
+    A rendszer `hunspell -a` (ispell-kompatibilis csővezeték) módja.
+    Minden sort `^`-pal küldünk, hogy a szó ne értelmeződjön parancsként.
+    """
+
+    def __init__(self, base: Path):
+        env = dict(os.environ, LC_ALL="C.UTF-8", LANG="C.UTF-8")
+        self.p = subprocess.Popen(
+            ["hunspell", "-a", "-i", "UTF-8", "-d", str(base)],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+            env=env, text=True, encoding="utf-8", bufsize=1,
+        )
+        banner = self.p.stdout.readline()
+        if not banner.startswith("@(#)"):
+            raise RuntimeError("a hunspell nem indult el")
+        self._cache: dict[str, tuple[bool, list[str]]] = {}
+
+    def query(self, word: str) -> tuple[bool, list[str]]:
+        if word in self._cache:
+            return self._cache[word]
+        self.p.stdin.write("^" + word + "\n")
+        self.p.stdin.flush()
+        ok, sugg = True, []
+        while True:
+            line = self.p.stdout.readline()
+            if line in ("", "\n"):
+                break
+            tag = line[:1]
+            if tag in ("&", "#"):
+                ok = False
+                if tag == "&" and ":" in line:
+                    sugg = [s.strip() for s in line.split(":", 1)[1].split(",") if s.strip()]
+        self._cache[word] = (ok, sugg)
+        return ok, sugg
+
+
 class Speller:
     """
-    Három szint, ebben a sorrendben:
+    Négy szint, ebben a sorrendben:
 
-      hunspell  — spylls, teljes ragozás- és összetétel-kezelés (ajánlott)
-      enchant   — pyenchant, ha rendszerszinten telepítve van a hu_HU
-      wordlist  — puszta .dic tagság; csak szótári alakokra megbízható
+      hunspell-cli — a rendszer hunspell programja (referencia, legpontosabb)
+      hunspell     — spylls, teljes ragozás- és összetétel-kezelés
+      enchant      — pyenchant, ha rendszerszinten telepítve van a hu_HU
+      wordlist     — puszta .dic tagság; csak szótári alakokra megbízható
     """
 
     def __init__(self, lang: str = DEFAULT_LANG):
@@ -93,8 +143,16 @@ class Speller:
         if base is None:
             raise SystemExit(
                 f"Nincs letöltve a(z) {lang} szótár.\n"
-                f"  Telepítsd:  python dict/fetch.py --lang {lang}"
+                f"  Telepítsd:  {skill_cmd('ensure.py')} --lang {lang}"
             )
+
+        if shutil.which("hunspell") and not os.environ.get("MAGYAR_HUMANIZER_NO_CLI"):
+            try:
+                self._d = _HunspellPipe(base)
+                self.engine = "hunspell-cli"
+                return
+            except Exception as e:
+                print(f"hunspell program nem használható ({e}); visszaesés.", file=sys.stderr)
 
         try:
             _patch_spylls()
@@ -130,10 +188,12 @@ class Speller:
     @property
     def reliable(self) -> bool:
         """A szólista csak szótári alakokra megbízható — ragozott szövegre nem."""
-        return self.engine in ("hunspell", "enchant")
+        return self.engine in ("hunspell-cli", "hunspell", "enchant")
 
     def check(self, word: str) -> bool:
         w = _norm(word)
+        if self.engine == "hunspell-cli":
+            return self._d.query(w)[0]
         if self.engine == "hunspell":
             return bool(self._d.lookup(w))
         if self.engine == "enchant":
@@ -143,6 +203,8 @@ class Speller:
     def suggest(self, word: str, limit: int = 5) -> list[str]:
         w = _norm(word)
         try:
+            if self.engine == "hunspell-cli":
+                return self._d.query(w)[1][:limit]
             if self.engine == "hunspell":
                 out = []
                 for s in self._d.suggest(w):
@@ -170,6 +232,8 @@ HTML_TAG = re.compile(r"</?[a-zA-Z][^>]*>")
 # és szétvágva értelmetlen töredékeket adnának ("hu", "ben", "md").
 IDENTIFIER = re.compile(r"\S*[_/\\]\S*|\b[\w-]+(?:\.[\w-]+)+")
 FRONTMATTER = re.compile(r"\A---\n.*?\n---\n", re.S)
+# Közösségi média: #hashtag és @említés — nem szótári szó, nem is kell javítani.
+SOCIAL = re.compile(r"(?<!\w)[#@][^\s#@]+")
 # A számjegyet is beleveszzük, hogy az „1989-ben", „Q3-ban", „2-nél" EGY token
 # legyen. Külön nem szabad vágni: a puszta toldalék („ben", „nél") téves
 # hibaként jelenne meg. A számot tartalmazó tokent utána kihagyjuk.
@@ -178,6 +242,13 @@ HAS_DIGIT = re.compile(r"\d")
 # Csupa nagybetűs rövidítés: AI, MI, LLM, CV, KPI — magyar szövegben toldalékot
 # kötőjellel kapnak (AI-szag, LLM-ek), és a hunspell nem ismeri őket
 ABBREV = re.compile(r"\A[A-ZÁÉÍÓÖŐÚÜŰ]{2,}\Z")
+# Pontos magyar rövidítések: a pontot a szóhatár levágja, a törzs magában
+# nem szó („stb”, „pl”). Kisbetűs alakban, pont nélkül tároljuk.
+HU_ABBREV = {
+    "pl", "stb", "kb", "ún", "ill", "vö", "ld", "ti", "uo", "sz", "db", "dr",
+    "ifj", "id", "özv", "kft", "zrt", "bt", "nyrt", "krt", "hsz", "ker", "évf",
+    "old", "ford", "szerk", "vmi", "vki", "mp", "tel", "ált", "min", "max",
+}
 
 
 def load_ignore(lang: str = DEFAULT_LANG) -> set[str]:
@@ -243,6 +314,7 @@ def iter_words(text: str, skip_code: bool = True, skip_frontmatter: bool = True)
         line = MD_LINK_TARGET.sub(" ", line)
         line = URL.sub(" ", line)
         line = HTML_TAG.sub(" ", line)
+        line = SOCIAL.sub(" ", line)
         line = IDENTIFIER.sub(" ", line)
         for m in WORD.finditer(line):
             # Idézőjel vagy zárójel után kötőjellel kapcsolt toldalék:
@@ -255,7 +327,7 @@ def iter_words(text: str, skip_code: bool = True, skip_frontmatter: bool = True)
 
 def _acceptable(word: str, sp: Speller, ignore: set[str]) -> bool:
     key = _norm(word).lower()
-    if key in ignore or len(word) == 1:
+    if key in ignore or len(word) == 1 or key in HU_ABBREV:
         return True
     if HAS_DIGIT.search(word):  # „1989-ben", „Q3-ban" — szám, nem szó
         return True
@@ -314,14 +386,14 @@ def cmd_check(args):
         label = str(p)
 
     sp = Speller(args.lang)
-    result = check_text(text, sp, load_ignore(), skip_code=not args.include_code)
+    result = check_text(text, sp, load_ignore(args.lang), skip_code=not args.include_code)
     unknown = result["unknown"]
 
     print(f"{label} — {result['total_words']} szó, motor: {sp.engine}")
     if not sp.reliable:
         print(
             "  FIGYELEM: szólista-visszaesés. Ez csak szótári alakokra megbízható,\n"
-            "  ragozott alakokat tévesen hibásnak jelöl. Telepítsd:  pip install spylls"
+            f"  ragozott alakokat tévesen hibásnak jelöl. Telepítsd:  {skill_cmd('ensure.py')}"
         )
 
     if not unknown:
@@ -339,8 +411,10 @@ def cmd_check(args):
         print(head)
 
     print(
-        "\n  Ami szándékos (angol szakszó, név, márka), vedd fel kivételnek:"
-        "\n    python dict/db.py ignore add <szó> --reason idegen|tulajdonnev|marka|szakszo"
+        "\n  Nem minden találat hiba: a szándékos nyelvjárás, szleng, szereplői beszéd"
+        "\n  és az egyszeri tulajdonnév maradhat — ezeket NE vedd fel kivételnek."
+        "\n  Ami visszatérő szakszó vagy márka, az mehet a kivételek közé:"
+        f"\n    {skill_cmd('db.py')} ignore add <szó> --reason idegen|tulajdonnev|marka|szakszo"
     )
     return 1 if args.strict else 0
 
@@ -361,7 +435,10 @@ def cmd_engine(args):
     print(f"motor:  {sp.engine}")
     print(f"megbízható ragozott alakokra: {'igen' if sp.reliable else 'nem'}")
     if not sp.reliable:
-        print("\n  pip install spylls   — ezzel lesz teljes ragozás- és összetétel-kezelés")
+        print(f"\n  {skill_cmd('ensure.py')}   — ezzel lesz teljes ragozás- és összetétel-kezelés")
+    if sp.engine == "hunspell":
+        print("\n  Tipp: a rendszer hunspell programja pontosabb (apt install hunspell /"
+              "\n  brew install hunspell); ha elérhető, a szkript automatikusan azt használja.")
 
 
 def main():

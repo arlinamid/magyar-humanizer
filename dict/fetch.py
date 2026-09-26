@@ -11,8 +11,9 @@ a helyesírás-ellenőrzés csak a letöltött nyelvekre tud futni.
     python dict/fetch.py --list               # mi érhető el
     python dict/fetch.py --thesaurus-only     # csak tezaurusszal bíró nyelvek
 
-A szótárak a dict/data/<nyelv>/ alá kerülnek, és NEM kerülnek be a repóba
-(lásd .gitignore). Ennek licencokai is vannak: a magyar tezaurusz GPL-2,
+A szótárak a <adatmappa>/data/<nyelv>/ alá kerülnek (lásd dict/paths.py:
+a dict/ mappa, ha írható, különben a felhasználói adatmappa), és NEM kerülnek
+be a repóba (lásd .gitignore). Ennek licencokai is vannak: a magyar tezaurusz GPL-2,
 amit egy MIT-licencű repóba nem vendorolunk bele.
 """
 
@@ -20,14 +21,15 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
+import os
 import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
 
 DICT_DIR = Path(__file__).resolve().parent
-DATA = DICT_DIR / "data"
+sys.path.insert(0, str(DICT_DIR))
+from paths import DATA  # noqa: E402
 
 REPO = "LibreOffice/dictionaries"
 BRANCH = "master"
@@ -43,18 +45,24 @@ SKIP_DIRS = {".github", "util"}
 # --------------------------------------------------------------- katalógus
 
 
+class CatalogUnavailable(Exception):
+    pass
+
+
 def fetch_tree() -> list[str]:
-    req = urllib.request.Request(
-        TREE_URL, headers={"Accept": "application/vnd.github+json", "User-Agent": "magyar-humanizer"}
-    )
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "magyar-humanizer"}
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(TREE_URL, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             data = json.load(r)
-    except urllib.error.HTTPError as e:
-        raise SystemExit(
-            f"Nem sikerült lekérni a katalógust ({e.code}). "
-            "A GitHub API óránként korlátoz; próbáld később, vagy állíts be GITHUB_TOKEN-t."
-        )
+    except (urllib.error.URLError, TimeoutError, ValueError) as e:
+        # Gyakori: a GitHub API korlátoz (403/429), vagy egy homokozó csak a
+        # raw.githubusercontent.com-ot engedi. Ilyenkor a szabványos
+        # fájlnevekkel közvetlenül próbálkozunk (guess_catalog).
+        raise CatalogUnavailable(str(getattr(e, "code", "") or e))
     if data.get("truncated"):
         print("FIGYELEM: a falista csonkolt, egyes nyelvek hiányozhatnak.", file=sys.stderr)
     return [x["path"] for x in data["tree"] if x["type"] == "blob"]
@@ -101,6 +109,43 @@ def summarize(cat: dict[str, dict]) -> list[tuple[str, str, bool, int]]:
     return rows
 
 
+def _exists(path: str) -> bool:
+    req = urllib.request.Request(RAW + path, method="HEAD", headers={"User-Agent": "magyar-humanizer"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.status == 200
+    except (urllib.error.URLError, TimeoutError):
+        return False
+
+
+def guess_catalog(langs: set[str]) -> dict[str, dict]:
+    """
+    Katalógus API nélkül: a LibreOffice szokásos fájlneveit próbálja a
+    raw.githubusercontent.com-on (hu_HU/hu_HU.dic, en/en_US.dic,
+    th_<nyelv>_v2.dat). A szokatlan nevű nyelveket így nem találja meg —
+    azokhoz az API kell (GITHUB_TOKEN).
+    """
+    cat: dict[str, dict] = {}
+    for lang in langs:
+        for folder in dict.fromkeys([lang, lang.split("_")[0]]):
+            dic, aff = f"{folder}/{lang}.dic", f"{folder}/{lang}.aff"
+            if not (_exists(dic) and _exists(aff)):
+                continue
+            e = {"spell": {lang: {"dic": dic, "aff": aff}}, "thesaurus": [], "hyph": [], "readme": []}
+            th = f"{folder}/th_{lang}_v2.dat"
+            if _exists(th):
+                e["thesaurus"].append(th)
+            hyph = f"{folder}/hyph_{lang}.dic"
+            if _exists(hyph):
+                e["hyph"].append(hyph)
+            readme = f"{folder}/README_{lang}.txt"
+            if _exists(readme):
+                e["readme"].append(readme)
+            cat[lang] = e
+            break
+    return cat
+
+
 # --------------------------------------------------------------- letöltés
 
 
@@ -128,11 +173,11 @@ def pick_variant(variants: dict[str, dict], lang: str) -> str | None:
     return min(cands, key=len) if cands else min(variants, key=len)
 
 
-def install(lang: str, cat: dict[str, dict], want: set[str]) -> None:
+def install(lang: str, cat: dict[str, dict], want: set[str]) -> bool:
     key = lang if lang in cat else lang.split("_")[0]
     if key not in cat:
         print(f"  {lang}: nincs ilyen a katalógusban — kihagyva")
-        return
+        return False
     e = cat[key]
     out = DATA / lang
     files, total = [], 0
@@ -164,7 +209,7 @@ def install(lang: str, cat: dict[str, dict], want: set[str]) -> None:
 
     if not files:
         print(f"  {lang}: nem volt letölthető komponens")
-        return
+        return False
 
     print(f"  {lang}: {', '.join(files)}  ({total / 1024 / 1024:.1f} MB)")
 
@@ -179,6 +224,7 @@ def install(lang: str, cat: dict[str, dict], want: set[str]) -> None:
     m = json.loads(manifest.read_text("utf-8")) if manifest.exists() else {}
     m[lang] = {"source": f"https://github.com/{REPO}/tree/{BRANCH}/{key}", "files": files}
     manifest.write_text(json.dumps(m, ensure_ascii=False, indent=2), "utf-8")
+    return True
 
 
 # --------------------------------------------------------------- interaktív
@@ -241,8 +287,18 @@ def main():
     args = ap.parse_args()
 
     print("Katalógus lekérése a LibreOffice/dictionaries repóból…")
-    cat = build_catalog(fetch_tree())
-    print(f"{len(cat)} nyelv a katalógusban.")
+    try:
+        cat = build_catalog(fetch_tree())
+        print(f"{len(cat)} nyelv a katalógusban.")
+    except CatalogUnavailable as e:
+        if args.list or args.thesaurus_only or not args.lang:
+            raise SystemExit(
+                f"A GitHub API nem érhető el ({e}). Listához és interaktív módhoz kell;\n"
+                "  próbáld GITHUB_TOKEN-nel, vagy add meg a nyelvet: --lang hu_HU"
+            )
+        print(f"A GitHub API nem érhető el ({e}) — közvetlen letöltés szabványos fájlnevekkel.")
+        want_langs = {x.strip() for x in args.lang.split(",") if x.strip()}
+        cat = guess_catalog(want_langs)
 
     if args.list:
         cmd_list(cat)
@@ -250,7 +306,6 @@ def main():
 
     if args.lang:
         langs = {x.strip() for x in args.lang.split(",") if x.strip()}
-        langs.add(BASE_LANG)
         want = {"spell"}
         if not args.no_thesaurus:
             want.add("thesaurus")
@@ -266,11 +321,20 @@ def main():
         print("Nem interaktív futás — csak a magyar települ.")
 
     print(f"\nTelepítés: {', '.join(sorted(langs))}\n")
+    failed = []
     for lang in sorted(langs):
-        install(lang, cat, want)
+        try:
+            ok = install(lang, cat, want)
+        except (urllib.error.URLError, TimeoutError) as e:
+            print(f"  {lang}: letöltési hiba ({e})")
+            ok = False
+        if not ok:
+            failed.append(lang)
 
     print(f"\nKész. Helye: {DATA}")
-    print("Ellenőrzés:  python dict/thesaurus.py stats")
+    print(f'Ellenőrzés:  python3 "{DICT_DIR / "thesaurus.py"}" stats')
+    if failed:
+        raise SystemExit(f"Nem sikerült: {', '.join(failed)}")
 
 
 if __name__ == "__main__":

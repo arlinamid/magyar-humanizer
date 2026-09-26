@@ -1,5 +1,60 @@
 # Magyar Humanizer — Fejlesztési napló
 
+## v2.2.0 (2026-09-26)
+
+### Összefoglalás
+
+Teljes audit a v2.1.1-en: tartalmi hűség szabály, két új műfaji réteg (széppróza, közösségi média), tipográfiai és nyelvtani javítások a mintafájlokban, és hibajavítások az eszközökben.
+
+### 1. Tartalmi hűség
+
+- Új alapszabály a SKILL.md elején: humanizálás közben nem kerülhet a szövegbe új tény, szám, forrás, idézet, név, esemény, élmény, vélemény vagy érzés. Ahol a szerző saját részlete kellene, `[ide jöhet egy saját példa: …]` jelölés marad, és a kimenet felsorolja.
+- A példák eddig kitalált konkrétumokat tanítottak (Gartner-statisztika, „nálunk három hónapig…”, „ahol bevezettük”, „egy héttel korábban”). Ezek törölve vagy „szerzői háttérrel” ellátva: a konkrétum mindig a szerzőtől jön. Az A réteg elején megjegyzés: az „Utána” példák konkrétumai illusztrációk.
+- `voice.md` átírva: a hang a szerző anyagából jön, nem kitalált személyiségből; összhangban az S8-cal.
+
+### 2. Új műfaji rétegek
+
+- `references/szepproza.md` — novella, regényrészlet: magyar párbeszéd-tipográfia, a szereplői beszéd/nyelvjárás megőrzése, szépprózai AI-jelek (F1–F8: megnevezett érzelem, klisés kép, érzékszervi hármas, beszélő-igék, tanulságos zárás, túlmagyarázott alszöveg, egyforma szereplők, formulás átmenetek).
+- `references/kozossegi-media.md` — Facebook/LinkedIn-poszt: K1–K10 (horog-nyitány, emojis lista, markdown és Unicode-félkövér, egymondatos bekezdések, kommentvadász zárás, hashtag-halmaz, tanulság, túlzó lelkesedés, regiszterkeveredés, esszészerkezet). A kimenet posztnál sima szöveg.
+- A C réteg küszöbei kb. 400 szótól érvényesek; rövid szövegnél minőségi alkalmazás, szépprózában párbeszéd nélkül számolva.
+
+### 3. Javítások a mintafájlokban
+
+- Idézőjel: a skill saját példái is `„…"` alakot tanítottak (egyenes záró idézőjellel). Mindenhol `„…”`; a 14. minta leírja a belső idézetet (`»…«`) és az aposztrófot.
+- Gondolatjel: a magyar gondolatjel a szóközös nagykötőjel (`–`), nem az angol `—`; a 15. minta ezt tanítja, és a fájlok szövege is ezt használja.
+- M2: a „minden 3–4 mondatból egy legyen 5 szó alatt” kvóta ellentmondott a 25. mintának és az S3-nak — tartalom szerinti ritmusra cserélve.
+- M8: a „mondja → mondom” példa hibás volt (az alany a gyár); új példa, és szabály: előbb nézd meg az ige alanyát. T/1-et csak akkor írj E/1-re, ha a szerző valóban egyedül csinálta.
+- M9, S2, S4, S5, S6, S10 „Utána” példái nem adnak hozzá új tartalmat.
+- Nyelvi hibák: „hangulhoz” (elírás) → „agresszívvá teszi a hangulatot”, „Kétértelmes” → „Kétértelmű”, „A rendszer feldolgoz” → „A rendszer feldolgozza az adatokat”.
+- 7. minta: új AI-szavak (kulcsszerepet játszik, zökkenőmentes, betekintést nyújt, egyedülálló, „utazás”, „a … világában”) és a „mikor nem AI-jel” szabály (szakszó, egyszeri előfordulás).
+- 18. minta: posztban a mondatba illő emoji nem AI-jel.
+- Emojik a rétegfájlok címsoraiból törölve (a skill a saját 18. mintáját sértette).
+- Ellenőrzőlista: S4 küszöb összhangba hozva (kettő már vizsgálandó), új szakaszok: tartalmi hűség, széppróza, közösségi média.
+- `evolution-notes.md`: a „nemcsak…, hanem…” mintapélda ellentmondott a 9. mintának — átírva.
+
+### 4. SKILL.md
+
+- Frontmatter a Claude skill-szabvány szerint: `version`, `source`, `extends`, `changelog` a `metadata` alá került. A korábbi felső szintű kulcsok miatt a claude.ai / Claude asztali alkalmazás elutasította a feltöltést.
+- A leírás visszakapta a magyar triggerkifejezéseket („humanizáld”, „tedd emberibbé”, „AI-szagú”) és a műfajokat.
+- A parancsok abszolút úttal futnak (`<skill-mappa>`), nem a munkamappához képest.
+- Ha a bootstrap nem sikerül, a humanizálás folytatódik, és a kimenet jelzi, hogy a gépi ellenőrzés nem futott (eddig: „ne humanizálj tovább”).
+- A helyesírás-ellenőrzés után kötelező visszaolvasás: a létező, de rossz szót a hunspell nem látja.
+- A szerző hangjának megőrzése és a műfaj meghatározása az 1. lépés része.
+- Rögzítés: csak általánosítható szócsere, felhasználói mondat nem. Önfejlesztés: csak javaslat, a fájlokat a felhasználó jóváhagyásával.
+
+### 5. Eszközök (`dict/`)
+
+- Új `paths.py`: a szótárak és az adatbázis a `dict/` alá kerülnek, ha írható, különben a felhasználói adatmappába (`MAGYAR_HUMANIZER_HOME` felülírja). Csak olvasható telepítésben is működik.
+- `fetch.py`: ha a GitHub API nem érhető el (403, korlátozás, homokozó), a szabványos fájlnevekkel közvetlenül tölt le a raw.githubusercontent.com-ról; a hibaüzenetben emlegetett `GITHUB_TOKEN`-t most ténylegesen használja. `--lang` módban nem tölti le újra a magyart. Hibás letöltésnél nem nulla kilépési kód.
+- `ensure.py`: pip-telepítés `--user`, majd `--break-system-packages` visszaeséssel (PEP 668); kiírja az adatmappát és a rendszer-hunspell elérhetőségét.
+- `spell.py`: a rendszer `hunspell` programja az elsődleges motor, ha elérhető (a spylls a magyar szótárral hamis hibát ad pl. az „ellenőrzi” alakra); `#hashtag` és `@említés` kihagyva; magyar rövidítések (pl., stb., kb., ún. …) elfogadva; a `--lang` a kivétellistára is érvényes.
+- `thesaurus.py`: a címszó nem jelenik meg a saját szinonimái között; a „szófaji címkékkel” állítás javítva (a magyar tezauruszban nincs).
+- `db.py`: a „kölcsönös” ellenőrzés valóban kölcsönösséget mér (oda-vissza), ahogy a dokumentáció írta — eddig csak az egyik irányt; `import` nem áll le, ha nincs letöltött szótár; `scan` a toldalékolt alakokat is megtalálja, és jelzi, hogy jelölteket ad, nem kötelező cseréket; `ignore add` nem írja automatikusan a verziókövetett `seed-ignore.tsv`-t (a felhasználói szövegek nevei nem kerülnek a repóba).
+- `seed.tsv`: 140 bejegyzés törölve — köznapi szavak, amelyek novellában és posztban hamis találatot adtak („vezet”, „támogat”, „csökkent”, „pirul”, „elmúlás → kaszás”), rossz jelentésű vagy körkörös cserék („megvalósításra kerül → bevezető”, „szinergia → együtthatás”, „hangsúlyoz → aláhúz”), és elrontott idézőjeles sorok.
+- `install/build.js`: a verzió a `metadata.version`-ből is kiolvasható; a forrásban lévő NUL bájt `\u0000`-ra cserélve. A `compact.md` az új szabályokkal frissítve és újraszinkronizálva.
+
+---
+
 ## v2.1.1 (2026-09-20)
 
 ### Bootstrap — szótár és adatbázis automatikus előkészítése

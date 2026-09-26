@@ -4,6 +4,8 @@
 
 A jó publicisztika ne csak témát ismertessen, hanem állítson valamit róla. Legyen benne nézőpont, súly, ritmus és egy felismerhető szerzői hang.
 
+**Humanizáláskor a nézőpont és a konkrétum a szerzőé.** Az alábbi elvek azt írják le, milyen a jó publicisztika – nem azt, hogy a szerző helyett állíts, kockáztass vagy emlékezz. Ha a szöveg állítása homályos, élesítsd azt, ami benne van; ha nincs benne konkrétum, jelöld `[ide jöhet egy saját példa: …]` formában (SKILL.md, 1. alapszabály).
+
 ## Alapelvek
 
 ### 1. Legyen valódi állítás
@@ -21,7 +23,7 @@ A jó publicisztika ne csak témát ismertessen, hanem állítson valamit róla.
 ### 3. A hang legyen felismerhető
 
 - A publicisztika mögött legyen ember, ne csak szerkezet.
-- Nem kell hangoskodni, de érezni kell, hogy ezt valaki írta, nem „elkészült".
+- Nem kell hangoskodni, de érezni kell, hogy ezt valaki írta, nem „elkészült”.
 - A hang ritmusból, szóválasztásból, aránytalanságból és a vállalt nézőpontból áll össze.
 
 ### 4. A ritmus ne legyen egyenletes

@@ -7,97 +7,40 @@ word	hu_HU	autentikus	hiteles	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscs
 word	hu_HU	autentikus	igazi	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	autentikus	tényleges	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	autentikus	valódi	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	betanít	bevezet	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	betanít	kiképez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	betanít	képez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	betanít	megismertet	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	betanít	oktat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	bevezet	behoz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	bevezet	elterjeszt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	bevezet	kezdeményez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	bevezet	meghonosít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	csökkent	csillapít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	csökkent	enyhít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	csökkent	kisebbít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	csökkent	mérsékel	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	csökkent	redukál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	dedikált	elhivatott	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	dedikált	elkötelezett	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	dedikált	hozzáértő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
+word	hu_HU	dedikált	külön erre szánt	ai-szokincs	7	seed	0	v2.2 audit
 word	hu_HU	dedikált	odaadó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	dedikált	rátermett	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	dinamikus	aktív	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	dinamikus	gyors	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	dinamikus	lendületes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	dinamikus	mozgalmas	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	dinamikus	pörgős	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	dinamikus	változékony	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elkötelezett	eltökélt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	elkötelezett	hűséges	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elkötelezett	kitartó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	elkötelezett	következetes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	elkötelezett	odaadó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elkötelezett	állhatatos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	ellenőriz	figyelemmel kísér	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	ellenőriz	nyomon követ	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	ellenőriz	verifikál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elmúlás	enyészet	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elmúlás	halál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elmúlás	kaszás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elmúlás	vég	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elmúlás	végső óra	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	elmúlás	élet vége	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elősegít	lehetővé tesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elősegít	megkönnyít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elősegít	mozdít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	elősegít	segít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	elősegít	támogat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	elősegít	ösztönöz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	facilitál	elősegít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	facilitál	lehetővé tesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	facilitál	megkönnyít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	facilitál	segít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	facilitál	támogat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	facilitál	ösztönöz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	fejleszt	csiszol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fejleszt	jobbít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fejleszt	korszerűsít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	fejleszt	tökéletesít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fejleszt	átdolgoz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fejleszt	újít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	fenntartható	folytatható	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	fenntartható	hosszú távú	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	fenntartható	megtartható	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	fenntartható	stabil	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	fenntartható	tartós	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	fenntartható	életképes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fortyog	bugyborékol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1 | javítva: bugyborékal
-word	hu_HU	fortyog	bugyog	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fortyog	forr	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fortyog	habzik	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	fortyog	pezseg	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hangsúlyoz	aláhúz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	hangsúlyoz	kidomborít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	hangsúlyoz	kiemel	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hangsúlyoz	megjelöl	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	hangsúlyoz	nyomatékosít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hangsúlyoz	rámutat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hatékony	célszerű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hatékony	eredményes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hatékony	gazdaságos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hatékony	jó hatásfokú	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hatékony	sikeres	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hatékony	takarékos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	holisztikus	egészelvű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	holisztikus	teljes körű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	holisztikus	teljességre törekvő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	holisztikus	átfogó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hozzájárul	befolyásol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hozzájárul	erősít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hozzájárul	közrejátszik	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hozzájárul	részt vesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	hozzájárul	segít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	hozzájárul	támogat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	implementál	alkalmazásba vesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	implementál	bevezet	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	implementál	használatba vesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
@@ -109,24 +52,16 @@ word	hu_HU	innovatív	friss	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsop
 word	hu_HU	innovatív	korszerű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	innovatív	új	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	innovatív	újszerű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	innovatív	úttörő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	inspiráló	buzdító	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	inspiráló	lelkesítő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	inspiráló	lendítő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	inspiráló	szárnyaló	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	inspiráló	ösztönző	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	javít	helyesbít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	javít	kiigazít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	javít	korrigál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	javít	tökéletesít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kiemelkedő	figyelemre méltó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kiemelkedő	jelentős	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kiemelkedő	jeles	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kiemelkedő	kitűnő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	kiemelkedő	kiváló	ai-szokincs	7	learned	1	
+word	hu_HU	kiemelkedő	kiváló	ai-szokincs	7	seed	0	
 word	hu_HU	kiemelkedő	komoly	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kiemelkedő	számottevő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	kiválóság	erény	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kiválóság	hozzáértés	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kiválóság	jó teljesítmény	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kiválóság	minőség	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
@@ -140,7 +75,6 @@ word	hu_HU	komplex	bonyolult	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscso
 word	hu_HU	komplex	sokrétű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	komplex	szerteágazó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	komplex	szövevényes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	komplex	árnyalt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	komplex	összetett	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	koordinál	irányít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	koordinál	megszervez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
@@ -149,44 +83,21 @@ word	hu_HU	koordinál	összehangol	ai-szokincs	7	seed	0	synonyms.json v1, jelent
 word	hu_HU	kulcsfontosságú	alapvető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kulcsfontosságú	döntő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kulcsfontosságú	elsőrendű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	kulcsfontosságú	kritikus	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kulcsfontosságú	lényeges	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	kulcsfontosságú	megkerülhetetlen	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	kulcsfontosságú	nélkülözhetetlen	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	lelkes	buzgó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	lelkes	heves	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	lelkes	lendületes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	lelkes	odaadó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	lelkes	szenvedélyes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	lelkes	tüzes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	meghatározó	alapvető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	meghatározó	döntő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	meghatározó	iránymutató	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	meghatározó	irányító	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	meghatározó	lényegi	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	meghatározó	mértékadó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	meghatározó	mérvadó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	megold	elintéz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	megold	lebonyolít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	megold	lerendez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	mélységes	erős	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	mélységes	intenzív	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	mélységes	komoly	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	mélységes	megrendítő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	mélységes	mély	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	mélységes	súlyos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	mélységes	átható	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	mérföldkő	fordulópont	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	mérföldkő	határkő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	mérföldkő	kiemelkedő esemény	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	mérföldkő	változás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	mérföldkő	átmenet	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	növel	emel	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	növel	fokoz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	növel	gyarapít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	növel	nagyobbít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	optimalizál	csiszol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	optimalizál	fejleszt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	optimalizál	finomít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	optimalizál	hangol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	optimalizál	javít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
@@ -196,14 +107,6 @@ word	hu_HU	paradigmaváltás	gyökeres változás	ai-szokincs	7	seed	0	synonyms.
 word	hu_HU	paradigmaváltás	szemléletbeli fordulat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	paradigmaváltás	szemléletváltás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	paradigmaváltás	átalakulás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	pirul	irul-pirul	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	pirul	pironkodik	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	pirul	restelkedik	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	pirul	szégyell	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	pirul	szégyenkezik	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	pirul	ég	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	proaktív	aktív	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	proaktív	cselekvőkész	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	proaktív	előretekintő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	proaktív	kezdeményező	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	proaktív	megelőző	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
@@ -212,40 +115,25 @@ word	hu_HU	releváns	fontos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsop
 word	hu_HU	releváns	ide kapcsolódó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	releváns	ide vonatkozó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	releváns	lényeges	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	releváns	odaillő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	releváns	érintő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	robusztus	biztonságos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	robusztus	erős	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	robusztus	megbízható	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	robusztus	stabil	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	robusztus	szilárd	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	robusztus	tartós	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	rögzít	adminisztrál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	rögzít	bejegyez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	rögzít	dokumentál	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	rögzít	nyilvántartásba vesz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	stratégiai	célzott	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	stratégiai	hosszú távú	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	stratégiai	számított	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	stratégiai	taktikus	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	stratégiai	tervszerű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	stratégiai	átgondolt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	szervez	előkészít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	szervez	lebonyolít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	szervez	megszervez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	szervez	megtervez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szignifikáns	jelentős	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szignifikáns	komoly	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	szignifikáns	lényeges	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	szignifikáns	mérhető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	szignifikáns	számottevő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	szignifikáns	érzékelhető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	szimbolizál	jelképez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szimbolizál	jelöl	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szimbolizál	kifejez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szimbolizál	képvisel	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	szimbolizál	megtestesít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	szinergia	együtthatás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szinergia	együttműködési hatás	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	szinergia	kölcsönös erősítés	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	szinergia	összjáték	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
@@ -254,58 +142,37 @@ word	hu_HU	transzparáns	követhető	ai-szokincs	7	seed	0	synonyms.json v1, jele
 word	hu_HU	transzparáns	nyomon követhető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	transzparáns	nyílt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	transzparáns	átlátható	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	támogat	buzdít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	támogat	segít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	támogat	serkent	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	támogat	ösztönöz	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	tükröz	jelez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	tükröz	kifejez	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	tükröz	megmutat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	tükröz	mutat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	tükröz	visszaad	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	tükröz	ábrázol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	vezet	igazgat	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	vezet	irányít	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	vezet	vezényel	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	vezet	összehangol	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	átfogó	alapos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	átfogó	mindenre kiterjedő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	átfogó	részletes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	átfogó	széles körű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	átfogó	teljes körű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	élénk	aktív	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	élénk	eleven	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	élénk	lüktető	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	élénk	mozgalmas	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	élénk	nyüzsgő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	élénk	pezsgő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	élénk	virágzó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	értékes	becses	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	értékes	fontos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	értékes	hasznos	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	értékes	jó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	értékes	nélkülözhetetlen	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	értékes	számottevő	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	összetett	bonyolult	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	összetett	sokrétű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	összetett	sokszínű	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	összetett	szerteágazó	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
 word	hu_HU	összetett	szövevényes	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	összetett	tagolt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-word	hu_HU	összetett	árnyalt	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	úttörő	első	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	úttörő	eredeti	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	úttörő	felfedező	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
 word	hu_HU	úttörő	kezdeményező	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 1
-word	hu_HU	úttörő	korát megelőző	ai-szokincs	7	seed	0	synonyms.json v1, jelentéscsoport 2
-phrase	hu_HU	a jövő záloga	[töröld]	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	abban az esetben, ha	ha	terpeszkedo	M3	seed	0	
 phrase	hu_HU	annak érdekében, hogy	azért	terpeszkedo	M3	seed	0	synonyms.json v1
-phrase	hu_HU	annak érdekében, hogy	célból	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	annak érdekében, hogy	hogy	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	annak érdekében, hogy	hogy / azért	terpeszkedo	M3	seed	0	
 phrase	hu_HU	az a tény, hogy	az / hogy	terpeszkedo	M3	seed	0	
-phrase	hu_HU	büszkélkedik	rendelkezik	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	büszkélkedik	tartalmaz	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	büszkélkedik	van	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	elvégzésre kerül	elvégzik	terpeszkedo	M3	seed	0	synonyms.json v1
@@ -323,23 +190,18 @@ phrase	hu_HU	funkcionál	van	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	hozzájárul ahhoz, hogy	elősegíti	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	hozzájárul ahhoz, hogy	segíti	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	hozzájárul ahhoz, hogy	segíti / elősegíti	terpeszkedo	M3	seed	0	
-phrase	hu_HU	hozzájárul ahhoz, hogy	ösztönzi	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	jelen van	van / megjelenik	terpeszkedo	M3	seed	0	
 phrase	hu_HU	kapcsolatban áll egymással	összefügg	terpeszkedo	M3	seed	0	
 phrase	hu_HU	kerül sor arra, hogy	megtörténik / sor kerül rá	terpeszkedo	M3	seed	0	
-phrase	hu_HU	korszakalkotó áttörés	[konkrétummal: mi és mennyivel jobb]	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	kérdésként merül fel	felmerül	terpeszkedo	M3	seed	0	
 phrase	hu_HU	kérdésként merül fel	felvetődik	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	kérdésként merül fel	szóba kerül	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	lehetővé teszi azt, hogy	lehetővé teszi	terpeszkedo	M3	seed	0	synonyms.json v1
-phrase	hu_HU	lehetővé teszi azt, hogy	lehetővé teszi / segít	terpeszkedo	M3	seed	0	
 phrase	hu_HU	lehetővé teszi azt, hogy	módot ad arra, hogy	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	lehetővé teszi azt, hogy	segíti	terpeszkedo	M3	seed	0	synonyms.json v1
-phrase	hu_HU	megvalósításra kerül	bevezető	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	megvalósításra kerül	elkészül	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	megvalósításra kerül	megvalósul	terpeszkedo	M3	seed	0	
 phrase	hu_HU	minősül	számít	terpeszkedo	M3	seed	0	synonyms.json v1
-phrase	hu_HU	minősül	tekintendő	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	minősül	van	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	mérföldkövet jelent	[konkrétummal helyettesítsd: mi változott ténylegesen]	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	nem csupán ... hanem	... is, ... is	terpeszkedo	M3	seed	0	synonyms.json v1
@@ -361,12 +223,10 @@ phrase	hu_HU	tekintettel arra, hogy	tekintve, hogy	terpeszkedo	M3	seed	0	synonym
 phrase	hu_HU	átalakító erőként jelenik meg	hatással van rá	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	átalakító erőként jelenik meg	megváltoztatja	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	átalakító erőként jelenik meg	átalakítja	terpeszkedo	M3	seed	0	
-phrase	hu_HU	érdemes kiemelni, hogy	[töröld – mondd el közvetlenül]	terpeszkedo	M3	seed	0	synonyms.json v1
-phrase	hu_HU	összefoglalásképpen elmondható, hogy	[töröld]	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	összefoglalásképpen elmondható, hogy	röviden	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	összefoglalásképpen elmondható, hogy	tehát	terpeszkedo	M3	seed	0	synonyms.json v1
 phrase	hu_HU	A fentiek alapján megállapítható	Töröld	bevezeto	M5	seed	0	
-phrase	hu_HU	Ebből következik, hogy	Tehát" vagy átszerkesztés	bevezeto	M5	seed	0	
+phrase	hu_HU	Ebből következik, hogy	tehát / átszerkesztés	bevezeto	M5	seed	0	
 phrase	hu_HU	Fontos megjegyezni, hogy	Mondd el közvetlenül, bevezető nélkül	bevezeto	M5	seed	0	
 phrase	hu_HU	Mint azt korábban jeleztük	Töröld, vagy utalj konkrétan	bevezeto	M5	seed	0	
 phrase	hu_HU	Nem lehet eléggé hangsúlyozni	Töröld	bevezeto	M5	seed	0	
@@ -378,4 +238,4 @@ phrase	hu_HU	mérföldkövet jelent a fejlődés útján	mondd meg, mi változot
 phrase	hu_HU	paradigmaváltást hoz	mondd meg, mi változik a gyakorlatban	felfujt	M5	seed	0	
 phrase	hu_HU	példa nélküli lehetőség	töröld, vagy konkretizáld	felfujt	M5	seed	0	
 phrase	hu_HU	Érdemes kiemelni, hogy	Töröld a bevezetőt	bevezeto	M5	seed	0	
-phrase	hu_HU	Összefoglalásképpen elmondható, hogy	Töröld, vagy: "Tehát:	bevezeto	M5	seed	0	
+phrase	hu_HU	Összefoglalásképpen elmondható, hogy	[töröld] / tehát	bevezeto	M5	seed	0	

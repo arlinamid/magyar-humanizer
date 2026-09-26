@@ -3,23 +3,28 @@
 Bootstrap: szótár + adatbázis, ha még nincs.
 
 A skill első lépése. Nem interaktív — a magyar mindig települ.
-Ha a szövegben más nyelv is van, hívja újra:  python dict/ensure.py --lang en_US
+Bármelyik mappából futtatható (az útvonalak a szkript helyéhez igazodnak):
 
-    python dict/ensure.py
-    python dict/ensure.py --lang hu_HU,en_US
-    python dict/ensure.py --check   # csak jelent, nem telepít
+    python3 <skill-mappa>/dict/ensure.py
+    python3 <skill-mappa>/dict/ensure.py --lang hu_HU,en_US
+    python3 <skill-mappa>/dict/ensure.py --check   # csak jelent, nem telepít
+
+Kilépési kód: 0 = minden kész; 1 = valami hiányzik (a skill ilyenkor is
+dolgozhat, csak a hiányzó eszköz nélkül — lásd SKILL.md, 0. lépés).
 """
 
 from __future__ import annotations
 
 import argparse
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 DICT_DIR = Path(__file__).resolve().parent
-DATA = DICT_DIR / "data"
-DB = DICT_DIR / "humanizer.db"
+sys.path.insert(0, str(DICT_DIR))
+from paths import DATA, DB, HOME  # noqa: E402
+
 BASE_LANG = "hu_HU"
 
 
@@ -81,6 +86,19 @@ def _run(cmd: list[str]) -> int:
     return subprocess.call(cmd, cwd=str(DICT_DIR.parent))
 
 
+def _pip_install(pkg: str) -> int:
+    """
+    Sima pip, majd --user; ha a rendszer-Python „externally managed" (PEP 668,
+    Debian/Ubuntu), végül --break-system-packages. A spylls tiszta Python,
+    függősége nincs, így ez nem ír felül rendszercsomagot.
+    """
+    base = [sys.executable, "-m", "pip", "install", "--quiet", pkg]
+    for extra in ([], ["--user"], ["--break-system-packages"]):
+        if _run(base + extra) == 0:
+            return 0
+    return 1
+
+
 def ensure(langs: list[str], *, check_only: bool = False) -> int:
     langs = list(dict.fromkeys([BASE_LANG, *langs]))
     st = status(langs)
@@ -91,6 +109,8 @@ def ensure(langs: list[str], *, check_only: bool = False) -> int:
     ]
 
     print("magyar-humanizer dict bootstrap")
+    print(f"  adatmappa:  {HOME}")
+    print(f"  hunspell:   {'OK (rendszer)' if shutil.which('hunspell') else 'nincs — a spylls motor fut'}")
     print(f"  spylls:     {'OK' if st['spylls'] else 'HIÁNYZIK'}")
     print(f"  adatbázis:  {'OK' if st['db'] else 'HIÁNYZIK'}  ({DB.name})")
     for lang, info in st["langs"].items():
@@ -105,7 +125,7 @@ def ensure(langs: list[str], *, check_only: bool = False) -> int:
     rc = 0
 
     if not st["spylls"]:
-        rc = _run([sys.executable, "-m", "pip", "install", "spylls"]) or rc
+        rc = _pip_install("spylls") or rc
 
     if missing_langs:
         rc = (
@@ -131,7 +151,12 @@ def ensure(langs: list[str], *, check_only: bool = False) -> int:
         for lang, info in st2["langs"].items()
         if not info["spell"] or not info["thesaurus"]
     ]):
-        print("FIGYELEM: a bootstrap után is hiányzik valami.", file=sys.stderr)
+        print(
+            "FIGYELEM: a bootstrap után is hiányzik valami (lásd fent).\n"
+            "  A humanizálás ettől még elvégezhető; a hiányzó eszköz lépését\n"
+            "  kézzel kell pótolni, és a kimenetben jelezni kell, hogy nem futott.",
+            file=sys.stderr,
+        )
         return 1
 
     print("Kész — szótár és adatbázis használható.")

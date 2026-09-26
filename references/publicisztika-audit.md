@@ -6,7 +6,7 @@ Publicisztikai vagy véleményjellegű szöveg átírása **után** futtasd, zá
 
 Elkapni azokat az AI-mintákat, amelyek még egy tisztességes első átírást is túlélnek.
 
-> **Megjegyzés a rétegekhez:** az itteni 1., 2., 4., 7. és 8. pont a C réteg S1, S2, S3, S7 és S9 mintáinak publicisztikai megfelelője. Ha már lefuttattad a C réteget, ezeket gyorsan átfuthatod — a 3., 5., 6., 9. és 10. pont viszont csak itt szerepel.
+> **Megjegyzés a rétegekhez:** az itteni 1., 2., 4., 7. és 8. pont a C réteg S1, S2, S3, S7 és S9 mintáinak publicisztikai megfelelője. Ha már lefuttattad a C réteget, ezeket gyorsan átfuthatod – a 3., 5., 6., 9. és 10. pont viszont csak itt szerepel.
 
 ## Mit nézz meg
 

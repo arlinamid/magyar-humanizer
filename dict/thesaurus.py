@@ -6,8 +6,8 @@ A LibreOffice `th_<lang>_v2.dat` fájljait olvassa. A formátum:
 
     UTF-8                      <- kódolás
     szó|N                      <- N jelentéscsoport
-    (szófaj)|szin1|szin2|...   <- egy jelentéscsoport
-    ...
+    (szófaj)|szin1|szin2|...   <- egy jelentéscsoport; a szófaji címke
+    ...                           elmaradhat — a magyar tezauruszban nincs
 
 A `.dat` fájlhoz nem jár index a LibreOffice repóban, ezért a `build-index`
 paranccsal generáljuk: a `.idx` a szó -> bájtoffszet leképezést tárolja, így
@@ -15,11 +15,11 @@ a 2 MB-os fájlból nem kell mindent memóriába olvasni.
 
 Használat:
 
-    python dict/thesaurus.py lookup kulcsfontosságú
-    python dict/thesaurus.py lookup kiemelkedő --verify
-    python dict/thesaurus.py lookup szerep --lang hu_HU --json
-    python dict/thesaurus.py build-index --lang hu_HU
-    python dict/thesaurus.py stats
+    python3 <skill-mappa>/dict/thesaurus.py lookup kulcsfontosságú
+    python3 <skill-mappa>/dict/thesaurus.py lookup kiemelkedő --verify
+    python3 <skill-mappa>/dict/thesaurus.py lookup szerep --lang hu_HU --json
+    python3 <skill-mappa>/dict/thesaurus.py build-index --lang hu_HU
+    python3 <skill-mappa>/dict/thesaurus.py stats
 """
 
 from __future__ import annotations
@@ -27,12 +27,13 @@ from __future__ import annotations
 import argparse
 import io
 import json
-import os
 import sys
 import unicodedata
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent / "data"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from paths import DATA, skill_cmd  # noqa: E402
+
 DEFAULT_LANG = "hu_HU"
 
 
@@ -49,7 +50,7 @@ def lang_dir(lang: str) -> Path:
     if not d.is_dir():
         raise SystemExit(
             f"Nincs letöltve: {lang}\n"
-            f"  Telepítsd:  python dict/fetch.py --lang {lang}"
+            f"  Telepítsd:  {skill_cmd('ensure.py')} --lang {lang}"
         )
     return d
 
@@ -138,8 +139,13 @@ class Thesaurus:
             for _ in range(int(count)):
                 line = f.readline().decode(self.encoding, "replace").rstrip("\r\n")
                 parts = [p for p in line.split("|")]
-                pos = parts[0].strip("()") if parts and parts[0] else ""
-                syns = [p.strip() for p in parts[1:] if p.strip()]
+                pos = parts[0].strip("()-") if parts and parts[0] else ""
+                # A LibreOffice-tezaurusz néha a címszót is felsorolja a saját
+                # csoportjában („sárcipő|1 / |sárcipő|kalocsni”) — az nem jelölt.
+                syns = [
+                    p.strip() for p in parts[1:]
+                    if p.strip() and _norm(p) != _norm(word)
+                ]
                 senses.append({"pos": pos, "synonyms": syns})
         return senses
 
@@ -244,10 +250,10 @@ def print_lookup(th: Thesaurus, word: str, spell, do_verify: bool):
 
 def cmd_stats(args):
     if not DATA.is_dir():
-        raise SystemExit("Nincs letöltött szótár. Futtasd: python dict/fetch.py")
+        raise SystemExit(f"Nincs letöltött szótár. Futtasd: {skill_cmd('ensure.py')}")
     langs = sorted(p.name for p in DATA.iterdir() if p.is_dir())
     if not langs:
-        raise SystemExit("Nincs letöltött szótár. Futtasd: python dict/fetch.py")
+        raise SystemExit(f"Nincs letöltött szótár. Futtasd: {skill_cmd('ensure.py')}")
     print(f"{'nyelv':<12} {'tezaurusz':>10} {'helyesírás':>12}  fájlok")
     for lang in langs:
         try:

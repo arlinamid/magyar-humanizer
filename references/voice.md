@@ -1,40 +1,43 @@
 # Személyiség és lélek
 
-*A skill A/B/C rétege AI-mintákat távolít el. Ez a fájl arról szól, mi kerüljön a helyükre.*
+*Az A/B/C réteg AI-mintákat távolít el. Ez a fájl arról szól, mi kerüljön a helyükre: a szerző hangja – nem egy kitalált személyiség.*
 
-## SZEMÉLYISÉG ÉS LÉLEK
+## A cél
 
-Az AI-minták kerülése csak a fél munka. A steril, személytelen írás ugyanolyan árulkodó, mint a slop. A jó szöveg mögött ember áll.
+A minták kigyomlálása csak a fél munka. A steril, személytelen szöveg ugyanolyan árulkodó, mint a töltelékszöveg: úgy olvasódik, mint egy lexikonszócikk vagy sajtóközlemény. De a lelket nem kívülről kell beletenni. A szerző szövegében rendszerint ott van – az AI-réteg alá temetve.
 
-### A lélektelen írás jelei (akkor is, ha technikailag "tiszta"):
+### A lélektelen írás jelei (akkor is, ha technikailag „tiszta”)
 
-* Minden mondat azonos hosszú és szerkezetű
-* Nincs vélemény, csak semleges tényközlés
-* Nincs bizonytalanság vagy vegyes érzések elismerése
-* Nincs első személyű nézőpont, ahol helyénvaló volna
-* Nincs humor, él, személyiség
-* Úgy olvasódik, mint egy Wikipedia-cikk vagy sajtóközlemény
+* minden mondat azonos hosszú és szerkezetű;
+* a szöveg csak közöl, sehol nem reagál, pedig a műfaj megengedné;
+* nincs benne bizonytalanság vagy vegyes érzés, ahol a szerzőnek láthatóan van;
+* hiányzik az első személy ott, ahol a szerző a saját tapasztalatáról ír;
+* nincs humor, él vagy szabálytalanság – minden egyformán csiszolt.
 
-### Hogyan adj hangot:
+## Hogyan adj hangot – a szerző anyagából
 
-**Legyen véleményed.** Ne csak tényeket közölj — reagálj rájuk. "Nem igazán tudom, mit érzek ezzel kapcsolatban" emberibben hat, mint a pros and cons semleges felsorolása.
+**Keresd meg, ami már benne van.** A szerző konkrét részletei, saját szavai, tájszavai, kedvenc fordulatai, egy odavetett félmondat – ezeket az AI-átírás gyakran elsimítja. Hozd vissza és emeld előre őket, ne cseréld „szebbre”.
 
-**Változtasd a ritmust.** Rövid, ütős mondatok. Aztán hosszabbak, amelyek lassan jutnak el a végkövetkeztetésig. Váltogasd őket.
+**A véleményt és az érzést nem te adod.** Ha a szerző állást foglal, a szöveg mondja ki egyenesen, ne puhítsa. Ha nem foglal állást, nem írsz a nevében véleményt vagy érzést. A „Nem igazán tudom, mit érzek ezzel kapcsolatban” csak akkor kerülhet be, ha ez a szerző álláspontja.
 
-**Ismerd el a komplexitást.** A valódi embereknek vegyes érzéseik vannak. "Ez lenyűgöző, de valahogy kicsit aggasztó is" jobb, mint "Ez lenyűgöző."
+**A ritmus a tartalomból jön.** Az összetett gondolat hosszabb mondatot kap, az egyszerű rövidebbet. A rövid, ütős mondat ritkán erős; sablonként AI-jel (M2, S3).
 
-**Használj első személyt, ha illik.** Az "én" nézőpont nem amatőr — őszinte. "Én erre sosem gondoltam volna" vagy "Ami engem meglepett..." egy valódi embert jelez.
+**Ismerd el a bonyolultságot, ha a szöveg is bonyolult.** „Lenyűgöző, de van benne valami nyugtalanító” – ha a szerző ezt gondolja. Kötelező kettősségként beírva ez is sablon (S6).
 
-**Engedd be a rendetlenséget.** A tökéletes struktúra algoritmusos. A kitérők, közbevetések és félig kész gondolatok emberiek.
+**Első személy ott, ahol a szerző tapasztalatáról van szó.** Blogban, posztban, esszében a „nálunk”, „amikor kipróbáltam” természetes. A „szerintem” nem helyettesíti a tapasztalatot (S8), és nem kell minden bekezdésbe.
 
-**Légy konkrét az érzésekben.** Nem "aggasztó ez a fejlemény", hanem "van benne valami nyugtalanító, ahogy ezek az ügynökök éjjel 3-kor dolgoznak, miközben senki sem figyel."
+**Engedd a szabálytalanságot.** A kitérő, a közbevetés, a nem tökéletesen illeszkedő példa emberi – ha a szerzőé. Ne építs be újat; a meglévőt ne simítsd ki.
 
-### Előtte (tiszta, de lélektelen):
+**Műfaj szerint más a mérce.** Hivatalos szövegben a lélek a pontosság és a cselekvő ige, nem a személyesség. Szépprózában a hang a narrátoré és a szereplőké, nem a szerzőé (lásd `szepproza.md`). Posztban a beszélt nyelvhez közeli, tegező hang is rendben lehet (lásd `kozossegi-media.md`).
+
+## Példa
+
+**Előtte** (tiszta, de lélektelen – a szerző a beszélgetésben hozzátette: *„engem ez inkább nyugtalanít, főleg hogy éjjel is futnak”*):
 
 > A kísérlet érdekes eredményeket hozott. Az ügynökök 3 millió sornyi kódot generáltak. Egyes fejlesztők lenyűgözve reagáltak, mások szkeptikusak maradtak. A következmények egyelőre nem egyértelműek.
 
-### Utána (van pulzusa):
+**Utána:**
 
-> Őszintén szólva nem tudom, mit érzek ezzel kapcsolatban. 3 millió sor kód, miközben az emberek valószínűleg aludtak. A fejlesztőközösség fele elveszti az eszét, a másik fele magyarázgatja, hogy miért nem számít. Az igazság valószínűleg valahol unalmasan a középen van — de folyton visszatér bennem a kép ezekről az ügynökökről, akik egész éjjel dolgoznak.
+> Az ügynökök 3 millió sor kódot írtak – részben éjjel, amikor senki nem figyelt rájuk. A fejlesztők egy része lelkes, a másik része szkeptikus. Engem inkább nyugtalanít: nem a mennyiség, hanem hogy ennyi minden történik felügyelet nélkül.
 
----
+*A véleményt és az „éjjel” részletet a szerző adta. Nélküle az átírás megállt volna a második mondatnál, vélemény nélkül.*

@@ -1,6 +1,6 @@
 # Önfejlesztési szabályok
 
-Akkor használd, ha helyben érdemes továbbfejleszteni a `magyar-humanizer` skillt.
+Akkor használd, ha helyben érdemes továbbfejleszteni a `magyar-humanizer` skillt. Egy humanizálási feladat közben ne írd át a skill fájljait: javasold a felhasználónak a bejegyzést, és csak az ő jóváhagyásával vedd fel. A skill mappája sok telepítésben csak olvasható, és egy frissítés felülírja.
 
 ## A cél
 
@@ -10,8 +10,8 @@ Megőrizni a visszatérő, újrahasznosítható átírási tudást anélkül, ho
 
 Az [evolution-notes.md](evolution-notes.md) fájlba csak akkor kerüljön bejegyzés, ha **mind** igaz:
 
-- A mintát legalább kétszer láttad, vagy nyilvánvalóan túlmutat egyetlen szövegen.
-- Még nincs benne a rétegfájlokban (`layer-a-general.md`, `layer-b-hungarian.md`, `layer-c-stylometric.md`, `publicisztika.md`).
+- A mintát legalább kétszer láttad (ugyanabban a munkamenetben, vagy a felhasználó megerősíti, hogy visszatérő), vagy nyilvánvalóan túlmutat egyetlen szövegen.
+- Még nincs benne a rétegfájlokban (`layer-a-general.md`, `layer-b-hungarian.md`, `layer-c-stylometric.md`, `publicisztika.md`, `szepproza.md`, `kozossegi-media.md`).
 - Tömören, 2–6 sorban leírható.
 - Tartósan javítja a következő magyar átírásokat.
 
@@ -43,10 +43,10 @@ Tömör bejegyzés, ebben a szerkezetben:
 **Szócsere és fordulatcsere nem ide való, hanem az adatbázisba:**
 
 ```bash
-python dict/db.py add "<eredeti>" "<csere>" --pattern <minta> --context "<mondat>"
+python3 "<skill-mappa>/dict/db.py" add "<eredeti>" "<csere>" --pattern <minta>
 ```
 
-Az adatbázis kereshető, számolja a használatot, és minden bejegyzést átereszt a kereszt-ellenőrzésen (helyesírás, tezaurusz, kölcsönösség). Egy prózai jegyzet ezt nem tudja. Ide az olyan megfigyelés kerüljön, ami **nem** fejezhető ki „ezt erre cseréld" formában.
+Az adatbázis kereshető, számolja a használatot, és minden bejegyzést átereszt a kereszt-ellenőrzésen (helyesírás, tezaurusz, kölcsönösség). Egy prózai jegyzet ezt nem tudja. Ide az olyan megfigyelés kerüljön, ami **nem** fejezhető ki „ezt erre cseréld” formában.
 
 ## Tartsd karcsún a skillt
 
