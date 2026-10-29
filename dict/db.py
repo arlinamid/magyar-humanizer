@@ -199,27 +199,41 @@ def run_checks(con: sqlite3.Connection, entry_id: int, verbose: bool = False) ->
     if thes and row["kind"] == "word":
         cand = row["replacement"].strip()
         src = row["source_text"].strip()
-        out["thesaurus"] = (cand in thes, "" if cand in thes else "nincs a tezauruszban")
+        note = row["note"] or ""
 
-        # A kölcsönösség csak akkor értelmezhető, ha a FORRÁSSZÓ is szerepel a
-        # tezauruszban. Ha nem, a válasz „nem tudjuk", nem pedig „rossz" — a
-        # skill épp az olyan AI-klisékkel dolgozik (kulcsfontosságú, mélységes),
-        # amelyek szándékosan hiányoznak a szótárból.
-        senses = thes.lookup(src)
-        if not senses:
-            out["reciprocal"] = (None, "a forrásszó nincs a tezauruszban — nem értelmezhető")
+        if note.startswith("szerk:"):
+            # Szerkesztői döntés: a tezaurusz más jelentést ad, vagy a csere nem
+            # szócikk. A bejegyzés indoklása a megjegyzésben van; az ellenőrzés
+            # nem bukás, hanem „nem értelmezhető”.
+            out["thesaurus"] = (None, note)
+            out["reciprocal"] = (None, note)
+        elif len(cand.split()) > 1:
+            # A tezaurusz szócikkei egyszavasak; a többszavas csere hiánya nem hiba.
+            out["thesaurus"] = (True if cand in thes else None,
+                                "" if cand in thes else "többszavas csere — nem értelmezhető")
+            out["reciprocal"] = (None, "többszavas csere — nem értelmezhető")
         else:
-            fwd = any(cand.lower() == s.lower() for g in senses for s in g["synonyms"])
-            back = any(
-                src.lower() == s.lower() for g in thes.lookup(cand) for s in g["synonyms"]
-            )
-            recip = fwd and back
-            detail = (
-                "" if recip
-                else "nem szerepel a forrásszó jelentéscsoportjában" if not fwd
-                else "egyirányú: a csere szócikkében nincs vissza a forrásszó"
-            )
-            out["reciprocal"] = (recip, detail)
+            out["thesaurus"] = (cand in thes, "" if cand in thes else "nincs a tezauruszban")
+
+            # A kölcsönösség csak akkor értelmezhető, ha a FORRÁSSZÓ is szerepel a
+            # tezauruszban. Ha nem, a válasz „nem tudjuk", nem pedig „rossz" — a
+            # skill épp az olyan AI-klisékkel dolgozik (kulcsfontosságú, mélységes),
+            # amelyek szándékosan hiányoznak a szótárból.
+            senses = thes.lookup(src)
+            if not senses:
+                out["reciprocal"] = (None, "a forrásszó nincs a tezauruszban — nem értelmezhető")
+            else:
+                fwd = any(cand.lower() == s.lower() for g in senses for s in g["synonyms"])
+                back = any(
+                    src.lower() == s.lower() for g in thes.lookup(cand) for s in g["synonyms"]
+                )
+                recip = fwd and back
+                detail = (
+                    "" if recip
+                    else "nem szerepel a forrásszó jelentéscsoportjában" if not fwd
+                    else "egyirányú: a csere szócikkében nincs vissza a forrásszó"
+                )
+                out["reciprocal"] = (recip, detail)
 
     for name, (passed, detail) in out.items():
         con.execute(
@@ -635,6 +649,63 @@ def cmd_lookup(args):
         _print_checks(r, indent="      ")
 
 
+# --- scan: találati logika ---------------------------------------------------
+# A magyar toldalékoló nyelv: a szó szerinti egyezés kevés. A scan három dolgot
+# kezel, külső nyelvi eszköz nélkül (a hunspell-szótő a magyarban megbízhatatlan:
+# „mérföldkövet” -> „mérföldkövek”, „hozzájárul” -> „járul”):
+#   1. tőváltozat: mérföldkő -> mérföldköv-, erő -> erej-, szó -> szav-, alma -> almá-
+#   2. ragozott kifejezés: minden szó utáni toldalék, és az -ik végű ige töve
+#      („játszik” -> „játsz”, így a „játszott” is találat)
+#   3. hézagos minta: „nem csupán ... hanem” egy mondaton belül
+# A találat így továbbra is jelölt, nem ítélet: az olvasó dönti el, AI-jel-e.
+
+_STEM_SWAPS = (("ő", "öv"), ("ő", "ej"), ("ó", "av"), ("ó", "ov"), ("ű", "üv"), ("a", "á"), ("e", "é"))
+_GAP = r"[^.!?\n]{0,120}?"
+
+
+def _stem_variants(word: str) -> list[str]:
+    w = word.lower()
+    out = [w]
+    for end, rep in _STEM_SWAPS:
+        if w.endswith(end):
+            out.append(w[: -len(end)] + rep)
+    return out
+
+
+def _word_re(word: str, *, verb_stem: bool = False) -> str:
+    w = word.lower()
+    if len(w) < 4:
+        return re.escape(w)  # névelő, kötőszó, „is”: csak szó szerint
+    if verb_stem and w.endswith("ik") and len(w) > 5:
+        w = w[:-2]
+    alts = "|".join(re.escape(v) for v in _stem_variants(w))
+    return f"(?:{alts})\\w*"
+
+
+def _phrase_re(src: str) -> str:
+    toks = re.findall(r"\w+(?:[-’']\w+)*|[^\w\s]", src)
+    if len(toks) > 1 and toks[0].lower() in ("a", "az"):
+        toks = toks[1:]  # „a jövő záloga” -> „jövőjének záloga” is találat
+    out = []
+    for i, t in enumerate(toks):
+        if t[0].isalnum():
+            out.append(("" if i == 0 else r"\s+") + _word_re(t, verb_stem=True))
+        else:
+            out.append(r"\s*" + re.escape(t))
+    return "".join(out)
+
+
+def scan_pattern(src: str, kind: str) -> re.Pattern:
+    if "..." in src or "…" in src:
+        parts = [p.strip() for p in re.split(r"\.\.\.|…", src) if p.strip()]
+        body = _GAP.join(_phrase_re(p) for p in parts)
+    elif kind == "word":
+        body = _word_re(src.strip())
+    else:
+        body = _phrase_re(src)
+    return re.compile(r"(?<!\w)" + body + r"(?!\w)", re.IGNORECASE)
+
+
 def cmd_scan(args):
     con = connect(args.db)
     text = sys.stdin.read() if args.path == "-" else Path(args.path).read_text("utf-8", errors="replace")
@@ -643,15 +714,7 @@ def cmd_scan(args):
 
     hits = []
     for r in rows:
-        src = r["source_text"]
-        if "..." in src or "…" in src:
-            continue  # sablon („nem csupán ... hanem”), nem szó szerinti fordulat
-        # Egyszavas bejegyzésnél a toldalékolt alak is találat
-        # („kulcsfontosságúnak”, „elősegítette”). Fordulatnál csak a szó szerinti
-        # alak: a belső ragozást („szerepet játszott”) regex nem kezeli
-        # megbízhatóan, azt a B réteg olvasása fogja meg.
-        tail = r"\w*" if r["kind"] == "word" else ""
-        pat = re.compile(r"(?<!\w)" + re.escape(src) + tail + r"(?!\w)", re.IGNORECASE)
+        pat = scan_pattern(r["source_text"], r["kind"])
         for n, line in enumerate(lines, 1):
             for m in pat.finditer(line):
                 hits.append((n, m.start() + 1, r))

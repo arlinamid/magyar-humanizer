@@ -4,15 +4,19 @@
 
 ### Előkészítés – mielőtt bármit átírnál
 
-- [ ] Lefutott a `python3 "<skill-mappa>/dict/ensure.py"`? Ha nem sikerült, tudod, melyik eszköz hiányzik, és a kimenetben jelzed?
+- [ ] Lefutott a `python3 "<skill-mappa>/dict/ensure.py" --check`? Ha valami hiányzott, a felhasználó jóváhagyta a telepítést? Ha nem sikerült vagy nem engedte, tudod, melyik eszköz hiányzik, és a kimenetben jelzed?
 - [ ] Ha angol vagy más nyelvű szakszavakra is kell motor: `--lang hu_HU,en_US`?
 - [ ] Megállapítottad a műfajt (publicisztika/esszé, széppróza, poszt, blog, hivatalos) és a szerző hangját (tegez/magáz, személyes/tárgyilagos)?
-- [ ] Beolvastad a műfaji fájlt, ha van ilyen (`publicisztika.md`, `szepproza.md`, `kozossegi-media.md`)?
+- [ ] Beolvastad a műfaji fájlt, ha van ilyen (`publicisztika.md`, `szepproza.md`, `kozossegi-media.md`, `blog.md`, `hivatalos.md`)?
+- [ ] Ha az adatbázis megvan: lefutott a `db.py scan` az eredeti szövegen?
 
 ### Tartalmi hűség – minden réteg után
 
 - [ ] Nem került a szövegbe új tény, szám, forrás, idézet, név, esemény vagy élmény, ami az eredetiben nincs?
 - [ ] Nem írtál a szerző nevében véleményt vagy érzést?
+- [ ] Nem adtál hozzá kötőszót (pedig, így, ezért, tehát), amely új logikai viszonyt állít? Cím és alcím csak a 13. minta szerint változott, vagy mert maga AI-minta?
+- [ ] A szó szerinti idézet változatlan (legfeljebb az idézőjel lett `„…”`)? A kihagyott hivatkozás után nem maradt forrás nélküli, vitatható tény (`[ide jöhet a forrás: …]`)?
+- [ ] Megmaradt a mondatok logikai viszonya (tagadás, ok, fokozás, feltétel, ellentét)? Kihagyott tagadás („egy tanfolyam gyakorlatot”) és enyhébb szó („nem a kérdés” → „kevésbé fontos”) megfordítja vagy gyengíti az állítást; a „mellékes”, „nem számít” nem gyengít. A „szerintem” csak arra az állításra vonatkozik, amire az eredetiben. A fokozás („X-nél több: Y”), a mód (kérdés ≠ kötelezettség) és a tartalmas felsorolás elemei is megmaradtak?
 - [ ] Ahol konkrétum hiányzik, `[ide jöhet egy saját példa: …]` jelölés áll, és felsoroltad a kimenetben?
 
 ### A réteg – általános (1–26) · mondatszint
@@ -23,7 +27,7 @@
 - [ ] Van reklámnyelv: „élénk”, „lélegzetelállító”, „a szívében”, „büszkén kínál”? → cserélendő (4.)
 - [ ] Van „szakértők szerint” konkrét forrás nélkül? → konkretizálandó (5.)
 - [ ] Van „Kihívások és kilátások” típusú formulaszerű fejezet? → átírandó (6.)
-- [ ] Vannak AI-szókincs szavak: „kulcsfontosságú”, „elősegítve”, „aláhúzva”, „mélységes”? → cserélendő (7.)
+- [ ] Vannak AI-szókincs szavak: „kulcsfontosságú”, „elősegítve”, „aláhúzva”, „mélységes”? → cserélendő (7.) Szakszóként marad a szakma kötött kifejezésében („fenntartható fejlődés/jövő/közlekedés”); üres jelzőként („fenntartható megoldás”) nem.
 - [ ] Van létige-kerülés: „szolgál alapul”, „büszkélkedik”, „funkcionál”? → egyszerűsítendő (8.)
 - [ ] Van „nem csak… hanem…” túlhasználat? → egyszerűsítendő (9., lásd még S2)
 - [ ] Van kényszerített hármas felsorolás? → egyszerűsítendő (10.)
@@ -56,16 +60,15 @@
 - [ ] Van T/1 igealak eredménymondatban (csökkentettük, stabilizáltuk)? → E/1-re cserélendő (M8)
 - [ ] Van E/1 névmás + T/1 ige ellentmondás („én értettük”)? → grammatikai javítás (M8)
 - [ ] Van E/3 ige ott, ahol a narrátor maga cselekszik („felöltözik” → „felöltöztem”)? → E/1-re cserélendő; ha az alany harmadik személy vagy dolog, az E/3 helyes (M8)
-- [ ] Bekezdésenként 2+ névismétlés egyértelmű alannyal? → névmással kiváltandó (M9)
+- [ ] Elbeszélő prózában: bekezdésenként 2+ névismétlés egyértelmű alannyal? → névmással kiváltandó (M9)
 - [ ] Jelenetenként 20+ névhasználat? → szisztematikus vizsgálat (M9)
 
 ### C réteg – stilometriai (S1–S10) · a teljes szövegen, egyszerre
 
-*A számszerű küszöbök kb. 400 szótól értelmezhetők; rövidebb szövegnél minőségileg nézd. Szépprózában a párbeszédet hagyd ki a számolásból.*
-
+*A számszerű küszöbök kb. 400 szótól értelmezhetők; rövidebb szövegnél három kérdés: tér-e vissza legalább háromszor ugyanaz a szerkezeti mozdulat; ugyanazt a szerepet tölti-e be minden bekezdés; több-e a véleményjelölő a tapasztalati elemnél? Kettő igen = mintázat. Szépprózában a párbeszédet hagyd ki a számolásból.*
 
 - [ ] Minden bekezdésnek egyértelmű, rövid „dolga” van, egyik sem lóg ki? → kitérő beépítendő (S1)
-- [ ] Hány „nem az… hanem…” szerkezet van 1000 szavanként? 4 felett átírandó (S2)
+- [ ] Hány „nem az… hanem…” (és fordított „X, nem Y”) szerkezet van? 1000 szavanként 4 felett átírandó; 400 szó alatt 1 db rendben, 2 db elfogadható, ha a tartalom indokolja, 3 db vagy több átírandó. Két szembeállítás egy mondatba kötése nem javítás (S2) Az elvetett fél, ha maga állítás („nem költség”), nem veszhet el.
 - [ ] Van mondatkezdő „Hanem” 3-nál többször? → átírandó (S2)
 - [ ] Az 1–3 szavas mondatok aránya 8% felett van? → visszaolvasztandó (S3)
 - [ ] Van kettő vagy több retorikai kérdéssor, azonos dramaturgiai helyen? → prózává írandó (S4)
@@ -75,7 +78,8 @@
 - [ ] Több a véleményjelölő („szerintem”), mint a konkrét tapasztalati elem? → tapasztalatra cserélendő (S8)
 - [ ] A központi tétel négynél többször tér vissza új tartalom nélkül? → a közbülső ismétlések törlendők; új tartalom csak a szerző anyagából (S9)
 - [ ] Van pontokba szedhető mondatsorozat folyó szövegbe rejtve? → prózává vagy listává írandó (S10)
-- [ ] Lefuttattad a stilometriai mutatótáblát? Három vagy több kilógó érték = mintázat
+- [ ] Lefuttattad a stilometriai mutatótáblát (`metrics.py <fájl>`, szépprózában `--skip-dialogue`)? Három vagy több kilógó érték = mintázat
+- [ ] A mondathossz szórása ±4 fölött van (80 szó felett)? Alatta a javítás maga hozott egyenletes ritmust (M2). A szórás hosszú mondattal is emelhető, az S3 korlátja marad. Az utolsó szerkesztés után, a végleges szövegen mérd újra.
 
 ### Széppróza (ha a szöveg az)
 
@@ -93,9 +97,9 @@
 ### Eszközök – a visszaadás előtt
 
 - [ ] Lefutott a helyesírás-ellenőrzés az átírt szövegen? (`spell.py check <fájl> --suggest`)
-- [ ] Minden találatot megnéztél: javítva, szándékosként hagyva (nyelvjárás, szleng, egyszeri név), vagy visszatérő szakszóként `db.py ignore add …`-dal felvéve?
+- [ ] Minden találatot megnéztél: javítva, szándékosként hagyva (nyelvjárás, szleng, egyszeri név), vagy visszatérő szakszóként felvételre javasolva (`db.py ignore add …`, jóváhagyással)?
 - [ ] Visszaolvastad a szöveget a létező, de rossz szavakra is („egyenlőre/egyelőre”), amit a gép nem lát?
 - [ ] A szinonimacseréknél kölcsönös párt választottál, és nem léptél át jelentéscsoportot? (`thesaurus.py lookup --verify`)
-- [ ] Az általánosítható szócseréket rögzítetted? (`db.py add …` – felhasználói mondatot nem)
+- [ ] Az általánosítható szócseréket felvételre javasoltad a kimenetben, és csak jóváhagyással rögzítetted? (`db.py add …` – felhasználói mondatot nem)
 
 ---

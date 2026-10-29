@@ -1,6 +1,6 @@
 # Szépirodalmi próza – novella, elbeszélés, regényrészlet
 
-*Műfaji réteg. Az A/B/C réteg után, azokkal együtt olvasd, ha a szöveg elbeszélő próza: novella, mese, regényrészlet, jelenet, fikciós napló.*
+*Műfaji réteg. Az A/B/C réteggel együtt, az átírás előtt olvasd, ha a szöveg elbeszélő próza: novella, mese, regényrészlet, jelenet, fikciós napló.*
 
 A szépprózában a hang nem a szerzőé, hanem a narrátoré és a szereplőké. Ezért több olyan jelenség, ami egy blogbejegyzésben AI-jel vagy hiba, itt eszköz – és van néhány AI-jel, ami csak itt fordul elő.
 

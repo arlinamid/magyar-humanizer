@@ -92,7 +92,7 @@ Részletek: [install/README.md](install/README.md)
 A `dict/` mappában öt offline eszköz. Egyik sem igényel API-kulcsot.
 
 ```bash
-python dict/ensure.py       # szótár + tezaurusz + spylls + adatbázis, ha hiányzik
+python dict/ensure.py       # szótár + tezaurusz + spylls + adatbázis, ha hiányzik (--check: csak ellenőriz)
 python dict/fetch.py        # kézi letöltés — rákérdez, mely nyelvek kellenek
 ```
 
@@ -164,6 +164,7 @@ magyar-humanizer/
 │   ├── fetch.py          — szótárletöltő (interaktív nyelvválasztás)
 │   ├── spell.py          — helyesírás-ellenőrzés (spylls / hunspell)
 │   ├── thesaurus.py      — MyThes tezaurusz kereszt-ellenőrzéssel
+│   ├── metrics.py        — a C réteg számolható mutatói
 │   ├── db.py             — a skill saját SQLite adatbázisa
 │   ├── paths.py          — hová kerülnek a szótárak és az adatbázis
 │   ├── seed.tsv          — szócsere-mag (verziókövetett)
@@ -184,7 +185,8 @@ magyar-humanizer/
 - **Irodalmi / esszé, publicisztika** – Jelenkor, Litera, WMN, 24.hu stílus (`references/publicisztika.md`)
 - **Szépirodalmi próza** – novella, regényrészlet, párbeszéd-tipográfia, nyelvjárás (`references/szepproza.md`)
 - **Közösségi média** – Facebook-, LinkedIn-poszt: horog-nyitány, emojis lista, hashtag-halmaz, kommentvadász zárás (`references/kozossegi-media.md`)
-- **Hivatalos / jogi** – törvényszöveg, AB-határozat stílus
+- **Hivatalos / jogi** – törvényszöveg, AB-határozat stílus; közlemény, tájékoztató, ügyfélértesítés: számok és hivatkozások betű szerint, magázás, cselekvő ige (`references/hivatalos.md`)
+- **Blog, hírlevél, ismeretterjesztő cikk** – a szerző alcímei és példái maradnak, a ritmus mérve (`references/blog.md`)
 
 Minden műfajban érvényes a **tartalmi hűség** szabálya: a humanizálás nem ad hozzá tényt, forrást, számot, véleményt vagy élményt, ami az eredetiben nincs – ahol a szerző saját részlete kellene, jelölést hagy.
 
@@ -200,7 +202,7 @@ Ez szövegszerkesztő eszköz, nem detektor-megkerülő. Az automatikus MI-detek
 
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) – az A réteg alapja (WikiProject AI Cleanup)
 - [@blader/humanizer](https://github.com/blader/humanizer) – az eredeti skill
-- 2022 előtti magyar korpusz (Index, HVG, Magyar Narancs, Jelenkor, Litera, törvényszövegek, AB-határozatok) – a B réteg alapja
+- 2022 előtti magyar szövegek (Index, HVG, Magyar Narancs, Jelenkor, Litera, törvényszövegek, AB-határozatok), minőségi olvasás – a B réteg alapja
 - [Caimelot: Az MI-használat felismerhető nyomai – mit mutat meg a stilometria?](https://caimelot.blogspot.com/2026/09/az-mi-hasznalat-felismerheto-nyomai-mit.html) (2026) – a C réteg alapja
 - [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) – hunspell + MyThes tezaurusz (offline)
 - [vercel-labs/skills](https://github.com/vercel-labs/skills) – a telepítéshez használt skills CLI

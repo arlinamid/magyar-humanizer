@@ -11,7 +11,7 @@ Megőrizni a visszatérő, újrahasznosítható átírási tudást anélkül, ho
 Az [evolution-notes.md](evolution-notes.md) fájlba csak akkor kerüljön bejegyzés, ha **mind** igaz:
 
 - A mintát legalább kétszer láttad (ugyanabban a munkamenetben, vagy a felhasználó megerősíti, hogy visszatérő), vagy nyilvánvalóan túlmutat egyetlen szövegen.
-- Még nincs benne a rétegfájlokban (`layer-a-general.md`, `layer-b-hungarian.md`, `layer-c-stylometric.md`, `publicisztika.md`, `szepproza.md`, `kozossegi-media.md`).
+- Még nincs benne a rétegfájlokban (`layer-a-general.md`, `layer-b-hungarian.md`, `layer-c-stylometric.md`, `publicisztika.md`, `szepproza.md`, `kozossegi-media.md`, `blog.md`, `hivatalos.md`).
 - Tömören, 2–6 sorban leírható.
 - Tartósan javítja a következő magyar átírásokat.
 

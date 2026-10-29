@@ -1,11 +1,127 @@
 # Magyar Humanizer — Fejlesztési napló
 
-## Kiadatlan
+## Kiadatlan (tervezett: v2.3.0)
 
-- `db.py import`: törli a `seed.tsv`-ből kikerült `seed` eredetű bejegyzéseket (a `learned`/`manual` érintetlen). Eddig egy frissítés után a v2.2.0-ban törölt hibás cserék („elmúlás → kaszás”, „pirul → irul-pirul”) a meglévő adatbázisokban tovább éltek. Az adatbázis tárolja a betöltött mag ujjlenyomatát; az `ensure.py` eltérésnél magától importál, a `--check` ilyenkor 1-gyel lép ki.
-- `spell.py`: a motor neve pontos — `hunspell` a rendszerprogram, `spylls` a Python-implementáció (eddig a spylls is „hunspell”-ként jelent meg, így a téves találatai megbízhatónak látszottak). Spylls esetén a kimenet figyelmeztet a hamis hibákra.
-- `db.py seed`: a „Felfújt fontosság” tábla kulcsa törölve — a jobb oldala utasítás, nem csere (a gondolatjel-javítás óta amúgy sem illeszkedett).
-- `install/compact.md`: újraszinkronizálva és rövidítve; a Windsurf-kimenet 12 036 karakterről a 12 000-es korlát alá került, a build ismét hiba nélkül fut.
+### Összefoglalás
+
+A v2.3.0 fő célja, hogy az átírt szöveg **ne csak gépiesen tiszta legyen, hanem ugyanazt mondja, mint az eredeti**. Eddig a skill a „mérföldkövet jelent”-féle klisékre figyelt; most arra is, hogy az átírás ne forgassa ki a jelentést, ne gyengítse az állítást, ne vegye el az idézetet, és ne találjon ki alcímet. Emellett:
+
+- két új műfaji útmutató (blog, hivatalos szöveg);
+- új mérőeszköz a szöveg egészének ritmusához és ismétléseihez (`dict/metrics.py`);
+- sokkal pontosabb „ismert AI-fordulat” keresés és kitisztított szinonima-szótár;
+- egyszerűbb, kevesebb ismétlést tartalmazó `SKILL.md`;
+- telepítés és adatbázis-írás csak a felhasználó jóváhagyásával.
+
+**Mit mutattak a tesztek.** Hat gépies mintaszöveggel (blog, közösségi poszt, novella, hivatalos közlemény, publicisztika, hosszú esszé) nyolc egymástól független kipróbálás készült, a régi és az új szabályokkal. A gépi ellenőrzés szerint a hibák száma a régi változat 6-os értékéről az utolsó három futásban 0-ra csökkent. Ez nem jelent hibátlanságot: az ember által végzett átolvasás továbbra is talál finom eltéréseket (például egy kimaradt fél tagadást), futásonként pedig csak egy-egy minta készült. A pontos számok ezért tájékoztató jellegűek (tesztek alapján).
+
+---
+
+### 1. A jelentés megőrzése (új szabályok az 1. alapszabályban)
+
+Eddig az alapszabály azt mondta: ne adj hozzá új tényt. Mostantól azt is: **ne változtasd meg a mondatok logikáját**.
+
+- **A tagadás nem veszhet el.** Hibás: *„Egy szoftver nem ad megértést, egy tanfolyam gyakorlatot, egy mentor pedig önbizalmat.”* (magyarul ez azt jelenti, hogy a tanfolyam és a mentor ad). Helyes: *„… egy tanfolyam gyakorlatot sem, egy mentor pedig önbizalmat sem.”*
+- **Az állítás ereje marad.** *„Nem csupán lehetőség, hanem szükségszerűség”* nem lehet *„lehetőség, de egyben szükségszerűség is”*; helyesen: *„lehetőségnél több: szükségszerűség”*. Hasonlóan: a „mellékes” és a „nem számít” ugyanolyan erős, mint a „nem az számít”, a „kevésbé fontos” viszont gyengébb.
+- **A „szerintem” csak arra vonatkozik, amire az eredetiben.** Összevonáskor a vélemény nem válhat ténnyé, a tényből nem lehet vélemény.
+- **A mód sem változik.** Kérdésből nem lesz kötelezettség (*„Mennyibe kerül?”* ≠ *„Tisztázni kell, mennyibe kerül”*).
+- **Kötőszót csak akkor adhatsz hozzá, ha az eredeti is ugyanazt fejezi ki.** A „pedig” ellentétet, az „így” és az „ezért” következményt állít.
+- **Alcímet nem találunk ki.** Csak akkor módosul, ha a magyar helyesírás (Title Case) vagy maga az AI-minta indokolja (*„… világában”*).
+- **A szó szerinti idézet változatlan marad**, akkor is, ha AI-szagú; legfeljebb az idézőjel lesz `„…”`. A kimenet jelzi, ha az idézet maga gépies.
+- **Kihagyott hivatkozás után nem marad forrás nélküli tény.** Ha a „szakértők szerint” törlése után a vitatható állítás egyedül áll, jelölés kerül mellé: `[ide jöhet a forrás: …]`.
+- **A tartalmas felsorolás elemei nem tűnnek el.** Ha a szerző három konkrét előnyt sorol fel, összevonáskor sem hagyható el egyik sem; csak az ismétlő, töltelék elem törölhető.
+- **A mintapéldák sem tanítanak hibát.** Az „Utána” példák nem adnak hozzá tényt (a kitalált konkrétumok törölve vagy `[ide jöhet …]` jelölésre cserélve). Egy példa maga is megfordította a jelentést (*„a tiltás készséget”*), ez javítva.
+
+### 2. Új műfaji útmutatók és pontosított műfaji szabályok
+
+- **`references/blog.md`** – blog, hosszabb hírlevél, ismeretterjesztő és szakmai-személyes cikk: a szerző alcímei, sorrendje és személyes példái maradnak.
+- **`references/hivatalos.md`** – közlemény, tájékoztató, szabályzat, ügyfélértesítés: a rendeletszám, a dátum, a határidő, a „8. § (2) bekezdés” és a magázás betű szerint megmarad; a „-ra/-re kerül” szerkezet cselekvő igére cserélődik (*„elbírálásra kerül”* → *„elbírálják”*).
+- **Besorolás:** ha egy személyes, alcímes esszé érvelő is – vagyis kér vagy tilt valamit (*kellene*, *ideje*, *nem szabad*), vagy két lehetőség közül az egyiket védi –, a `publicisztika.md` és a záró publicisztikai ellenőrzés is jár hozzá. A műfaji fájlt már az átírás előtt el kell olvasni, nem utána.
+- **Közösségi média:** a hashtagnél megkülönböztetjük a *témás* címkét (*#távmunka* egy otthoni munkáról szóló posztban), amely marad, az *általános* halmaztól (*#siker #motiváció #jövő*), amelyet ritkítunk. Az „Elképesztő!”-féle felkiáltás maga az AI-jel (a meglepetés marad, visszafogottabb szóval). A szerző általános bölcsességgé vált zárómondata kivonható, de a kimenet jelzi.
+- **Zárás:** ha a záró mondat az egyetlen összefoglaló tézis, egyszerűsíteni kell, nem törölni.
+
+### 3. Új eszköz: `dict/metrics.py` (a szöveg egészének mérése)
+
+A harmadik (stilometriai) réteg eddig „számolj” utasítást adott, de nem volt mivel számolni. Az új szkript kiszámolja:
+
+- a mondathosszt és szórását (az egyforma hosszú mondatok gépies ritmust jeleznek);
+- az 1–3 szavas és a kérdő mondatok arányát, a kérdéssorokat;
+- a szembeállítások számát (*„Nem az X, hanem az Y”*, és a **fordított alakot** is: *„Az számít, hogy X, nem az, hogy Y”*);
+- az azonos kezdésű mondatsorozatokat, az átvezető formulával induló bekezdéseket, a „szerintem”-típusú jelölőket.
+
+Használat: `python3 dict/metrics.py szoveg.md` (novellához `--skip-dialogue`, géppel olvasható kimenethez `--json`).
+
+Fontos tudnivalók:
+
+- 400 szó alatt a küszöbök csak tájékoztatók; ott a „nem… hanem…” darabszámban értékelendő (1 db rendben, 2 db elfogadható, ha a tartalom indokolja, 3 vagy több javítandó).
+- A **ritmus-ellenőrzés külön szabály**: 80 szó felett a szórás legyen ±4 fölött. Az átírás maga is csinálhat egyenletes ritmust (törlés után a mondatok egyforma hosszúak lesznek), ezért a végleges szövegen **újra kell mérni**. A szórás hosszú mondat beillesztésével is emelhető, az S3 8%-os rövid mondat korlátja marad.
+- Két szembeállítás egy mondatba kötése (*„nem X, és nem Y, hanem Z”*) **nem javítás**; a szkript két szembeállításnak számolja.
+- A mondatvágó pontos: nem vág szét a „12/2025. (II. 20.)”, „8. §”, „2025. március” és hasonló helyeken.
+- A hashtagekből álló sort nem veszi mondatnak.
+
+### 4. Okosabb keresés az ismert AI-fordulatokra (`db.py scan`)
+
+Eddig csak a pontosan egyező szöveget találta meg. Mostantól:
+
+- **toldalékolt és szótövet váltó alakokat:** *mérföldkő* → *mérföldkövet*;
+- **ragozott kifejezéseket:** *mérföldkövet jelent* → *mérföldkövet jelentett*, *szerepet játszik* → *szerepet játszanak*;
+- **hézagos mintákat egy mondaton belül:** *nem csupán … hanem*.
+
+Egy 11 beépített AI-fordulatot tartalmazó tesztbekezdésben a régi keresés 3-at fogott meg, az új az összeset (tesztek alapján).
+
+### 5. A szótár (`dict/seed.tsv`) bővítése és kitisztítása
+
+- **78 új bejegyzés** azokra a fordulatokra, amelyeket a rétegfájlok felsoroltak, de a szótárból hiányoztak (például *szakértők szerint*, *kulcsszerepet játszik*, *fényesnek ígérkezik*, *kihívással kell szembenézni*, *ezen a ponton*, *új szintre emel*, *nem csak … hanem*; szépprózai és közösségi klisék, például *a csend fülsiketítő volt*, *ezt senki nem mondja el neked*).
+- **Kikerült a „stratégiai”** (köznapi szó, a cseréi nem voltak szinonimák).
+- **A „fenntartható” kezelése:** a *fenntartható fejlődés / jövő / közlekedés* szakszóként marad; üres jelzőként (*fenntartható megoldás*, *fenntartható szemlélet*) jelölt. A szó négy sora helyett három kifejezés-sor van.
+- **Szinonima-ellenőrzés rendbe téve.** A korábban 94 sor bukott az ellenőrzésen, mert a tezaurusz szócikkei egyszavasak, a többszavas csere (*külön erre szánt*) ellenőrzése viszont hibásan bukott. Most: a többszavas csere vizsgálata „nem értelmezhető”; 25 gyenge vagy félrevezető csere törölve (például *autentikus → tényleges*, *robusztus → biztonságos*, *meghatározó → mértékadó*); 13 kölcsönös pár hozzáadva (*hangsúlyoz → aláhúz*, *releváns → idevágó*, *zökkenőmentes → problémamentes*); 49 sor kapott `szerk:` jelölést, ahol a szerkesztői döntés indokolt, de a tezaurusz más jelentést ad (például *robusztus → stabil*). Az ellenőrzés most: „Minden bejegyzés átment.”
+- **Frissítés után nem marad régi hiba:** a `db.py import` törli a szótárból kikerült bejegyzéseket (a saját, tanult bejegyzésekhez nem nyúl). A v2.2.0-ban törölt hibás cserék (*elmúlás → kaszás*, *pirul → irul-pirul*) így nem élnek tovább a meglévő adatbázisokban.
+
+### 6. A munkafolyamat (`SKILL.md`) változásai
+
+**Egyszerűbb és rövidebb.** A `SKILL.md` ismétlődő részei (ugyanaz a parancs két-három helyen, az ideiglenes fájl háromszori magyarázata, a „400 szó” küszöb többszöri kimondása) egy helyre kerültek. Az 1. lépés felsorolássá bomlott, a „Telepítés” szakasz kikerült (a README-k tartalmazzák), a második olvasás és a réteg-ellenőrzés a 6. lépés ellenőrzőlistájába olvadt.
+
+**Az olvasás a szöveg hosszától függ.**
+
+- 200 szó alatt (poszt, komment, rövid bekezdés) a `checklist.md` és a műfaji fájl elég a három réteg lefuttatásához;
+- 200 szó felett mindhárom rétegfájl kell;
+- a 400 szavas küszöb a `metrics.py` mondatokban lévő szavaira vonatkozik (a fájl összes szavát is kiírja zárójelben).
+
+**Új vagy áthelyezett lépések.**
+
+- az 1. lépésben beolvasandó a műfaji fájl, mert a kivételei már az átírásra is vonatkoznak;
+- a 2. lépés az eredeti szövegen futó `db.py scan`;
+- új 8. lépés: *Újramérés és kiadás* – ha az átírás után még szerkesztettél, a végleges szövegen mérj újra;
+- a 9. lépés (*Rögzítés*) a válasz **után** fut, a felhasználó jóváhagyásával.
+
+**Hogyan dolgozzon a skill.**
+
+- **Csak azt írd át, ami minta.** Ami természetesen szól, maradjon. Ha egy rétegben nincs teendő, a kimenet ezt írja: „nincs változtatás”.
+- **A szerző következetes szokása előnyt élvez** a mintával szemben (például gondolatjel, rövid mondat), az emoji kivételével: az mindig törlendő.
+- **Bizonytalan esetben hagyd úgy, és jelezd.** Például: ha nem derül ki, hogy a szerző egyedül csinálta-e, a „csökkentettük” T/1-ben marad.
+- **A `[ide jöhet …]` jelölés csak ott kerül be,** ahol a hiány a szöveg érthetőségét vagy hitelességét rontja; szövegenként néhány legfeljebb.
+- **Hivatalos, jogi, szakmai szöveg:** az M6 szakasz az irányadó, ahol az ütközik egy A vagy B mintával; a többi A-minta (reklámnyelv, chatbot-töredék, emoji) változatlanul érvényes.
+
+### 7. Jóváhagyás és biztonság
+
+- A telepítés (pip-csomag, magyar szótár és tezaurusz letöltése a GitHubról) **csak a felhasználó jóváhagyásával** fut. A 0. lépés az `ensure.py --check`-kel kezdődik, ami csak olvas.
+- Kivétel: ha csak az adatbázis helyi magja elavult, a helyi import hálózat nélkül, jóváhagyás nélkül is fut.
+- A `db.py add` és az `ignore add` is csak jóváhagyással fut; a kimenet felsorolja a javasolt bejegyzéseket.
+- Ha a felhasználó nem engedi a telepítést, a skill ettől még dolgozik: a helyesírást kétszer kézzel olvassa át, és jelzi, hogy a gépi ellenőrzés nem futott.
+
+### 8. Javítások a mintafájlokban (A, B, C réteg)
+
+- **A réteg:** a 7. minta tükörfordításai javítva (*„tapéta/szőttes”* → *„kárpit/szőttes”*); az ellenőrizhetetlen helyesírási pontszámok (AkH. 256., 263.) elhagyva; új kivételek: a hármas felsorolás (10. minta) és a félkövér (16. minta) valódi esetben nem hiba; az 5. és 13. minta a törölt hivatkozás és az alcím kezelését is kimondja.
+- **B réteg:** a forrás „minőségi olvasásként” van jelölve, nem „korpuszelemzésként”; az M9 (névismétlés) csak elbeszélő prózára vonatkozik; az M2 küszöbe „4 vagy több”; az M3 körkörös sora és az M6 bevezetője javítva.
+- **C réteg:** a küszöbök heurisztikaként jelölve (nem mért tartományok); rövid szövegnél három kérdés: *Visszatér-e legalább háromszor ugyanaz a mozdulat? Ugyanazt a szerepet tölti-e be minden bekezdés? Több-e a „szerintem”, mint a konkrét tapasztalat?* (kettő igen = mintázat). Az S1, S6 és S9 javítási technikái már nem kérnek kitalált tartalmat. Az S2 a fordított alakot is mintának tekinti, és kimondja, hogy az elvetett fél, ha maga állítás (*„nem költség”*), nem vész el.
+- **Pontosítás:** az EU MI-rendelet 50. cikk (4) bekezdése 2026. augusztus 2. óta alkalmazandó (a digitális omnibusz-csomag nem halasztotta el).
+
+### 9. Eszközök, rövidített szabályfájl
+
+- `spell.py`: a motor neve pontos – `hunspell` a rendszerprogram, `spylls` a Python-megvalósítás (eddig a spylls is „hunspell”-ként jelent meg, így a téves találatai megbízhatónak látszottak). Spylls esetén a kimenet figyelmeztet a hamis hibákra.
+- `db.py seed`: a „Felfújt fontosság” tábla kulcsa törölve (a jobb oldala utasítás volt, nem csere).
+- `install/compact.md` (a rövidített szabályfájl a szabályfájl-alapú célokhoz): újraszinkronizálva és az új szabályokkal bővítve; a Windsurf-kimenet a 12 000 karakteres korláton belül maradt. A korláton belül maradás érdekében kikerült a bevezető egy mondata, a „Lélek” bekezdés (tartalmát az 1. alapszabály lefedi) és két ritka klisé az M5-ből.
+
+---
 
 ## v2.2.0 (2026-09-26)
 

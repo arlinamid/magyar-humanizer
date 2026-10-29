@@ -29,7 +29,7 @@ Nem tiltottak, de az ismételt használattól a próza előre gyártottnak hat.
 
 Figyelj az ilyen csomókra: `komplexitás`, `hasznosságélmény`, `kompetencia`, `jelenség`, `logika`, `dinamika`.
 
-Ha több is egymás közelébe kerül, legalább egy részüket cseréld konkrét tapasztalatra, cselekvésre vagy következményre.
+Ha több is egymás közelébe kerül, legalább egy részüket cseréld konkrétabb szóra a szerző anyagából; ha nincs mire, töröld vagy egyszerűsítsd.
 
 ### 4. Túl sok fényesre csiszolt tételmondat
 
@@ -39,7 +39,7 @@ Ha minden bekezdés kerek, idézhető konklúzióval zárul, a szöveg mestersé
 
 Kérdezd meg: van-e valódi kép, helyzet, tárgy, képernyő, mondat, feladat vagy bosszúság a szöveg elején?
 
-Ha nincs, a szöveg még mindig generált magyarázatnak hathat megélt próza helyett.
+Ha nincs, a szöveg még mindig generált magyarázatnak hathat megélt próza helyett. Ne találj ki jelenetet: ha a szerző anyagában nincs ilyen, jelöld `[ide jöhet egy saját példa: …]` formában.
 
 ### 6. Hamis egyensúly
 
@@ -63,7 +63,7 @@ Figyelj azokra a mondatokra, amelyek erősen hangzanak, de nem adnak hozzá info
 
 ### 10. Túlcsiszolt zárás
 
-Ha a befejezés bölcsebbnek hat, mint a szöveg többi része, ne bízz benne. Egy valamivel egyszerűbb utolsó mondat gyakran erősebb.
+Ha a befejezés bölcsebbnek hat, mint a szöveg többi része, ne bízz benne. Egy valamivel egyszerűbb utolsó mondat gyakran erősebb. Ha a záró mondat egyben az egyetlen tézis, egyszerűsítsd kijelentő alakra, ne töröld.
 
 ## Záró átfutás
 

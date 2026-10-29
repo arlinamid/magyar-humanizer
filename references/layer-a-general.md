@@ -2,7 +2,7 @@
 
 *Ez a réteg mindig fut, elsőként. Forrás: Wikipedia „Signs of AI writing” (WikiProject AI Cleanup).*
 
-> **Az „Utána” példákról.** A példák azt mutatják, milyen *fajta* javítás kell. A bennük szereplő konkrétumok – évszám, felmérés, „az építész elmondta” – illusztrációk: a valódi átírásban csak olyan tény maradhat, ami az eredeti szövegben vagy a szerzőtől származik. Ha nincs konkrétum, a javítás egyszerűsítés vagy törlés (lásd SKILL.md, 1. alapszabály).
+> **Az „Utána” példákról.** Az „Utána” változatok nem adnak hozzá tényt: ahol az eredeti nem ad konkrétumot, a javítás egyszerűsítés, törlés vagy `[ide jöhet …]` jelölés (lásd SKILL.md, 1. alapszabály). A valódi átírásban sem maradhat olyan tény, ami az eredeti szövegben vagy a szerzőtől nem származik.
 
 ## TARTALMI MINTÁK (általános)
 
@@ -18,7 +18,7 @@
 
 **Utána:**
 
-> A Katalán Statisztikai Intézet 1989-ben alakult, hogy a spanyol nemzeti statisztikai hivataltól független regionális statisztikákat gyűjtsön és publikáljon.
+> A Katalán Statisztikai Intézet 1989-ben alakult Spanyolországban, a közigazgatási funkciók decentralizálásának részeként.
 
 ---
 
@@ -34,7 +34,9 @@
 
 **Utána:**
 
-> Egy 2024-es New York Times-interjúban amellett érvelt, hogy az AI-szabályozásnak az eredményekre, nem a módszerekre kellene fókuszálnia.
+> Nézeteit idézte többek között a New York Times. [ide jöhet egy konkrét hivatkozás: melyik cikkben, mit állított]
+
+*(A médialista és a követőszám törölve; a konkrét hivatkozás a szerzőtől jön.)*
 
 ---
 
@@ -50,7 +52,9 @@
 
 **Utána:**
 
-> A templom kék, zöld és arany színeket használ. Az építész elmondta, hogy ezeket a helyi virágvilágra és a Golf-partra utalva választotta.
+> A templom kék, zöld és arany színeket használ.
+
+*(Az értelmezés törölve; ha a szerző ismeri az építész indoklását, az kerülhet a helyére.)*
 
 ---
 
@@ -64,7 +68,7 @@
 
 **Utána:**
 
-> Alamata Raya Kobo egy város Etiópia Gonder régiójában, amelyet heti piacáról és 18. századi templomáról ismernek.
+> Alamata Raya Kobo egy város Etiópia Gonder régiójában.
 
 ---
 
@@ -72,7 +76,7 @@
 
 **Figyelj ezekre:** szakértők szerint, iparági jelentések szerint, megfigyelők szerint, egyes kritikusok szerint, számos forrás
 
-**Probléma:** Az AI konkrét forrás nélkül hivatkozik homályos tekintélyekre.
+**Probléma:** Az AI konkrét forrás nélkül hivatkozik homályos tekintélyekre. Ha a hivatkozás kimarad, és a megmaradó állítás vitatható vagy tényszerű, jelölj `[ide jöhet a forrás: …]`-t, ne hagyd forrás nélküli tényként.
 
 **Előtte:**
 
@@ -80,7 +84,9 @@
 
 **Utána:**
 
-> A Haolai folyó több endemikus halfajnak ad otthont, egy 2019-es kínai akadémiai felmérés szerint.
+> A Haolai folyó felkelti a kutatók és természetvédők érdeklődését, és része a regionális ökoszisztémának.
+
+*(A „szakértők szerint” kimarad; forrás csak akkor kerül be, ha a szerző megadja.)*
 
 ---
 
@@ -94,7 +100,7 @@
 
 **Utána:**
 
-> A forgalmi dugók 2015 után súlyosbodtak, amikor három új IT-park nyílt. Az önkormányzat 2022-ben vízelvezető projektet indított az ismétlődő áradások kezelésére.
+> Korattur ipari város, amely számos, a városi területekre jellemző kihívással néz szembe. [ide jöhet a szerzőtől: melyek ezek a kihívások, és mit tettek ellenük]
 
 ---
 
@@ -102,9 +108,9 @@
 
 ### 7. Túlhasznált „AI-szókincs” szavak
 
-**Magas frekvenciájú AI-szavak (magyar):** Ezen felül, összhangban van, kulcsfontosságú, kulcsszerepet játszik, kiemelkedő, hangsúlyozva, fejlesztve, elősegítve, ösztönözve, tapéta/szőttes (átvitt), érintettség, mélységes, összetett/összetettsége, kulcs- (jelzőként), (szak)területi táj, meghatározó, bemutatva, kiválóság, aláhúzva (átvitt), értékes, élénk, zökkenőmentes, betekintést nyújt, egyedülálló, „utazás” (átvitt: „ez az utazás”), „a … világában” („a mesterséges intelligencia világában”)
+**Magas frekvenciájú AI-szavak (magyar):** Ezen felül, összhangban van, kulcsfontosságú, kulcsszerepet játszik, kiemelkedő, hangsúlyozva, fejlesztve, elősegítve, ösztönözve, kárpit/szőttes (átvitt: „a kultúra kárpitja”), érintettség, mélységes, összetett/összetettsége, kulcs- (jelzőként), táj (átvitt: „a gasztronómiai tájban”), meghatározó, bemutatva, kiválóság, aláhúzva (átvitt), értékes, élénk, zökkenőmentes, betekintést nyújt, egyedülálló, „utazás” (átvitt: „ez az utazás”), „a … világában” („a mesterséges intelligencia világában”)
 
-**Mikor nem AI-jel:** a szó a sűrűségtől és a szereptől lesz gyanús, nem önmagától. Szakszóként maradjon („fenntartható fejlődés”, „szignifikáns eltérés” statisztikában, „összetett szó” nyelvtanban), és egy-egy előfordulás egy különben természetes szövegben nem ok a cserére. Cserélni ott kell, ahol a szó üres nyomatékot ad, vagy ahol ugyanabban a bekezdésben több ilyen torlódik.
+**Mikor nem AI-jel:** a szó a sűrűségtől és a szereptől lesz gyanús, nem önmagától. Szakszóként maradjon, ha a szó a szakma kötött kifejezésének része („fenntartható fejlődés”, „fenntartható jövő”, „fenntartható közlekedés”, „szignifikáns eltérés” statisztikában, „összetett szó” nyelvtanban); üres jelzőként ne („fenntartható megoldás”, „fenntartható szemlélet”, „szignifikáns javulás”). Egy-egy előfordulás egy különben természetes szövegben nem ok a cserére. Cserélni ott kell, ahol a szó üres nyomatékot ad, vagy ahol ugyanabban a bekezdésben több ilyen torlódik.
 
 **Előtte:**
 
@@ -112,7 +118,7 @@
 
 **Utána:**
 
-> A szomáliai konyha tevehúst is tartalmaz, amelyet csemegének tekintenek. A tésztaételek, amelyeket az olasz gyarmatosítás idején vezettek be, ma is gyakoriak, különösen délen.
+> A szomáliai konyha tevehúst is használ. A tészta az olasz gyarmati hatás nyomán terjedt el a helyi étrendben.
 
 ---
 
@@ -128,13 +134,13 @@
 
 **Utána:**
 
-> A 825-ös Galéria a LAAA kortárs művészeti kiállítótere. A galériának négy terme van, összesen 3000 négyzetméteren.
+> A 825-ös Galéria a LAAA kortárs művészeti kiállítótere. A galériának négy külön tere van, összesen több mint 3000 négyzetméteren.
 
 ---
 
 ### 9. Negatív párhuzamosságok
 
-**Probléma:** „Nem csak...hanem...” vagy „Nem csupán...hanem...” szerkezetek túlhasználata.
+**Probléma:** „Nem csak...hanem...” vagy „Nem csupán...hanem...” szerkezetek túlhasználata. Javításnál a fokozás marad: „nem csupán X, hanem Y” → „X-nél több: Y”, nem „X is, Y is”.
 
 **Előtte:**
 
@@ -149,6 +155,8 @@
 ### 10. Hármas szabály túlhasználata
 
 **Probléma:** Az LLM-ek hármasokba kényszerítik az ötleteket a teljesség látszata érdekében.
+
+**Mikor nem AI-jel:** ha a szerző valóban három dolgot sorol fel, és mindhárom tartalmas. A gyanú ott kezdődik, ahol mindenből három van, vagy a harmadik elem töltelék. Összevonáskor a tartalmas elemeket ne dobd el; csak az ismétlő, töltelék elemet hagyd el.
 
 **Előtte:**
 
@@ -194,7 +202,7 @@
 
 **Figyelj ezekre:** Minden Szó Nagybetűvel Kezdődik A Fejlécben
 
-**Probléma:** Az AI angol Title Case mintát alkalmaz magyar fejlécekre is. Magyarul csak a mondat első szava és a tulajdonnevek kapnak nagybetűt.
+**Probléma:** Az AI angol Title Case mintát alkalmaz magyar fejlécekre is. Magyarul csak a mondat első szava és a tulajdonnevek kapnak nagybetűt. A fejlécet csak ennyire írd át; új alcímet ne találj ki, a sorrendet ne változtasd.
 
 **Előtte:**
 
@@ -210,7 +218,7 @@
 
 **Figyelj ezekre:** `“ilyen”` (angol tipográfiai) vagy `"ilyen"` (egyenes, gépi) idézőjel magyar szövegben; `'ilyen'` egyszeres idézőjel belső idézetként.
 
-**Probléma:** Az AI az angol idézőjelet viszi át a magyarba. A magyar szabály (AkH. 256.): nyitó idézőjel lent (`„`, U+201E), záró fent, 9-es alakban (`”`, U+201D). Idézeten belüli idézet: `»…«`. Az aposztróf `’` (U+2019), nem egyenes `'`.
+**Probléma:** Az AI az angol idézőjelet viszi át a magyarba. A magyar szabály (AkH. 12. kiadás, az idézőjel szabályai): nyitó idézőjel lent (`„`, U+201E), záró fent, 9-es alakban (`”`, U+201D). Idézeten belüli idézet: `»…«`. Az aposztróf `’` (U+2019), nem egyenes `'`.
 
 **Előtte:**
 
@@ -228,7 +236,7 @@
 
 **Figyelj ezekre:** mondaton belül két vagy több gondolatjel; gondolatjel vesszőt vagy pontot helyettesít; három egymás utáni mondatban is szerepel; angol hosszú kötőjel (`—`, em dash) magyar szövegben, főleg szóköz nélkül.
 
-**Probléma:** Az LLM-ek az emberinél sűrűbben használnak gondolatjelet, „ütős” értékesítési szöveget utánozva – és magyarul is az angol formát írják. A magyar gondolatjel a nagykötőjel (`–`, U+2013), mindkét oldalán szóközzel (AkH. 263.); a szóköz nélküli `—` angol tipográfia, magyar szövegben önmagában is árulkodó. Szépprózában a párbeszéd sorát is nagykötőjel vezeti be (`– Hová mész? – kérdezte.`).
+**Probléma:** Az LLM-ek az emberinél sűrűbben használnak gondolatjelet, „ütős” értékesítési szöveget utánozva – és magyarul is az angol formát írják. A magyar gondolatjel a nagykötőjel (`–`, U+2013), mindkét oldalán szóközzel (AkH. 12. kiadás, a gondolatjel szabályai); a szóköz nélküli `—` angol tipográfia, magyar szövegben önmagában is árulkodó. Szépprózában a párbeszéd sorát is nagykötőjel vezeti be (`– Hová mész? – kérdezte.`).
 
 **Javítás:** a gondolatjelek többsége vessző, kettőspont, zárójel vagy új mondat lesz; ami marad, az ` – ` alakú.
 
@@ -247,6 +255,8 @@
 **Figyelj ezekre:** bekezdésenként 3+ félkövér kifejezés; technikai rövidítések mind félkövérben; félkövér alcím + utána ugyanaz a szó kiírva
 
 **Probléma:** Az AI chatbotok gépiesen félkövérrel emelnek ki kifejezéseket.
+
+**Mikor nem AI-jel:** szakmai dokumentum, felhasználói felület feliratai, a szerző saját, következetes kiemelése.
 
 **Előtte:**
 
@@ -272,7 +282,7 @@
 
 **Utána:**
 
-> A frissítés javítja a felületet, gyorsítja a betöltési időt optimalizált algoritmusokkal, és végponttól végpontig titkosítást vezet be.
+> A frissítés javítja a felületet, optimalizált algoritmusokkal a teljesítményt, és végponttól végpontig titkosítást vezet be.
 
 ---
 
@@ -290,7 +300,7 @@
 
 **Utána:**
 
-> A termék Q3-ban kerül piacra. A felhasználói kutatás az egyszerűség iránti preferenciát mutatott. Következő lépés: követő megbeszélés ütemezése.
+> A termék Q3-ban kerül piacra. A felhasználók az egyszerűséget részesítik előnyben. Következő lépés: követő megbeszélés ütemezése.
 
 ---
 
@@ -306,7 +316,7 @@
 
 **Utána:**
 
-> A francia forradalom 1789-ben kezdődött, amikor pénzügyi válság és élelmiszerkorlátozások tömeges elégedetlenséget szültek.
+> [Csak az áttekintés tartalma marad; az „Íme…” bevezető, a „Remélem, segít!” és a felajánlás törölve.]
 
 ---
 
@@ -320,7 +330,9 @@
 
 **Utána:**
 
-> A vállalatot 1994-ben alapították, bejegyzési dokumentumai szerint.
+> A vállalat az 1990-es években jött létre.
+
+*(A pontos év csak akkor kerülhet be, ha a szerző megadja.)*
 
 ---
 
@@ -365,13 +377,15 @@
 
 ### 24. Általános pozitív zárómondat
 
+**Ha a zárómondat az egyetlen összefoglaló tézis,** ne töröld: egyszerűsítsd kijelentő mondattá, aforisztikus kép és ellentétpár nélkül. A tartalom a szerzőé, csak a csillogás törlendő.
+
 **Előtte:**
 
 > A vállalat jövője fényesnek ígérkezik. Izgalmas idők közelednek, ahogy folytatják útjukat a kiválóság felé. Ez egy fontos lépés a helyes irányba.
 
 **Utána:**
 
-> A vállalat jövőre két új telephelyet tervez megnyitni.
+> [A pozitív zárómondatok törölve; ha a szerző ismeri a vállalat konkrét terveit, azok kerülhetnek a helyükre.]
 
 ---
 

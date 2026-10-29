@@ -1,6 +1,6 @@
 # Közösségi média – Facebook-, LinkedIn-, Instagram-poszt
 
-*Műfaji réteg. Az A/B/C réteg után, azokkal együtt olvasd, ha a szöveg poszt, komment, rövid hírlevél vagy más közösségi médiás szöveg.*
+*Műfaji réteg. Az A/B/C réteggel együtt, az átírás előtt olvasd, ha a szöveg poszt, komment, rövid hírlevél vagy más közösségi médiás szöveg.*
 
 A poszt beszélt nyelvhez közeli műfaj. Ami egy esszében lazaság, az itt természetes; ami egy esszében rendben van (hosszú, kerek bekezdés, összegző zárás), az itt gyakran gépies. Az AI-posztok árulkodó jegyei inkább formai és retorikai sablonok, mint szóhasználat.
 
@@ -12,7 +12,7 @@ A poszt beszélt nyelvhez közeli műfaj. Ami egy esszében lazaság, az itt ter
 - Beszélt nyelvi elemek: *szóval*, *na*, *amúgy*, *hát*, félmondat, odavetett kérdés, önirónia.
 - Szleng, becézés, angol szakszó, ha a szerző így beszél (*promptolás*, *lájk*, *xD*). A helyesírás-ellenőrző ezeket jelzi – ez nem hiba, nem kell kivételnek felvenni.
 - Rövid bekezdések, sorközök – a telefonos olvasáshoz ez normális.
-- `@említés`, link, `#hashtag` – pontosan úgy, ahogy a szerző megadta.
+- `@említés`, link – pontosan úgy, ahogy a szerző megadta; a hashtagre lásd K6.
 
 **Emoji nincs.** A posztban sem marad emoji – se mondaton belül, se sor elején, se a végén. Ha egy emoji jelentést hordozott (🤯 = meglepett), azt szóval mondd ki; ha csak díszítés volt, törlendő (18. minta).
 
@@ -44,15 +44,20 @@ Minden mondat külön sorban, végig („LinkedIn-vers”). A rövid bekezdés r
 
 ### K6. Hashtag-halmaz
 
-Öt–tíz általános hashtag a végén (*#AI #innováció #jövő #motiváció #siker*). Magyar posztban 0–3, a témához tartozó hashtag természetes. A szerző saját hashtagjeit ne töröld – ha soknak tűnik, jelezd a kimenetben.
+Öt–tíz általános hashtag a végén (*#AI #innováció #jövő #motiváció #siker*). Magyar posztban 0–3 hashtag természetes.
+
+- **Témás** a hashtag, ha a poszt konkrét tárgyát nevezi meg: egy idegen ezzel a címkével a tárgya alapján megtalálná a posztot (*#távmunka* egy otthoni munkáról szóló posztban). A témásat tartsd meg.
+- **Általános**, ha bármelyik posztra ráillik: értékszavak és divatszavak (*#siker, #motiváció, #jövő, #innováció, #tanulás, #produktivitás*). Az általános halmazt ritkítsd.
+- **A szerző saját címkéjét** (a saját nevét, rendezvényét, sorozatát, márkáját) ne töröld.
+- Kétes esetben hagyd meg, és jelezd a kimenetben.
 
 ### K7. Összegző tanulság és „A lényeg:”
 
-*A lényeg: …*, *Tanulság: …*, *Röviden: …* a poszt végén, vagy egy általános bölcsesség (*„Mert a siker nem cél, hanem út.”*). Ez a 24. minta posztalakja: ha a poszt enélkül is lezárul, töröld.
+*A lényeg: …*, *Tanulság: …*, *Röviden: …* a poszt végén, vagy egy általános bölcsesség (*„Mert a siker nem cél, hanem út.”*). Ez a 24. minta posztalakja: ha a poszt enélkül is lezárul, töröld. A szerző általános bölcsességgé vált felhívása (*„aki most nem áll át, lemarad”*) is kivonható; ha a szerzőnek fontos állítás, hagyd meg egyszerű kijelentésként, és jelezd a kimenetben.
 
 ### K8. Túlzó lelkesedés
 
-*Elképesztő!*, *Ez mindent megváltoztat!*, *Nem fogod elhinni…*, 🤯🔥🚀 halmozva. Az 1. és 4. minta posztváltozata. A szerző valódi meglepetése maradjon – egyszer, a konkrétumhoz kötve.
+*Elképesztő!*, *Ez mindent megváltoztat!*, *Nem fogod elhinni…*, 🤯🔥🚀 halmozva. Az 1. és 4. minta posztváltozata. A szerző valódi meglepetése maradjon – egyszer, a konkrétumhoz kötve. Maga a felkiáltó szó (*elképesztő*, *hihetetlen*) az AI-jel: a szerző meglepetése maradjon, de visszafogottabb szóval (*meglepő*, *meglepett*), egyszer, a konkrétumhoz kötve.
 
 ### K9. Regiszterkeveredés
 
@@ -98,6 +103,6 @@ Bevezetés – három kifejtő bekezdés – összegzés, átvezető mondatokkal
 
 > Tegnap kipróbáltam az új modellt, és meglepett: gyorsabb, pontosabb, és magyarul is jól ír.
 >
-> #AI
+> #AI #MesterségesIntelligencia
 
-**Változtatások:** törölt horog-nyitány és markdown-félkövér (K1, K3); az „Elképesztő volt” helyett a szerző saját reakciója marad, visszafogottabban (K8); az emojis lista folyó szöveggé (K2); a „lemarad” tanulság törölve (K7), mert általános bölcsesség, nem a szerző tapasztalata (ha a szerzőnek ez fontos állítás, maradhat – egyszerűbben, saját szavaival); a kommentvadász zárás törölve (K5); öt hashtagből egy maradt (K6). Minden emoji törölve (18. minta); a 🤯 jelentését a „meglepett” szó viszi. Tartalom nem került bele: minden állítás (gyorsabb, pontosabb, magyarul jól ír, meglepett) az eredetiből való. Ha a szerző a kérdést is meg akarja tartani, egy konkrét kérdés mehet a végére.
+**Változtatások:** törölt horog-nyitány és markdown-félkövér (K1, K3); az „Elképesztő volt” helyett a szerző saját reakciója marad, visszafogottabban (K8); az emojis lista folyó szöveggé (K2); a „lemarad” tanulság törölve (K7), mert általános bölcsesség, nem a szerző tapasztalata (ha a szerzőnek ez fontos állítás, maradhat – egyszerűbben, saját szavaival); a kommentvadász zárás törölve (K5); öt hashtagből kettő maradt: az #AI és a #MesterségesIntelligencia témás, a #Jövő, #Innováció és #Tanulás általános (K6). Minden emoji törölve (18. minta); a 🤯 jelentését a „meglepett” szó viszi. Tartalom nem került bele: minden állítás (gyorsabb, pontosabb, magyarul jól ír, meglepett) az eredetiből való. Ha a szerző a kérdést is meg akarja tartani, egy konkrét kérdés mehet a végére.

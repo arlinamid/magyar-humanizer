@@ -1,6 +1,6 @@
 # dict/ – szótárak és nyelvi eszközök
 
-Öt eszköz, mind offline, egyik sem igényel API-kulcsot.
+Hat eszköz, mind offline, egyik sem igényel API-kulcsot.
 
 | Fájl | Mire való |
 |------|-----------|
@@ -8,6 +8,7 @@
 | `fetch.py` | szótárak letöltése a LibreOffice repóból (interaktív nyelvválasztás) |
 | `spell.py` | helyesírás-ellenőrzés teljes hunspell motorral – **kötelező lépés** |
 | `thesaurus.py` | szinonimakeresés kereszt-ellenőrzéssel |
+| `metrics.py` | a C réteg számolható mutatói (mondathossz, arányok, ismétlődések), közelítésként |
 | `db.py` | a skill saját adatbázisa, amit munka közben ő maga épít |
 | `paths.py` | közös útvonalak: hová kerülnek a szótárak és az adatbázis |
 | `seed.tsv` | az adatbázis verziókövetett szöveges magja (szócserék) |
@@ -17,7 +18,7 @@
 
 ## Telepítés / bootstrap
 
-A skill első lépése – **ne kérdezz rá, futtasd**, ha a szótár vagy az adatbázis hiányzik:
+A skill első lépése az `ensure.py --check`. Ha a szótár vagy az adatbázis hiányzik, a telepítés (pip-csomag, GitHub-letöltés) a felhasználó jóváhagyása után fut:
 
 ```bash
 python dict/ensure.py                 # magyar + spylls + humanizer.db
@@ -79,6 +80,8 @@ kiemelkedő -> sárcipő   helyesírás: rendben   tezaurusz: rendben   kölcsö
 
 A „sárcipő” valódi szó, és szerepel is a tezauruszban – csak éppen semmi köze a „kiemelkedő”-höz. Egyedül a kölcsönösség fogja meg.
 
+**Többszavas csere és szerkesztői döntés.** A tezaurusz szócikkei egyszavasak: a többszavas csere (`külön erre szánt`) tezaurusz- és kölcsönösségi ellenőrzése „nem értelmezhető”, nem bukás. Ha egy egyszavas csere a szokásos használatban megfelelő, de a tezaurusz más jelentést ad (`robusztus` → `stabil`: a tezaurusz a testalkatot adja) vagy a csere nem szócikk, a `seed.tsv` megjegyzés oszlopa `szerk:` előtaggal kezdődik, és az ellenőrzés ilyenkor szintén „nem értelmezhető”. Az indoklás a megjegyzésben áll. A helyesírás-ellenőrzés ettől függetlenül mindig fut.
+
 **A hiányzó adat nem bukás.** Ha a forrásszó nincs a tezauruszban – és a skill épp ilyen AI-klisékkel dolgozik, mint a „kulcsfontosságú” vagy a „mélységes” —, a kölcsönösség „n.a.”, nem „FIGYELEM”.
 
 ---
@@ -96,7 +99,7 @@ python dict/db.py stats
 python dict/db.py export --out dump.tsv
 ```
 
-A `scan` a toldalékolt alakokat is megtalálja (`kulcsfontosságúnak`), és jelölteket mutat – nem kötelező cseréket. A mag csak AI-szókincset és terpeszkedő fordulatot tartalmaz; köznapi szavakat (vezet, támogat, csökkent) szándékosan nem, mert azok egy novellában vagy posztban nem AI-jelek.
+A `scan` a toldalékolt alakokat (`kulcsfontosságúnak`), a tőváltozókat (`mérföldkő` → `mérföldkövet`), a kifejezések ragozott alakjait (`jelent` → `jelentett`, `játszik` → `játszanak`) és a hézagos mintákat (`nem csupán ... hanem`, egy mondaton belül, legfeljebb 120 karakter hézaggal) is megtalálja, és jelölteket mutat – nem kötelező cseréket. A hunspell-tő nem használható erre: a magyarban megbízhatatlan (`mérföldkövet` → `mérföldkövek`, `hozzájárul` → `járul`). A mag a rétegfájlokban listázott fordulatokat tartalmazza (A réteg 1–26., B réteg M3 és M5, S7, a szépprózai F1, F2, F5 és a közösségi médiás K1, K5, K8), a minta száma a `pattern` oszlopban áll; köznapi szavakat (vezet, támogat, csökkent, stratégiai) szándékosan nem, mert azok egy novellában vagy posztban nem AI-jelek. Új fordulat előbb a rétegfájlba kerül, utána a magba.
 
 A `db.py ignore add` csak a helyi adatbázisba ír; a verziókövetett `seed-ignore.tsv`-be csak a karbantartói `dump` visz át – így a felhasználói szövegekből felvett nevek nem kerülnek a repóba.
 

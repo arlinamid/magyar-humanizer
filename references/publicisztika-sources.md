@@ -1,6 +1,6 @@
 # Publicisztika referenciák
 
-Ezek 2020 előtti magyar szövegek vagy olyan 2020 előtti darabokból összeállított referenciák, amelyekből hangot, ritmust és szerzői mozdulatokat lehet ellesni.
+Ezek 2020 előtti magyar szövegek vagy olyan 2020 előtti darabokból összeállított referenciák, amelyekből hangot, ritmust és szerzői mozdulatokat lehet ellesni. Opcionális olvasmány: a humanizáláshoz nem kell letölteni őket; csak akkor nyisd meg, ha van webes eszközöd, és a felhasználó hangmintát kér, vagy a szerző hangja nem állapítható meg a szövegből.
 
 ## WMN
 

@@ -1,6 +1,6 @@
 # C réteg – stilometriai (szövegegész-szintű) minták
 
-*Forrás: Caimelot, „Az MI-használat felismerhető nyomai” (2026. szeptember) – stilometriai elemzés magyar szakmai-oktatási szövegeken. Lásd a Referenciák szakaszt.*
+*Forrás: Caimelot, „Az MI-használat felismerhető nyomai” (2026. szeptember) – stilometriai elemzés magyar szakmai-oktatási szövegeken. Lásd: SKILL.md, Források.*
 
 ## Mi különbözteti meg ezt a réteget?
 
@@ -12,7 +12,11 @@ Egy szöveg minden egyes mondata lehet természetes, miközben a szöveg egésze
 
 Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes szöveget, számolj, és csak utána nyúlj hozzá.
 
-**Mikor érvényesek a számok:** a küszöbök (arányok, „1000 szavanként”) nagyjából 400 szótól értelmezhetők. Rövidebb szövegnél – poszt, rövid jelenet – a C réteget minőségileg alkalmazd: van-e végig ugyanaz a szerkezeti mozdulat. Szépprózában a párbeszédet hagyd ki a számolásból: a beszélt nyelv tele van rövid mondattal és kérdéssel, ez ott nem AI-jel.
+**Mikor érvényesek a számok:** a küszöbök (arányok, „1000 szavanként”) nagyjából 400 szótól értelmezhetők. Szépprózában a párbeszédet hagyd ki a számolásból: a beszélt nyelv tele van rövid mondattal és kérdéssel, ez ott nem AI-jel.
+
+**400 szó alatt (poszt, rövid jelenet) három kérdés** a számolás helyett: van-e végig ugyanaz a szerkezeti mozdulat? (1) Tér-e vissza ugyanaz a szerkezeti mozdulat legalább háromszor (azonos vázú mondat, szembeállítás, rövid ütés, kérdéssor)? (2) Ugyanazt a szerepet tölti-e be minden bekezdés vagy mondat (állítás, magyarázat, kerek zárás)? (3) Több-e a véleményjelölő, mint a tapasztalati elem? Ha legalább kettőre igen, mintázat: írd át.
+
+**A küszöbök státusza:** tapasztalati heurisztikák, nem mért tartományok. Egy szakmai-oktatási szövegekre épülő elemzésből és szerkesztői tapasztalatból származnak; szépprózára és posztra nem igazoltak. Támpont, nem ítélet.
 
 **Tartalmi hűség:** a javítási technikák egy része konkrétumot kér (kitérő, emlék, köztes eset). Ezt a szerző anyagából vedd; ha nincs, hagyj `[ide jöhet egy saját példa: …]` jelölést, és ne találj ki élményt vagy adatot (SKILL.md, 1. alapszabály).
 
@@ -31,8 +35,8 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 **Javítási technika:**
 - Hagyj ki egy átvezetést: tedd egymás mellé a két bekezdést magyarázat nélkül
 - Ha a szerző anyagában van olyan részlet, ami nem az érvelést szolgálja (egy emlék, egy mellékes megfigyelés, egy szakmai zárójel), hagyd benne, vagy hozd előrébb – ne simítsd ki. Ha nincs, ne írj helyette.
-- Engedj meg egy példát, ami nem tökéletesen illeszkedik – és mondd is ki, hogy nem tökéletesen illeszkedik
-- Hagyj benne egy bizonytalanságot, amit nem oldasz fel
+- Ha a szerző példája nem illeszkedik tökéletesen az érveléshez, ne igazítsd hozzá
+- Ha a szerző bizonytalanságot hagyott a szövegben, ne oldd fel
 
 ---
 
@@ -43,10 +47,15 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 - „Nem X a kérdés. Hanem Y.”
 - „Nem az a jó megoldás, amelyik X. Hanem az, amelyik Y.”
 - külön mondatot kezdő **„Hanem”**
+- **fordított alak:** „X, nem Y.” / „Az számít, hogy X, nem az, hogy Y.” / „A feladat az X, nem az Y.”
 
 **Miért AI-jel:** A séma mindig ugyanaz: a szerző megnevez egy egyszerűbb álláspontot, elveti, majd a következő mondatban közli a „valódit”. Világos érvelés – de gyakori ismétléssel kiszámíthatóvá válik, mintha a szöveg minden gondolatot előre gyártott retorikai keretbe helyezne.
 
 **Magyar sajátosság:** a mondatkezdő „Hanem” nem hibás a magyar írott nyelvben, de hosszabb szakmai vagy publicisztikai szövegben szokatlanul erős nyomaték. Ha az ellentét két fele **következetesen** külön mondatra válik, az szónokias hatást kelt.
+
+**A fordított alak ugyanaz a minta.** Az átírás, amely a „Nem az X, hanem az Y”-t „Y, nem X”-re cseréli, a szembeállítás sablonját nem szünteti meg, csak álcázza; a két alakot együtt számold (a `metrics.py` is így tesz). Valódi javítás: a szembeállításból csak az állítás marad (*„A sávok összeérése számít.”*), vagy a keret kevesebb helyen tér vissza. Ha az elvetett fél maga is állítás (*„nem költség”* a *„nem költség, hanem befektetés”*-ben), ne vesszen el: szövegenként egy szembeállítás elfér, a többiben az állítás marad, az elvetett fél pedig beleolvad a mondatba (*„A kerékpárút nem kiadás: befektetés.”*).
+
+**Két szembeállítás egy mondatba kötése nem javítás.** A „nem X, és nem Y, hanem Z” két keretnek számít (a `metrics.py` a „hanem” előtti „nem” tagmondatokat számolja). Javítás: az állítás kimondása a keret helyett.
 
 **Küszöb:** 1000 szavanként 2 ilyen szerkezet még természetes. 4 felett vizsgálandó. Ha mondatkezdő „Hanem” háromszor is előfordul, az szinte biztosan sablon.
 
@@ -56,7 +65,7 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 
 **Utána:**
 
-> A sebesség itt mellékes, a pontosság számít. A hibák számát amúgy sem tudjuk nullára vinni; az viszont sokat javít, ha korábban derülnek ki.
+> Azt kell megnézni, pontosabb-e a folyamat, nem azt, hogy gyorsabb. A hibák számánál pedig fontosabb, hogy milyen hamar vesszük észre őket.
 
 **Kapcsolódás:** ez az A réteg **9. mintájának** (negatív párhuzamosságok, „nem csak… hanem…”) magyar és szövegszintű kiterjesztése. A 9. minta egy mondatot néz, az S2 a szöveg egészében méri a sűrűséget.
 
@@ -93,7 +102,7 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 
 **Utána:**
 
-> A mérőszámnál a definíció a könnyebb rész. A nehezebb az, hogy kinek szól az eredmény, meddig marad érvényes, és mi történik, ha rosszul mértünk.
+> Azt kell tisztázni, mit és miért mérünk, kinek szól az eredmény, mikor avul el, és mi történik, ha rosszul mérünk.
 
 ---
 
@@ -108,13 +117,15 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 
 **Javítási technika:** Tartsd meg a párhuzamot két elemig, a harmadiknál törd meg – változtass mondathosszt, ékelj be közbevetést, vagy váltsd más szerkezetre.
 
+**Vigyázat a kihagyással:** tagadó mondatban a kihagyott tagadás megfordítja a jelentést (*„Egy tanfolyam nem ad gyakorlatot, egy mentor önbizalmat”* azt jelenti, hogy a mentor ad önbizalmat). Ha az ige tagadó, a rövidített elemnél is jelöld: *„… sem”*.
+
 **Előtte:**
 
 > Egy szabályzat nem ad módszertant. Egy tiltás nem ad készséget. Egy eszköz nem ad ítélőképességet.
 
 **Utána:**
 
-> Egy szabályzat nem ad módszertant, a tiltás pedig készséget végképp nem. Ítélőképességet meg semmilyen eszköz nem fog adni helyettünk.
+> Egy szabályzat nem ad módszertant, a tiltás készséget sem, az eszköz pedig ítélőképességet sem.
 
 **Kapcsolódás:** rokona az A réteg **10. mintájának** (hármas szabály), de nem ugyanaz. A 10. minta a *felsorolt elemek számát* nézi, az S5 a *mondatvázak ismétlődését*.
 
@@ -128,7 +139,7 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 
 **Azonosítási módszer:** Számold meg, hány kérdés kap kétpólusú felépítést. Ha egy hosszabb szövegben feltűnően sok, az stilometriai jel.
 
-**Javítási technika:** Nevezd meg legalább egy helyen a köztes esetet. *„A kettő között viszont van egy harmadik eset, amiről ritkábban beszélünk: …”* – vagy ismerd el, hogy ugyanaz az eszköz máshogy működik különböző helyzetekben.
+**Javítási technika:** Ha a szerző anyagában ott van a köztes eset, nevezd meg legalább egy helyen. Ha nincs, ne találd ki, és ne kérj a szerzőtől példát egy olyan szerkezethez, amely egyszer fordul elő, és a szerző valóban így gondolja: hagyd a kettősséget. `[ide jöhet egy saját példa: …]` csak akkor, ha a kétpólusú keret több helyen ismétlődik, és a szöveg enélkül egyoldalú marad.
 
 **Előtte:**
 
@@ -136,7 +147,7 @@ Ezért a C réteget nem lehet mondatonként futtatni. Olvasd végig a teljes sz�
 
 **Utána:**
 
-> Az automatizálás a legtöbb helyen egyszerre vesz el és szabadít fel, csak nem ugyanattól az embertől. A folyamat közben lehet gyorsabb és rosszabb is: a tipikus eset felgyorsul, a kivételes viszont könnyen gazdátlan marad.
+> Az automatizálás elvehet munkát, és időt is felszabadíthat – hogy melyiket, az a helyzettől függ. A folyamat lehet gyorsabb és minőségibb is. [ide jöhet egy saját példa: melyik esetben mi történt?]
 
 ---
 
@@ -170,7 +181,7 @@ Egy szakember felidézhet egy konkrét napot, egy váratlan kérdést, egy sajá
 1. Számold meg a véleményjelölőket („szerintem”, „úgy gondolom”, „meggyőződésem”)
 2. Számold meg a konkrét tapasztalati elemeket (megnevezett helyzet, időpont, szám, név, saját tévedés)
 
-Ha az első szám nagyobb, mint a második, a személyesség díszlet.
+Ha az első szám nagyobb, mint a második, a személyesség díszlet. Ha az eredetiben két külön vélemény áll, mindkét jelölő maradhat; ugyanazon tétel kétszeri jelölőjéből egy marad.
 
 **Szerzői háttér** (a felhasználó adta meg a beszélgetésben): *„Nálunk három hónapig ment úgy a rendszer, hogy az éjszakás műszakban senki nem tudta, mit jelent a piros riasztás. Végül egy operátor lefotózta a képernyőt, és megkérdezte a reggeli váltást.”*
 
@@ -192,7 +203,7 @@ Ha az első szám nagyobb, mint a második, a személyesség díszlet.
 
 **Azonosítási módszer:** Minden ismétlésnél kérdezd meg: *hoz ez új példát, következményt vagy ellenérvet?* Ha igen, az érvelés halad. Ha nem, a terjedelem nő, miközben az új információ aránya csökken – és az érvelés körkörössé válik.
 
-**Javítási technika:** Tartsd meg az első és a legerősebb megfogalmazást. A közbülső ismétléseket vagy töröld, vagy tölts beléjük új tartalmat: egy ellenpéldát, egy határesetet, egy következményt.
+**Javítási technika:** Tartsd meg az első és a legerősebb megfogalmazást. A közbülső ismétléseket vagy töröld, vagy – ha a szerző anyagában van – tölts beléjük új tartalmat: egy ellenpéldát, egy határesetet, egy következményt. Ha nincs, töröld.
 
 **Kapcsolódás:** ne keverd az A réteg **11. mintájával** (elegáns variáció). A 11. minta ugyanannak a *szónak* a fölösleges szinonimacseréje; az S9 ugyanannak a *gondolatnak* az újrafogalmazása.
 
@@ -217,17 +228,17 @@ Ha az első szám nagyobb, mint a második, a személyesség díszlet.
 
 **Utána:**
 
-> Nem fárad el, és bármikor elérhető: ötödszörre is ugyanolyan türelemmel magyarázza el, mint először.
+> Mindig elérhető, és mivel nem fárad el, türelmesen újra elmagyarázza, ha kell.
 
 ---
 
 ## Stilometriai önellenőrzés – mérhető mutatók
 
-A C réteg mérhető. Az átírás után futtasd le ezt az ellenőrzést a **teljes** szövegen:
+A C réteg mérhető. Az átírás után futtasd le ezt az ellenőrzést a **teljes** szövegen. A közelítő értékeket a `dict/metrics.py` adja (`python3 "<skill-mappa>/dict/metrics.py" <fájl>`, szépprózában `--skip-dialogue`); a tapasztalati elemeket és a központi tétel ismétlését kézzel ítéld meg:
 
 | Mutató | Természetes tartomány | Gyanús |
 |--------|----------------------|--------|
-| Átlagos mondathossz | 12–22 szó (önmagában nem jel) | 15–19 szó, alacsony szórással együtt |
+| Átlagos mondathossz | önmagában nem jel | 15–19 szó körül, ha a szórás is alacsony |
 | Mondathossz szórása | magas (±8 szó felett) | alacsony (±4 szó alatt) |
 | 1–3 szavas mondatok aránya | 0–8% | 10% felett |
 | Kérdő mondatok aránya | 0–5% | 8% felett, vagy tömbökben |
@@ -237,6 +248,8 @@ A C réteg mérhető. Az átírás után futtasd le ezt az ellenőrzést a **tel
 | Bekezdéskezdő átvezető formulák aránya | a bekezdések 0–20%-a | 40% felett |
 | Véleményjelölő / tapasztalati elem arány | 1 alatt | 1 felett |
 | A központi tétel újrafogalmazásai | 1–2 | 4 felett, új tartalom nélkül |
+
+**400 szó alatt a „nem… hanem…” sort darabszámban értékeld** (a `metrics.py` is így teszi): legfeljebb 1 db rendben, 2 db határeset (elfogadható, ha a tartalom indokolja), 3 db vagy több gyanús (javítandó). Az ezer szavankénti érték csak 400 szó felett számít.
 
 **A halmozódás szabálya:** egyetlen kilógó mutató semmit nem jelent. **Három vagy több egyszerre már mintázat** – ott kell átírni.
 
@@ -252,6 +265,6 @@ Ez a skill szövegszerkesztő eszköz, nem detektor-megkerülő. Két dolgot ér
 
 **Átláthatóság.** Nincs általános szabály arra, hogy minden MI-vel támogatott szövegen fel kell tüntetni a technológia használatát – ötletelésnél vagy nyelvi-szerkesztési segítségnél ez rendszerint nem indokolt. Jelentős tartalmi közreműködésnél viszont szakmailag és etikailag helyes jelezni. Aki a szöveget a saját vagy intézménye neve alatt közli, felelősséget vállal az adatokért, a hivatkozásokért és a következtetésekért akkor is, ha azok egy részét generatív rendszer készítette.
 
-**Jogi korlát:** az EU MI-rendelet 50. cikkének (4) bekezdése szerint jelezni kell az MI által generált vagy manipulált olyan szöveget, amelyet a nyilvánosság **közérdekű ügyekről való tájékoztatására** tesznek közzé. Jelzésre nincs szükség, ha a tartalom érdemi emberi felülvizsgálaton vagy szerkesztői ellenőrzésen ment át, és valaki szerkesztői felelősséget visel érte. A rendelkezés 2026. augusztus 2-tól alkalmazandó.
+**Jogi korlát:** az EU MI-rendelet 50. cikkének (4) bekezdése szerint jelezni kell az MI által generált vagy manipulált olyan szöveget, amelyet a nyilvánosság **közérdekű ügyekről való tájékoztatására** tesznek közzé. Jelzésre nincs szükség, ha a tartalom érdemi emberi felülvizsgálaton vagy szerkesztői ellenőrzésen ment át, és valaki szerkesztői felelősséget visel érte. A rendelkezés 2026. augusztus 2. óta alkalmazandó; a digitális omnibusz-csomag nem halasztotta el.
 
 ---

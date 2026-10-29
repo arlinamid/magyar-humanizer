@@ -1,6 +1,6 @@
 # B réteg – magyar-specifikus kiterjesztések
 
-*Ez a réteg az A rétegre **ráépül**, nem helyettesíti azt. Csak akkor futtasd, ha az A réteg már lefutott. Az alábbi minták kizárólag a magyar nyelvű szövegekre vonatkoznak. Alapjuk: 2022 előtti, AI-mentes magyar szövegkorpusz (Index, HVG, KPMG Blog, Jelenkor, Litera, törvényszövegek, AB-határozatok).*
+*Ez a réteg az A rétegre **ráépül**, nem helyettesíti azt. Csak akkor futtasd, ha az A réteg már lefutott. Az alábbi minták kizárólag a magyar nyelvű szövegekre vonatkoznak. Alapjuk: 2022 előtti, AI-mentes magyar szövegek (Index, HVG, KPMG Blog, Jelenkor, Litera, törvényszövegek, AB-határozatok) olvasása – minőségi megfigyelés, nem számszerű korpuszelemzés.*
 
 ---
 
@@ -26,7 +26,7 @@
 
 **Miért AI-specifikus probléma magyarul:** Az AI egyenletesen hosszú mondatokat ír, 15–25 szó körüli átlaggal, szórás nélkül. A természetes magyar szöveg váltogat – rövid ütős mondat, hosszabb kifejtés, megint rövid.
 
-**Azonosítási módszer:** Ha egymás után 4–5 mondat nagyjából azonos hosszú és azonos szerkezetű, a ritmus gépi. Az emberi szövegben a mondathossz a tartalomhoz igazodik: ahol a gondolat összetett, hosszabb, ahol egyszerű, rövidebb – ezért szór.
+**Azonosítási módszer:** Ha egymás után 4 vagy több mondat nagyjából azonos hosszú és azonos szerkezetű, a ritmus gépi. Az emberi szövegben a mondathossz a tartalomhoz igazodik: ahol a gondolat összetett, hosszabb, ahol egyszerű, rövidebb – ezért szór.
 
 **Előtte (AI-ritmus, egyenletes):**
 
@@ -34,11 +34,15 @@
 
 **Utána (emberi ritmus, váltakozó):**
 
-> Az adatelemzés meggyorsítja a döntéshozatalt. Nem helyettesíti – de aki nem használja, versenyhátrányba kerül. A képzés ennek ellenére az utolsó prioritás a legtöbb cégnél, és ez látszik az eredményeken.
+> Az adatelemzési eszközökkel gyorsabban és pontosabban lehet dönteni. A szervezeteknek alkalmazkodniuk kell, és az átállás sikere főleg azon múlik, hogy képzik-e hozzá a munkatársakat.
+
+*(A tartalom az eredetiből való; a ritmus a kötésből és a bontásból jön, nem kvótából.)*
 
 **Javítási technika:**
 - Kösd össze, ami összetartozik (alárendelés, közbevetés, pontosítás), és bontsd szét, ami két külön gondolat – a hossz ebből adódjon, ne kvótából.
 - Rövid mondat akkor kell, ha a tartalma önálló súlyú. Ne tegyél minden bekezdés végére rövid ütést: az maga is AI-minta (25. minta, S3).
+- Átírás után mérd a szórást (`metrics.py`): ±4 alatt a javítás maga hozott egyenletes ritmust, mert a törlés és az összevonás egyformán hosszú mondatokat ad. Ilyenkor kösd össze és bontsd szét a mondatokat a tartalom szerint.
+- A szórást nem csak rövid mondattal lehet emelni: egy hosszú (20+ szavas), tartalom szerint összekötött mondat is megteszi. A rövid mondatok aránya (S3) közben maradjon 8% alatt.
 - Félmondat és kérdés is belefér, ha a szerző hangjához illik: *„Ez viszont már más kérdés.”*, *„De miért?”*
 
 **Figyelem:** ez a pont a C réteg S3 mintájával együtt érvényes. Az M2 azt mondja, a mondathossz szórjon; az S3 azt, hogy a szórás ne legyen sablon.
@@ -66,7 +70,7 @@
 | figyelmet érdemel | fontos / érdemes |
 | szerepet játszik | hat / befolyásol / számít |
 | szolgál alapul | alapja |
-| kerül sor arra, hogy | megtörténik / sor kerül rá |
+| kerül sor arra, hogy | megtörténik / lesz |
 | tekintettel arra, hogy | mivel / mert |
 | annak érdekében, hogy | hogy / azért |
 | az a tény, hogy | az / hogy |
@@ -80,13 +84,13 @@
 
 | Főnevesített (AI) | Igés (természetes) |
 |------------------|-------------------|
-| „a digitalizáció alkalmazása lehetővé teszi” | „ha digitalizálunk, lehetővé válik” |
+| „a digitalizáció alkalmazása lehetővé teszi” | „ha digitalizálnak, lehetővé válik” |
 | „a bevezetés végrehajtása szükséges” | „be kell vezetni” |
 | „az együttműködés erősítése a cél” | „jobban kell együttműködni” |
-| „a változás megvalósítása folyamatban van” | „változás zajlik” / „változtatnak” |
+| „a változás megvalósítása folyamatban van” | „éppen változtatnak” |
 | „a döntéshozatal felgyorsítása” | „gyorsabban dönteni” |
 | „a képzés fontosságának hangsúlyozása” | „hangsúlyozni, hogy a képzés fontos” |
-| „az innováció elősegítése érdekében” | „hogy innoválhassunk” |
+| „az innováció elősegítése érdekében” | „hogy jobban lehessen innoválni” |
 | „a folyamat optimalizálásának megvalósítása” | „optimalizálni a folyamatot” |
 
 ---
@@ -109,13 +113,11 @@ Ezek az angol AI-sablonok („it is important to note that”, „this marks a p
 
 ### Felfújt fontosság (significance inflation) – magyar változat
 
+A „mérföldkövet jelent”, „korszakalkotó”, „paradigmaváltást hoz”, „a jövő záloga” és társaik az A réteg 1. mintájában vannak. Ide a további magyar fordulatok tartoznak:
+
 | AI-felfújt | Tömör |
 |-----------|-------|
-| „mérföldkövet jelent a fejlődés útján” | mondd meg, mi változott konkrétan |
-| „korszakalkotó áttörés” | mondd meg, mi és mennyivel jobb |
-| „paradigmaváltást hoz” | mondd meg, mi változik a gyakorlatban |
 | „az emberiség előtt álló egyik legnagyobb kihívás” | töröld, vagy mondd el a kihívást |
-| „a jövő záloga” | töröld |
 | „példa nélküli lehetőség” | töröld, vagy konkretizáld |
 | „forradalmasítja az iparágat” | mondd meg, pontosan mit változtat |
 
@@ -123,7 +125,7 @@ Ezek az angol AI-sablonok („it is important to note that”, „this marks a p
 
 ## M6. Stílusréteg-érzékeny szabályok
 
-A következő minták stílusrétegenként különböznek – ne alkalmazzuk vakon, igazodjunk a szöveg regiszteréhez.
+A következő minták stílusrétegenként különböznek – ne alkalmazd vakon, igazodj a szöveg regiszteréhez. Blog és hírlevél: a köznyelvi / újságírói szakasz. Szakmai szöveg: a hivatalos / jogi szakasz igei elve (cselekvő ige), a személyesség mértéke a szerzőé. Ahol ez a szakasz ütközik egy A vagy B mintával (pl. jogi pontosítás miatti terpeszkedés), az M6 dönt; a többi A-minta (reklámnyelv, chatbot-töredék, emoji) változatlanul érvényes.
 
 ### Köznyelvi / újságírói szöveg
 
@@ -131,12 +133,12 @@ Természetes minták (Index, HVG, Magyar Narancs, 2017–2021):
 - Rövid ütős mondatok váltakoznak hosszabbakkal
 - Az újságíró benne van a szövegben: *„Nem véletlenül”*, *„Erre hamar kiderül a válasz”*
 - Kötőszó-gazdag: *„Pedig”*, *„Ugyanakkor”*, *„Ráadásul”* – de nem túl sűrűn
-- Az alany el is maradhat: *„Megcsinálják. Bevállalják. Nem gondolkoznak.”*
+- Az alany el is maradhat: *„Megcsinálták, és kész.”*
 
 ### Irodalmi / esszé stílus
 
 Természetes minták (Jelenkor, Litera, 2015–2017 – Nádas Péter, Schein Gábor, Krusovszky Dénes):
-- A hosszú mondatok **belülről tagoltak** – gondolatjellel, kettősponttal, zárójelbe emelt betéttel
+- A hosszú mondatok **belülről tagoltak** – gondolatjellel (mértékkel, lásd A réteg 15. minta), kettősponttal, zárójelbe emelt betéttel
 - A szórend szabadabb, de mindig van oka: a ritmus és a fókusz egyszerre érvényesül
 - Visszakérdezés és félmondat is megengedett: *„Miben bízhatunk?”* – önállóan is áll
 - Az „én” nézőpont explicit: *„Úgy éreztem”*, *„Azt nem tudtam”*
@@ -174,6 +176,8 @@ Természetes minták (törvényszövegek, AB-határozatok, 2017–2020):
 **Utána:**
 
 > Bedobtam a képet az ocr.z.ai-ba. Meglepett, hogy ilyen pontosan jött ki.
+
+*(A hiba az „engem is”: mintha más is meglepődött volna, vagy a szerző kívülről nézné magát. Az eredményen való meglepődés önmagában rendben van.)*
 
 ---
 
@@ -215,6 +219,8 @@ Természetes minták (törvényszövegek, AB-határozatok, 2017–2020):
 ---
 
 ## M9. Névismétlés névmás helyett (Name repetition drift)
+
+**Hatókör:** csak elbeszélő próza (novella, regényrészlet). Más műfajban hagyd ki. A jelenetenkénti számok tapasztalati támpontok, forrás nélkül.
 
 **Miért AI-specifikus probléma magyarul:** Az AI close third person narrációban hajlamos a főszereplő nevét bekezdésenként többször is kiírni, akkor is, ha az alany egyértelmű, és névmással (ő, -) vagy alanyi igeragozással kiváltható lenne. Az emberi irodalmi szöveg a nevet csak akkor ismétli, ha az alany kétértelművé vált, vagy ha ritmikai/érzelmi hangsúly indokolja.
 
